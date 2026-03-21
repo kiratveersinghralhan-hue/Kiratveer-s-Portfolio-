@@ -843,7 +843,52 @@
     }, {threshold:0.15});
     document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-    
+
+    const form = document.getElementById('portfolioForm');
+    const formStatus = document.getElementById('formStatus');
+
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        formStatus.style.display = 'block';
+        formStatus.style.color = '#b9c0cf';
+        formStatus.textContent = 'Sending inquiry...';
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) submitButton.disabled = true;
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch('https://formspree.io/f/xjgadypw', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            window.location.href = 'thankyou.html';
+          } else {
+            const data = await response.json().catch(() => ({}));
+            formStatus.style.color = '#ff9b9b';
+            formStatus.textContent = data.errors?.[0]?.message || 'Something went wrong. Please try again.';
+          }
+        } catch (error) {
+          formStatus.style.color = '#ff9b9b';
+          formStatus.textContent = 'Submission failed. Please check your internet and try again.';
+        } finally {
+          if (submitButton) submitButton.disabled = false;
+        }
+      });
+    }
+
+
   </script>
 </body>
 </html>
