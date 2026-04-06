@@ -3,558 +3,494 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kiratveer | Luxury Portfolio</title>
-  <meta name="description" content=" Personal Portfolio for Kiratveer — web developer and creative editor." />
+  <title>Kiratveer | Futuristic Web Designer & Creative Developer</title>
+  <meta name="description" content="Kiratveer designs premium websites, landing pages, and portfolio experiences with modern visuals, smooth motion, SEO-ready structure, and conversion-focused layouts." />
+  <meta name="keywords" content="Kiratveer, web designer, portfolio website, landing page design, website redesign, creative developer, SEO website, futuristic web design, Punjab web designer" />
+  <meta name="author" content="Kiratveer" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Kiratveer | Futuristic Web Designer & Creative Developer" />
+  <meta property="og:description" content="Premium websites, landing pages, and redesigns built with strong visuals, smooth motion, and modern SEO foundations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#081120" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kiratveer",
+    "jobTitle": "Web Designer & Creative Developer",
+    "email": "mailto:qq299629@gmail.com",
+    "telephone": "+91 9814800017",
+    "sameAs": ["https://instagram.com/ralhanx"],
+    "knowsAbout": ["Website Design", "Landing Pages", "Portfolio Design", "Website Redesign", "Creative Editing"],
+    "worksFor": {
+      "@type": "ProfessionalService",
+      "name": "Independent Web Design Studio"
+    }
+  }
+  </script>
   <style>
     :root{
-      --bg:#0a0f1f;
-      --bg2:#11182b;
-      --panel:rgba(255,255,255,.05);
-      --line:rgba(255,255,255,.12);
-      --text:#f6f2ea;
-      --muted:#b9c0cf;
-      --gold:#d5b06b;
-      --gold-soft:#f0d7a1;
-      --teal:#63d7c8;
-      --purple:#7f7cff;
-      --shadow:0 24px 70px rgba(0,0,0,.35);
-      --radius:24px;
-      --max:1180px;
+      --bg:#050916;
+      --bg-2:#081120;
+      --bg-3:#0d1730;
+      --surface:rgba(11,18,38,.72);
+      --surface-2:rgba(255,255,255,.05);
+      --surface-3:rgba(255,255,255,.08);
+      --line:rgba(255,255,255,.1);
+      --text:#f5f8ff;
+      --muted:#9dacd0;
+      --muted-2:#cad5f5;
+      --cyan:#85f7ff;
+      --blue:#5db6ff;
+      --violet:#8f7cff;
+      --pink:#ff7bd8;
+      --gold:#f0d28b;
+      --success:#6ff7be;
+      --shadow:0 30px 90px rgba(0,0,0,.45);
+      --radius-xl:34px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --max:1240px;
+      --scroll:0;
+      --spot-x:50%;
+      --spot-y:50%;
     }
-
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
-      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(127,124,255,.18), transparent 24%),
-        radial-gradient(circle at top right, rgba(213,176,107,.14), transparent 25%),
-        radial-gradient(circle at bottom left, rgba(99,215,200,.16), transparent 20%),
-        linear-gradient(180deg, #09101d 0%, #0d1424 45%, #0b1020 100%);
+        radial-gradient(circle at 15% 10%, rgba(143,124,255,.18), transparent 22%),
+        radial-gradient(circle at 85% 14%, rgba(133,247,255,.12), transparent 20%),
+        radial-gradient(circle at 20% 90%, rgba(255,123,216,.1), transparent 18%),
+        linear-gradient(180deg, var(--bg) 0%, #060b17 45%, #03050d 100%);
       overflow-x:hidden;
       line-height:1.65;
+      cursor:none;
     }
-
+    @media (max-width: 920px){body{cursor:auto}}
     a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .container{width:min(92%,var(--max));margin:auto}
-    .section{padding:96px 0}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:10px;
-      color:var(--gold-soft);
-      text-transform:uppercase;
-      letter-spacing:3px;
-      font-size:.78rem;
-      font-weight:800;
-      margin-bottom:16px;
-    }
-    .eyebrow::before{
-      content:"";
-      width:34px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);
-    }
-    .section-title{
-      font-size:clamp(2.2rem,4.5vw,4rem);
-      line-height:.98;
-      margin-bottom:16px;
-      font-weight:800;
-      letter-spacing:-1px;
-    }
-    .section-sub{
-      max-width:760px;
-      color:var(--muted);
-      font-size:1.03rem;
-      margin-bottom:34px;
-    }
+    img{display:block;max-width:100%}
+    button,input,select,textarea{font:inherit}
+    .container{width:min(92%, var(--max));margin:auto}
+    .section{padding:110px 0;position:relative}
 
-    .site-shell{
-      position:relative;
-      isolation:isolate;
-    }
-    .blob{
-      position:absolute;
-      filter:blur(60px);
-      opacity:.45;
-      z-index:-1;
-      pointer-events:none;
-    }
-    .blob.one{width:220px;height:220px;background:var(--purple);top:120px;right:8%}
-    .blob.two{width:240px;height:240px;background:var(--teal);top:720px;left:6%}
-    .blob.three{width:220px;height:220px;background:var(--gold);bottom:280px;right:10%}
+    .cursor-dot,.cursor-ring{position:fixed;left:0;top:0;transform:translate(-50%,-50%);pointer-events:none;z-index:9999}
+    .cursor-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 0 24px rgba(133,247,255,.65)}
+    .cursor-ring{width:42px;height:42px;border-radius:50%;border:1px solid rgba(133,247,255,.4);transition:.2s ease;box-shadow:0 0 30px rgba(133,247,255,.12), inset 0 0 16px rgba(133,247,255,.08)}
+    .cursor-ring.active{width:68px;height:68px;border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.03)}
+    @media (max-width: 920px){.cursor-dot,.cursor-ring{display:none}}
 
-    .topbar{
-      border-bottom:1px solid var(--line);
-      color:var(--muted);
-      font-size:.92rem;
-      background:rgba(255,255,255,.02);
-      backdrop-filter:blur(14px);
-    }
-    .topbar .container{
-      display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:10px 0;
-    }
+    .bg-layer,.bg-grid,.bg-beam,.bg-orbits,.particles{position:fixed;inset:0;pointer-events:none}
+    .bg-layer{z-index:-5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");opacity:.045}
+    .bg-grid{z-index:-4;background-image:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);background-size:42px 42px;mask-image:linear-gradient(180deg, rgba(0,0,0,.45), transparent 94%)}
+    .bg-beam{z-index:-3;background:
+      radial-gradient(circle at calc(50% + (var(--scroll) * .04px)) 0%, rgba(133,247,255,.12), transparent 20%),
+      radial-gradient(circle at 50% calc(20% + (var(--scroll) * .02px)), rgba(143,124,255,.08), transparent 26%),
+      radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 18%)}
+    .bg-orbits{z-index:-2;background:
+      radial-gradient(circle at 50% 18%, transparent 0 32%, rgba(133,247,255,.05) 32.2%, transparent 32.8%),
+      radial-gradient(circle at 50% 18%, transparent 0 44%, rgba(255,255,255,.04) 44.2%, transparent 44.8%),
+      radial-gradient(circle at 50% 18%, transparent 0 56%, rgba(143,124,255,.05) 56.2%, transparent 56.8%);
+      opacity:.5;transform:translateY(calc(var(--scroll) * -.04px));}
+    .particles{z-index:-1;overflow:hidden}
+    .particles span{position:absolute;display:block;border-radius:50%;background:radial-gradient(circle, rgba(133,247,255,.95), rgba(133,247,255,0));opacity:.35;animation:rise linear infinite}
+    .particles span:nth-child(1){left:7%;top:85%;width:3px;height:3px;animation-duration:18s;animation-delay:-2s}
+    .particles span:nth-child(2){left:17%;top:94%;width:6px;height:6px;animation-duration:22s;animation-delay:-6s}
+    .particles span:nth-child(3){left:29%;top:80%;width:2px;height:2px;animation-duration:14s;animation-delay:-4s}
+    .particles span:nth-child(4){left:39%;top:92%;width:4px;height:4px;animation-duration:17s;animation-delay:-7s}
+    .particles span:nth-child(5){left:55%;top:86%;width:5px;height:5px;animation-duration:23s;animation-delay:-9s}
+    .particles span:nth-child(6){left:67%;top:95%;width:3px;height:3px;animation-duration:15s;animation-delay:-3s}
+    .particles span:nth-child(7){left:79%;top:83%;width:4px;height:4px;animation-duration:18s;animation-delay:-5s}
+    .particles span:nth-child(8){left:90%;top:92%;width:2px;height:2px;animation-duration:13s;animation-delay:-1s}
+    @keyframes rise{0%{transform:translate3d(0,0,0) scale(1);opacity:0}10%,80%{opacity:.4}100%{transform:translate3d(0,-120vh,0) scale(1.8);opacity:0}}
+    @keyframes floaty{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-18px,0)}}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 rgba(133,247,255,0), 0 20px 45px rgba(0,0,0,.25)}50%{box-shadow:0 0 45px rgba(133,247,255,.12), 0 20px 45px rgba(0,0,0,.25)}}
+    @keyframes lineMove{0%{transform:translateX(-100%)}100%{transform:translateX(130%)}}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-    header{
-      position:sticky;top:0;z-index:1000;
-      backdrop-filter:blur(18px);
-      background:rgba(10,15,31,.72);
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .nav{
-      display:flex;justify-content:space-between;align-items:center;padding:16px 0;gap:16px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:14px;
-    }
-    .brand-mark{
-      width:48px;height:48px;border-radius:16px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(213,176,107,.22), rgba(99,215,200,.18));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:var(--shadow);
-      color:var(--gold-soft);
-      font-weight:800;
-      letter-spacing:1px;
-    }
-    .brand strong{
-      display:block;
-      font-size:1.12rem;
-      letter-spacing:1px;
-      text-transform:uppercase;
-    }
-    .brand span{
-      display:block;
-      color:var(--muted);
-      font-size:.78rem;
-      letter-spacing:2px;
-      text-transform:uppercase;
-    }
+    .topbar{background:rgba(255,255,255,.025);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:.88rem}
+    .topbar .container{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:11px 0}
 
-    .menu{
-      display:flex;align-items:center;gap:22px;
-    }
-    .menu a{
-      font-weight:700;
-      color:#eef0f5;
-    }
-    .menu a:hover{color:var(--gold-soft)}
-    .primary-btn,.ghost-btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:13px 22px;border-radius:999px;font-weight:800;transition:.25s ease;
-    }
-    .primary-btn{
-      background:linear-gradient(135deg, var(--gold), #b48943);
-      color:#111;
-      box-shadow:0 14px 34px rgba(213,176,107,.2);
-    }
-    .primary-btn:hover{transform:translateY(-2px)}
-    .ghost-btn{
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.04);
-      color:#fff;
-    }
-    .ghost-btn:hover{background:rgba(255,255,255,.08)}
+    header{position:sticky;top:0;z-index:1000;background:rgba(5,9,22,.72);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-mark{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;font-weight:900;letter-spacing:1px;color:#07111d;background:linear-gradient(135deg,var(--cyan),var(--violet),var(--pink));box-shadow:0 14px 34px rgba(93,182,255,.2);position:relative;overflow:hidden}
+    .brand-mark::after{content:"";position:absolute;inset:1px;border-radius:17px;border:1px solid rgba(255,255,255,.32)}
+    .brand strong{display:block;font-size:1.04rem;letter-spacing:1.2px;text-transform:uppercase}
+    .brand span{display:block;font-size:.76rem;letter-spacing:2.2px;text-transform:uppercase;color:var(--muted)}
+    .menu{display:flex;align-items:center;gap:22px}
+    .menu a{font-weight:700;color:#eef3ff;position:relative}
+    .menu a:not(.primary-btn)::after{content:"";position:absolute;left:0;bottom:-8px;width:100%;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);transform:scaleX(0);transform-origin:left;transition:.28s ease}
+    .menu a:hover{color:var(--cyan)}
+    .menu a:not(.primary-btn):hover::after{transform:scaleX(1)}
 
-    .menu-toggle{
-      display:none;width:48px;height:48px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(255,255,255,.04);position:relative;cursor:pointer;
+    .primary-btn,.ghost-btn,.chip-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 22px;border-radius:999px;font-weight:800;border:1px solid transparent;position:relative;overflow:hidden;transition:.28s ease
     }
-    .menu-toggle span,.menu-toggle::before,.menu-toggle::after{
-      content:"";position:absolute;left:50%;transform:translateX(-50%);
-      width:20px;height:2px;background:#fff;border-radius:999px;transition:.28s ease;
-    }
+    .primary-btn::before,.ghost-btn::before{content:"";position:absolute;inset:0;transform:translateX(-130%);background:linear-gradient(110deg, transparent 15%, rgba(255,255,255,.28) 50%, transparent 85%);transition:transform .75s ease}
+    .primary-btn:hover::before,.ghost-btn:hover::before{transform:translateX(120%)}
+    .primary-btn{color:#07111c;background:linear-gradient(135deg,var(--cyan),var(--violet) 55%,var(--pink));box-shadow:0 18px 40px rgba(93,182,255,.24)}
+    .ghost-btn{color:#fff;border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04);backdrop-filter:blur(10px)}
+    .chip-btn{min-height:40px;padding:0 15px;font-size:.84rem;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);color:var(--muted-2)}
+    .primary-btn:hover,.ghost-btn:hover,.chip-btn:hover{transform:translateY(-2px)}
+
+    .menu-toggle{display:none;width:48px;height:48px;border:none;border-radius:16px;background:rgba(255,255,255,.05);position:relative;cursor:pointer}
+    .menu-toggle span,.menu-toggle::before,.menu-toggle::after{content:"";position:absolute;left:50%;width:20px;height:2px;background:#fff;border-radius:4px;transform:translateX(-50%);transition:.28s ease}
     .menu-toggle span{top:23px}.menu-toggle::before{top:16px}.menu-toggle::after{top:30px}
-    .menu-toggle.active span{opacity:0}
-    .menu-toggle.active::before{top:23px;transform:translateX(-50%) rotate(45deg)}
-    .menu-toggle.active::after{top:23px;transform:translateX(-50%) rotate(-45deg)}
-
-    .mobile-backdrop{
-      position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
-      opacity:0;pointer-events:none;transition:.28s ease;z-index:1190;
-    }
+    .menu-toggle.active span{opacity:0}.menu-toggle.active::before{top:23px;transform:translateX(-50%) rotate(45deg)}.menu-toggle.active::after{top:23px;transform:translateX(-50%) rotate(-45deg)}
+    .mobile-backdrop{position:fixed;inset:0;background:rgba(1,4,12,.65);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.3s ease;z-index:1190}
     .mobile-backdrop.show{opacity:1;pointer-events:auto}
-    .mobile-menu{
-      position:fixed;top:0;right:0;width:min(86vw,360px);height:100vh;z-index:1200;
-      transform:translateX(100%);transition:transform .35s ease;
-      background:
-        radial-gradient(circle at top right, rgba(213,176,107,.18), transparent 24%),
-        linear-gradient(180deg, rgba(19,28,48,.98), rgba(8,12,24,.99));
-      border-left:1px solid var(--line);
-      box-shadow:-24px 0 60px rgba(0,0,0,.42);
-      padding:86px 22px 28px;
-      display:flex;flex-direction:column;gap:14px;
-    }
+    .mobile-menu{position:fixed;top:0;right:0;z-index:1200;height:100vh;width:min(86vw,360px);transform:translateX(100%);transition:transform .35s ease;padding:86px 22px 26px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg, rgba(8,12,28,.96), rgba(5,8,20,.98));border-left:1px solid rgba(255,255,255,.1);box-shadow:-24px 0 60px rgba(0,0,0,.45)}
     .mobile-menu.open{transform:translateX(0)}
-    .mobile-link{
-      padding:15px 14px;border:1px solid var(--line);border-radius:14px;
-      background:rgba(255,255,255,.03);font-weight:700;
-    }
-    .mobile-close{
-      position:absolute;top:18px;right:18px;width:44px;height:44px;border:none;
-      border-radius:12px;background:rgba(255,255,255,.05);color:#fff;font-size:1.45rem;cursor:pointer;
-    }
+    .mobile-link{padding:15px 16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04);font-weight:700}
+    .mobile-close{position:absolute;top:18px;right:18px;width:44px;height:44px;border:none;border-radius:14px;background:rgba(255,255,255,.06);color:#fff;font-size:1.45rem;cursor:pointer}
 
-    .hero{
-      padding:86px 0 40px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:30px;
-      align-items:center;
-    }
-    .hero h1{
-      font-size:clamp(3rem,7vw,6.4rem);
-      line-height:.9;
-      margin-bottom:16px;
-      letter-spacing:-2px;
-    }
-    .hero p{
-      max-width:680px;
-      color:var(--muted);
-      font-size:1.08rem;
-      margin-bottom:26px;
-    }
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-    .hero-tags{
-      display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 0;
-    }
-    .tag-pill{
-      padding:10px 14px;border-radius:999px;border:1px solid var(--line);
-      background:rgba(255,255,255,.04);color:#e7e9ef;font-weight:700;font-size:.92rem;
-    }
+    .eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.78rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
+    .eyebrow::before{content:"";width:42px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+    .section-title{font-size:clamp(2.2rem,4.8vw,5rem);line-height:.96;letter-spacing:-2px;margin-bottom:16px}
+    .section-sub{max-width:760px;color:var(--muted);font-size:1.05rem}
+    .text-gradient{background:linear-gradient(135deg,#fff 18%,var(--cyan) 48%,var(--violet) 78%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-    .hero-card{
-      position:relative;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:24px;
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .hero-card::after{
-      content:"";
-      position:absolute;inset:auto -30px -30px auto;width:180px;height:180px;
-      background:radial-gradient(circle, rgba(213,176,107,.24), transparent 65%);
-      pointer-events:none;
-    }
-    .preview-window{
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.1);
-      background:#0c1324;
-    }
-    .preview-top{
-      display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.03);
-    }
-    .dot{width:9px;height:9px;border-radius:50%;background:#fff;opacity:.5}
-    .preview-screen{
-      padding:24px;
-      min-height:320px;
-      background:
-        linear-gradient(160deg, rgba(99,215,200,.12), transparent 35%),
-        linear-gradient(180deg, #0c1324, #0a1020);
-      display:grid;
-      gap:18px;
-      align-content:start;
-    }
-    .preview-badge{
-      justify-self:start;
-      padding:8px 12px;border-radius:999px;border:1px solid rgba(213,176,107,.24);
-      color:var(--gold-soft);font-size:.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-    }
-    .preview-title{
-      font-size:2rem;font-weight:800;line-height:1;
-    }
-    .preview-grid{
-      display:grid;grid-template-columns:1fr 1fr;gap:12px;
-    }
-    .preview-box{
-      padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);
-    }
-    .preview-box strong{display:block;margin-bottom:6px}
-    .preview-box span{color:var(--muted);font-size:.92rem}
+    .glass{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));backdrop-filter:blur(18px);border-radius:var(--radius-xl);box-shadow:var(--shadow)}
+    .glass::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg, rgba(133,247,255,.45), rgba(143,124,255,.22), rgba(240,210,139,.12), transparent 70%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .glass::after{content:"";position:absolute;top:-40%;right:-12%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle, rgba(133,247,255,.1), transparent 68%);pointer-events:none}
 
-    .stats-ribbon{
-      margin-top:28px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-    }
-    .stat{
-      padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid var(--line);
-      box-shadow:var(--shadow);
-    }
-    .stat strong{display:block;font-size:1.55rem;margin-bottom:4px}
-    .stat span{color:var(--muted);font-size:.92rem}
+    .hero{padding:78px 0 44px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:28px;align-items:center}
+    .hero-copy h1{font-size:clamp(3.2rem,8vw,7rem);line-height:.88;letter-spacing:-3px;margin-bottom:18px}
+    .hero-copy p{max-width:720px;color:var(--muted);font-size:1.08rem;margin-bottom:28px}
+    .hero-actions,.stack-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .hero-tags{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+    .tag-pill{padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:.92rem;font-weight:700;color:#eff5ff}
+    .hero-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+    .metric{padding:18px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .metric strong{display:block;font-size:1.7rem;line-height:1;margin-bottom:6px}
+    .metric span{color:var(--muted);font-size:.92rem}
 
-    .about-grid,.contact-grid,.booking-grid{
-      display:grid;
-      grid-template-columns:1.04fr .96fr;
-      gap:26px;
-      align-items:start;
-    }
-    .panel{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:30px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-    }
-    .skills{
-      display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px;
-    }
-    .skill{
-      padding:16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:700;
-    }
+    .hero-card{padding:24px;min-height:100%;animation:pulseGlow 6s ease-in-out infinite}
+    .live-ui{display:grid;gap:16px}
+    .ui-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:6px}
+    .status-row{display:flex;gap:10px;flex-wrap:wrap}
+    .status-chip{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);font-size:.82rem;font-weight:700;color:var(--muted-2)}
+    .screen{padding:18px;border-radius:24px;background:linear-gradient(180deg, rgba(4,10,22,.95), rgba(10,16,34,.85));border:1px solid rgba(255,255,255,.08)}
+    .screen-hero{min-height:220px;border-radius:22px;overflow:hidden;position:relative;background:
+      linear-gradient(135deg, rgba(133,247,255,.15), rgba(143,124,255,.05)),
+      url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80') center/cover}
+    .screen-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:80px;background:linear-gradient(180deg, transparent, rgba(6,10,20,.82))}
+    .screen-copy{position:absolute;left:20px;right:20px;bottom:18px;z-index:1}
+    .screen-copy strong{display:block;font-size:1.1rem;margin-bottom:6px}
+    .screen-copy span{color:#dce5ff;font-size:.92rem}
+    .dashboard{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:16px}
+    .dash-card,.dash-list{padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .dash-bars{display:grid;gap:10px;margin-top:14px}
+    .bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
+    .bar span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));animation:grow 1.8s ease forwards;transform-origin:left}
+    @keyframes grow{from{transform:scaleX(.3)}to{transform:scaleX(1)}}
+    .dash-list ul{list-style:none;display:grid;gap:12px}
+    .dash-list li{display:flex;justify-content:space-between;gap:12px;color:var(--muted-2);font-size:.92rem}
 
-    .services-grid,.projects-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:22px;
-    }
-    .card{
-      border:1px solid var(--line);
-      border-radius:22px;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-      transition:.28s ease;
-    }
-    .card:hover{transform:translateY(-6px);border-color:rgba(213,176,107,.28)}
-    .card-copy{padding:24px}
-    .card h3{font-size:1.28rem;margin-bottom:10px}
-    .card p{color:var(--muted)}
-    .num{
-      width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
-      background:rgba(213,176,107,.14);color:var(--gold-soft);font-weight:800;margin-bottom:16px;
-    }
-    .project-media{
-      aspect-ratio:16/10;
-      background:center/cover no-repeat;
-      border-bottom:1px solid var(--line);
-    }
-    .project-badge{
-      display:inline-block;
-      font-size:.76rem;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      color:var(--gold-soft);
-      font-weight:800;
-      margin-bottom:10px;
-    }
-    .project-links{
-      display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;
-    }
+    .trust-marquee{padding:16px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);overflow:hidden}
+    .marquee-track{display:flex;width:max-content;animation:marquee 24s linear infinite}
+    .marquee-track span{display:inline-flex;align-items:center;gap:14px;padding-right:42px;color:var(--muted-2);font-weight:700;letter-spacing:1.4px;text-transform:uppercase;font-size:.84rem}
+    .marquee-track span::before{content:"";width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet))}
 
-    .booking-panel{
-      position:relative;
-      overflow:hidden;
-    }
-    .booking-panel::before{
-      content:"";
-      position:absolute;inset:auto auto -70px -70px;width:180px;height:180px;
-      background:radial-gradient(circle, rgba(99,215,200,.18), transparent 65%);
-      pointer-events:none;
-    }
-    .booking-features{
-      display:grid;gap:14px;margin-top:20px;
-    }
-    .booking-feature{
-      padding:16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);
-    }
-    .booking-feature strong{display:block;margin-bottom:6px}
+    .about-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px;align-items:stretch}
+    .bio-card,.story-card{padding:32px}
+    .bio-grid{display:grid;gap:16px;margin-top:20px}
+    .info-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .mini-card{padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .mini-card strong{display:block;font-size:1rem;margin-bottom:6px}
+    .mini-card span{color:var(--muted);font-size:.94rem}
+    .story-points{display:grid;gap:14px;margin-top:24px}
+    .story-item{padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);position:relative;overflow:hidden}
+    .story-item::after{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:linear-gradient(90deg,transparent,rgba(133,247,255,.7),transparent);animation:lineMove 5s linear infinite}
+    .story-item strong{display:block;margin-bottom:6px}
+    .story-item span{color:var(--muted)}
+
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+    .service-card{padding:28px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
+    .number-badge{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;font-weight:900;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--cyan);margin-bottom:26px}
+    .service-card h3{font-size:1.5rem;margin-bottom:12px}
+    .service-card p{color:var(--muted);margin-bottom:18px}
+    .service-card ul{list-style:none;display:grid;gap:10px}
+    .service-card li{position:relative;padding-left:18px;color:var(--muted-2)}
+    .service-card li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet))}
+
+    .projects-shell{display:grid;gap:24px;margin-top:30px}
+    .featured-project{display:grid;grid-template-columns:1.08fr .92fr;gap:0;overflow:hidden}
+    .project-media{min-height:420px;background-size:cover;background-position:center;position:relative}
+    .project-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(4,8,18,.08), rgba(4,8,18,.55))}
+    .project-copy{padding:34px}
+    .project-badge{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border-radius:999px;border:1px solid rgba(133,247,255,.2);background:rgba(255,255,255,.04);color:var(--cyan);font-size:.82rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:16px}
+    .project-copy h3{font-size:2rem;line-height:1.02;margin-bottom:14px}
+    .project-copy p{color:var(--muted);margin-bottom:18px}
+    .project-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
+    .stat-box{padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .stat-box strong{display:block;font-size:1.15rem;margin-bottom:5px}
+    .stat-box span{color:var(--muted);font-size:.9rem}
+    .project-links{display:flex;gap:14px;flex-wrap:wrap}
+
+    .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+    .project-card{padding:22px}
+    .project-thumb{height:220px;border-radius:24px;background-size:cover;background-position:center;margin-bottom:18px;position:relative;overflow:hidden}
+    .project-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(4,8,18,.45))}
+    .project-card h4{font-size:1.32rem;margin-bottom:10px}
+    .project-card p{color:var(--muted);margin-bottom:16px}
+
+    .timeline-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:24px;align-items:start}
+    .process-panel,.results-panel{padding:30px}
+    .timeline{display:grid;gap:18px;margin-top:10px}
+    .step{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:start;padding:18px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .step-num{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-weight:900;color:#07111c;background:linear-gradient(135deg,var(--cyan),var(--violet))}
+    .step h4{font-size:1.1rem;margin-bottom:6px}
+    .step p{color:var(--muted)}
+    .result-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
+    .result-card{padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .result-card strong{display:block;font-size:1.65rem;line-height:1;margin-bottom:8px}
+    .result-card span{color:var(--muted)}
+
+    .booking-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px}
+    .booking-panel,.form-panel{padding:32px}
+    .booking-features{display:grid;gap:14px;margin-top:26px}
+    .booking-feature{padding:18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .booking-feature strong{display:block;margin-bottom:7px}
     .booking-feature span{color:var(--muted)}
-    .form{
-      display:grid;gap:16px;
-    }
-    .form-row{
-      display:grid;grid-template-columns:1fr 1fr;gap:14px;
-    }
-    label{display:block;font-weight:700;font-size:.94rem}
-    input,select,textarea{
-      width:100%;margin-top:8px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);
-      color:#fff;border-radius:16px;padding:14px 16px;font:inherit;outline:none;
-    }
-    input::placeholder,textarea::placeholder{color:#9ca4b6}
-    textarea{min-height:140px;resize:vertical}
-    .form-note{color:var(--muted);font-size:.92rem}
+    .form{display:grid;gap:16px}
+    .form-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .form label{display:grid;gap:8px;font-weight:700;font-size:.95rem}
+    .form input,.form select,.form textarea{width:100%;padding:15px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#fff;outline:none;transition:.22s ease}
+    .form input::placeholder,.form textarea::placeholder{color:#9bacd4}
+    .form textarea{min-height:150px;resize:vertical}
+    .form input:focus,.form select:focus,.form textarea:focus{border-color:rgba(133,247,255,.45);box-shadow:0 0 0 4px rgba(133,247,255,.08)}
+    .form-note{color:var(--muted);font-size:.95rem}
 
-    .cta{
-      text-align:center;
-      padding:92px 0;
-    }
-    .cta-box{
-      border:1px solid var(--line);
-      border-radius:30px;
-      padding:48px 22px;
-      background:
-        radial-gradient(circle at top center, rgba(213,176,107,.22), transparent 24%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-    }
-    .cta-box p{
-      max-width:780px;margin:14px auto 26px;color:var(--muted);
-    }
+    .cta{padding:0 0 110px}
+    .cta-box{padding:42px;text-align:center}
+    .cta-box p{max-width:760px;margin:0 auto 22px;color:var(--muted);font-size:1.06rem}
 
-    footer{
-      border-top:1px solid var(--line);
-      background:rgba(0,0,0,.16);
-    }
-    .footer-grid{
-      display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:22px;padding:48px 0 24px;
-    }
-    .footer-title{
-      font-size:1.08rem;
-      text-transform:uppercase;
-      margin-bottom:12px;
-    }
-    .footer-col p,.footer-col a{color:var(--muted)}
-    .footer-col a{display:block;margin-bottom:8px}
-    .copyright{
-      border-top:1px solid var(--line);
-      padding:16px 0;
-      text-align:center;
-      color:var(--muted);
-    }
+    .contact-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:24px}
+    .contact-panel,.contact-list{padding:30px}
+    .contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .contact-card{padding:22px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);transition:.28s ease}
+    .contact-card strong{display:block;font-size:1rem;margin-bottom:8px}
+    .contact-card span,.contact-card a{color:var(--muted-2)}
+    .contact-card:hover{transform:translateY(-4px);border-color:rgba(133,247,255,.2)}
 
-    .reveal{opacity:0;transform:translateY(24px);transition:.7s ease}
+    footer{padding:34px 0 18px;border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.015)}
+    .footer-grid{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:24px}
+    .footer-title{font-size:1rem;font-weight:800;margin-bottom:12px}
+    .footer-col p,.footer-col a{color:var(--muted);display:block;margin-bottom:8px}
+    .copyright{padding-top:18px;text-align:center;color:var(--muted);font-size:.92rem}
+
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
     .reveal.show{opacity:1;transform:none}
 
-    @media (max-width:980px){
-      .hero-grid,.about-grid,.contact-grid,.booking-grid,.services-grid,.projects-grid,.footer-grid{grid-template-columns:1fr}
-      .stats-ribbon{grid-template-columns:1fr 1fr}
-      .menu{display:none}
-      .menu-toggle{display:block}
+    @media (max-width: 1080px){
+      .hero-grid,.about-layout,.timeline-grid,.booking-grid,.contact-grid,.featured-project{grid-template-columns:1fr}
+      .services-grid,.project-grid,.contact-cards,.project-stats,.result-cards{grid-template-columns:repeat(2,1fr)}
+      .hero-copy h1{max-width:780px}
     }
-    @media (max-width:680px){
+    @media (max-width: 920px){
+      .menu{display:none}.menu-toggle{display:inline-block}
+      .section{padding:90px 0}
+      .hero{padding-top:52px}
+      .hero-metrics,.form-row,.services-grid,.project-grid,.contact-cards,.project-stats,.result-cards,.footer-grid,.info-row{grid-template-columns:1fr}
+      .dashboard{grid-template-columns:1fr}
+    }
+    @media (max-width: 640px){
+      .hero-copy h1{font-size:clamp(2.6rem,14vw,4.3rem);letter-spacing:-2px}
+      .section-title{letter-spacing:-1.4px}
+      .hero-card,.bio-card,.story-card,.service-card,.booking-panel,.form-panel,.contact-panel,.contact-list,.process-panel,.results-panel,.project-copy,.cta-box{padding:24px}
+      .project-media{min-height:280px}
       .topbar .container{justify-content:center;text-align:center}
-      .hero-actions .primary-btn,.hero-actions .ghost-btn,.project-links .primary-btn,.project-links .ghost-btn{width:100%}
-      .stats-ribbon,.skills,.form-row,.preview-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <div class="site-shell">
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <div class="bg-layer"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-beam"></div>
+  <div class="bg-orbits"></div>
+  <div class="particles">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
 
-    <div class="topbar">
-      <div class="container">
-        <div> Portfolio • Web Developer • Creative Editor</div>
-        <div>Available for projects</div>
-      </div>
+  <div class="topbar">
+    <div class="container">
+      <span>Designing premium websites for businesses, creators, and personal brands.</span>
+      <span>Available for website design, landing pages, redesigns, and creative edits.</span>
     </div>
+  </div>
 
-    <header>
-      <div class="container nav">
-        <a href="#home" class="brand">
-          <div class="brand-mark">KV</div>
-          <div>
-            <strong>Kiratveer</strong>
-            <span>Digital Portfolio</span>
-          </div>
-        </a>
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand magnetic">
+        <div class="brand-mark">KV</div>
+        <div>
+          <strong>Kiratveer</strong>
+          <span>Web Designer • Creative Developer</span>
+        </div>
+      </a>
 
-        <nav class="menu">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#projects">Projects</a>
-          <a href="#booking">Book</a>
-          <a href="#contact">Contact</a>
-          <a href="#projects" class="primary-btn">View Work</a>
-        </nav>
+      <nav class="menu" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#booking">Book</a>
+        <a href="#contact">Contact</a>
+        <a href="#projects" class="primary-btn magnetic">View Work</a>
+      </nav>
 
-        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
-      </div>
-    </header>
+      <button class="menu-toggle" aria-label="Open Menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </header>
 
-    <div class="mobile-backdrop"></div>
-    <aside class="mobile-menu">
-      <button class="mobile-close" aria-label="Close menu">&times;</button>
-      <a class="mobile-link" href="#about">About</a>
-      <a class="mobile-link" href="#services">Services</a>
-      <a class="mobile-link" href="#projects">Projects</a>
-      <a class="mobile-link" href="#booking">Book</a>
-      <a class="mobile-link" href="#contact">Contact</a>
-      <a class="primary-btn" href="#projects">View Work</a>
-    </aside>
+  <div class="mobile-backdrop"></div>
+  <div class="mobile-menu">
+    <button class="mobile-close" aria-label="Close Menu">×</button>
+    <a class="mobile-link" href="#about">About</a>
+    <a class="mobile-link" href="#services">Services</a>
+    <a class="mobile-link" href="#projects">Projects</a>
+    <a class="mobile-link" href="#booking">Book</a>
+    <a class="mobile-link" href="#contact">Contact</a>
+    <a class="primary-btn" href="#booking">Start a Project</a>
+  </div>
 
-    <section class="hero section" id="home">
+  <main id="home">
+    <section class="hero section">
       <div class="container hero-grid">
-        <div class="reveal show">
-          <div class="eyebrow">Web Developer • Creative Editor</div>
-          <h1>Different style. Premium presence.</h1>
-         <p>A premium portfolio built to showcase my work in a clean, elegant, and professional way. Designed to create a strong impression and highlight my personal brand.</p>
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Premium Digital Presence</div>
+          <h1>Websites that <span class="text-gradient">look sharp</span>, feel modern, and win trust fast.</h1>
+          <p>
+            I design and build high-impact websites for brands, startups, and personal businesses that need more than a template. Every layout is planned to feel premium, load cleanly, tell a clear story, and turn visitors into real enquiries.
+          </p>
           <div class="hero-actions">
-            <a href="#projects" class="primary-btn">Explore Projects</a>
-            <a href="#booking" class="ghost-btn">Book a Project</a>
+            <a href="#booking" class="primary-btn magnetic">Start Your Project</a>
+            <a href="#projects" class="ghost-btn magnetic">See Selected Work</a>
           </div>
-
           <div class="hero-tags">
-           <div class="tag-pill">Web Development</div>
-<div class="tag-pill">Premium Portfolios</div>
-<div class="tag-pill">Client Websites</div>
-<div class="tag-pill">Creative Editing</div>
+            <div class="tag-pill">Modern UI & motion</div>
+            <div class="tag-pill">SEO-ready structure</div>
+            <div class="tag-pill">Mobile-first performance</div>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric glass">
+              <strong data-count="100">0</strong>
+              <span>Custom focus on premium presentation</span>
+            </div>
+            <div class="metric glass">
+              <strong data-count="24">0</strong>
+              <span>Hour response goal for new enquiries</span>
+            </div>
+            <div class="metric glass">
+              <strong data-count="3">0</strong>
+              <span>Core service lines with clear delivery</span>
+            </div>
+          </div>
         </div>
 
-        <div class="hero-card reveal show">
-          <div class="preview-window">
-            <div class="preview-top">
-              <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="hero-card glass reveal tilt-card" data-intensity="9">
+          <div class="live-ui">
+            <div class="ui-top">
+              <div>
+                <div class="eyebrow" style="margin-bottom:8px;">Live Studio Snapshot</div>
+                <h2 style="font-size:1.5rem;line-height:1.05;">A real portfolio layout, not a placeholder screen.</h2>
+              </div>
+              <div class="status-row">
+                <div class="status-chip">Animated</div>
+                <div class="status-chip">SEO</div>
+                <div class="status-chip">Responsive</div>
+              </div>
             </div>
-            <div class="preview-screen">
-              <div class="preview-badge">Signature Portfolio</div>
-              <div class="preview-title">Luxury. Clean. Memorable.</div>
-              <div class="preview-grid">
-                <div class="preview-box">
-                  <strong>Premium Layout</strong>
-                  <span>Built to feel elevated and client-ready.</span>
+            <div class="screen">
+              <div class="screen-hero">
+                <div class="screen-copy">
+                  <strong>Conversion-focused hero section</strong>
+                  <span>Message clarity, visual depth, and stronger trust at first glance.</span>
                 </div>
-                <div class="preview-box">
-                  <strong>Booking Section</strong>
-                  <span>Inquiry area for website and editing work.</span>
+              </div>
+              <div class="dashboard">
+                <div class="dash-card">
+                  <strong style="font-size:1rem;">Build priorities</strong>
+                  <div class="dash-bars">
+                    <div class="bar"><span style="width:96%"></span></div>
+                    <div class="bar"><span style="width:88%"></span></div>
+                    <div class="bar"><span style="width:91%"></span></div>
+                  </div>
                 </div>
-                <div class="preview-box">
-                  <strong>Project Showcase</strong>
-                  <span>Real client examples and visual work.</span>
-                </div>
-                <div class="preview-box">
-                  <strong>Instagram Bio Ready</strong>
-                  <span>Strong first impression from one link.</span>
+                <div class="dash-list">
+                  <ul>
+                    <li><span>Visual quality</span><strong>High</strong></li>
+                    <li><span>Readability</span><strong>Strong</strong></li>
+                    <li><span>Lead flow</span><strong>Direct</strong></li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="container stats-ribbon">
-        <div class="stat reveal"><strong>01</strong><span>Luxury styling direction</span></div>
-        <div class="stat reveal"><strong>02</strong><span>Premium inquiry section</span></div>
-        <div class="stat reveal"><strong>03</strong><span>Client project showcase</span></div>
-        <div class="stat reveal"><strong>04</strong><span>Instagram bio use case</span></div>
+    <section class="trust-marquee" aria-label="Capabilities ticker">
+      <div class="marquee-track">
+        <span>Website Design</span><span>Landing Pages</span><span>Portfolio Design</span><span>Redesign Projects</span><span>Creative Editing</span><span>Responsive Development</span><span>SEO Foundations</span><span>Website Design</span><span>Landing Pages</span><span>Portfolio Design</span><span>Redesign Projects</span><span>Creative Editing</span><span>Responsive Development</span><span>SEO Foundations</span>
       </div>
     </section>
 
     <section class="section" id="about">
-      <div class="container about-grid">
-        <div class="panel reveal">
-          <div class="eyebrow">About Me</div>
-          <h2 class="section-title">I build polished digital identities.</h2>
-          <p class="section-sub" style="margin-bottom:0;">I’m Kiratveer, a web developer and creative editor focused on modern websites, refined portfolio pages, and premium visual presentation. My work is built to feel elegant, professional, and distinct from template-style designs.</p>
+      <div class="container about-layout">
+        <div class="bio-card glass reveal tilt-card">
+          <div class="eyebrow">About Kiratveer</div>
+          <h2 class="section-title">Built for brands that want to look established from day one.</h2>
+          <p class="section-sub">
+            I focus on websites that feel clean, premium, and trustworthy. That means better spacing, stronger typography, real content structure, and sections that guide the visitor instead of overwhelming them.
+          </p>
+          <div class="bio-grid">
+            <div class="info-row">
+              <div class="mini-card">
+                <strong>What I design</strong>
+                <span>Business websites, landing pages, portfolio sites, and full visual redesigns.</span>
+              </div>
+              <div class="mini-card">
+                <strong>What I improve</strong>
+                <span>Clarity, first impression, mobile experience, and enquiry flow.</span>
+              </div>
+            </div>
+            <div class="mini-card">
+              <strong>How I work</strong>
+              <span>I keep the experience sharp and practical: clear headlines, real service language, polished visuals, and smooth motion that supports the message instead of distracting from it.</span>
+            </div>
+          </div>
         </div>
-        <div class="panel reveal">
-          <div class="eyebrow">Core Skills</div>
-          <div class="skills">
-            <div class="skill">Luxury Web Design</div>
-            <div class="skill">Portfolio Websites</div>
-            <div class="skill">Landing Pages</div>
-            <div class="skill">Client Site Delivery</div>
-            <div class="skill">Creative Visual Editing</div>
-            <div class="skill">Domain & Launch Setup</div>
+
+        <div class="story-card glass reveal tilt-card">
+          <div class="eyebrow">What makes this site feel real</div>
+          <div class="story-points">
+            <div class="story-item">
+              <strong>Actual positioning, not dummy copy</strong>
+              <span>Every section now speaks to real client needs like launch speed, trust, visual quality, and better conversion.</span>
+            </div>
+            <div class="story-item">
+              <strong>Stronger layout system</strong>
+              <span>The page flow is fully rebuilt with a new hero, trust strip, case study structure, service blocks, process section, and clearer contact journey.</span>
+            </div>
+            <div class="story-item">
+              <strong>SEO foundation included</strong>
+              <span>Metadata, semantic headings, schema markup, descriptive section copy, and a clearer internal section structure help search engines understand the site better.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -562,206 +498,231 @@
 
     <section class="section" id="services">
       <div class="container">
-        <div class="reveal">
-          <div class="eyebrow">Services</div>
-          <h2 class="section-title">What I can build.</h2>
-          <p class="section-sub">A cleaner, higher-end presentation of your services. This section is meant to feel more designer portfolio than local business site.</p>
-        </div>
-
+        <div class="eyebrow">Services</div>
+        <h2 class="section-title">Three focused services for brands that want a better online presence.</h2>
+        <p class="section-sub">Whether you need a fresh launch, a redesign, or a tighter presentation for your brand, the goal stays the same: a website that feels more credible, more premium, and easier to convert from.</p>
         <div class="services-grid">
-          <div class="card reveal">
-            <div class="card-copy">
-              <div class="num">01</div>
-              <h3>Business Websites</h3>
-              <p>Modern websites for brands, local businesses, creators, and service-based clients who want a stronger online image.</p>
+          <article class="service-card glass reveal tilt-card">
+            <div>
+              <div class="number-badge">01</div>
+              <h3>Website Design</h3>
+              <p>Custom business and personal websites built with modern visual hierarchy, strong mobile layouts, and clear calls to action.</p>
             </div>
-          </div>
-
-          <div class="card reveal">
-            <div class="card-copy">
-              <div class="num">02</div>
-              <h3>Portfolio Websites</h3>
-              <p>Elegant personal portfolios for developers, editors, creators, and freelancers who want a premium digital presence.</p>
-            </div>
-          </div>
-
-          <div class="card reveal">
-            <div class="card-copy">
-              <div class="num">03</div>
+            <ul>
+              <li>Homepages that create trust quickly</li>
+              <li>Responsive sections for every screen size</li>
+              <li>Clear service presentation and enquiry flow</li>
+            </ul>
+          </article>
+          <article class="service-card glass reveal tilt-card">
+            <div>
+              <div class="number-badge">02</div>
               <h3>Landing Pages</h3>
-              <p>High-converting, clean landing pages for launches, offers, services, and personal branding campaigns.</p>
+              <p>Focused pages for offers, campaigns, launches, and promotions where clarity, speed, and lead generation matter most.</p>
             </div>
-          </div>
-
-          <div class="card reveal">
-            <div class="card-copy">
-              <div class="num">04</div>
-              <h3>Creative Editing</h3>
-              <p>Post covers, presentation visuals, showcase graphics, and polished social media creative work.</p>
+            <ul>
+              <li>High-conversion hero and CTA sections</li>
+              <li>Message structure for products or services</li>
+              <li>Visual design that feels clean and premium</li>
+            </ul>
+          </article>
+          <article class="service-card glass reveal tilt-card">
+            <div>
+              <div class="number-badge">03</div>
+              <h3>Website Redesign</h3>
+              <p>Upgrade an outdated website with stronger content flow, better styling, improved readability, and a more current digital identity.</p>
             </div>
-          </div>
-
-          <div class="card reveal">
-            <div class="card-copy">
-              <div class="num">05</div>
-              <h3>Premium Redesigns</h3>
-              <p>Taking a basic-looking page or site and transforming it into something sharper, cleaner, and more luxurious.</p>
-            </div>
-          </div>
-
-          <div class="card reveal">
-            <div class="card-copy">
-              <div class="num">06</div>
-              <h3>Launch Support</h3>
-              <p>Domain connection, GitHub Pages setup, HTTPS, final polishing, and delivery support for live deployment.</p>
-            </div>
-          </div>
+            <ul>
+              <li>Modern layout replacement</li>
+              <li>Improved section hierarchy and spacing</li>
+              <li>Cleaner visual language and motion details</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="section" id="projects">
       <div class="container">
-        <div class="reveal">
-          <div class="eyebrow">Projects</div>
-          <h2 class="section-title">Featured work.</h2>
-          <p class="section-sub">A more editorial, designer-style project section. Replace these cards with your actual future work as your portfolio grows.</p>
+        <div class="eyebrow">Selected Work</div>
+        <h2 class="section-title">Case-study style presentation instead of basic project cards.</h2>
+        <p class="section-sub">The work section now reads like a real studio portfolio, with context, outcomes, and clearer reasons to click through.</p>
+
+        <div class="projects-shell">
+          <article class="featured-project glass reveal tilt-card">
+            <div class="project-media" style="background-image:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80');"></div>
+            <div class="project-copy">
+              <div class="project-badge">Featured Client Website</div>
+              <h3>Gloss Boss Automotive</h3>
+              <p>
+                A live automotive website presented here as a polished case study. The focus is on stronger visual trust, easier browsing, and a cleaner, more premium feel that fits a service-driven business.
+              </p>
+              <div class="project-stats">
+                <div class="stat-box"><strong>Sharper</strong><span>Visual hierarchy</span></div>
+                <div class="stat-box"><strong>Cleaner</strong><span>Service flow</span></div>
+                <div class="stat-box"><strong>Better</strong><span>First impression</span></div>
+              </div>
+              <div class="project-links">
+                <a class="primary-btn magnetic" href="https://glossbossautomotive.online" target="_blank">Visit Live Site</a>
+                <a class="ghost-btn magnetic" href="#booking">Book Similar Style</a>
+              </div>
+            </div>
+          </article>
+
+          <div class="project-grid">
+            <article class="project-card glass reveal tilt-card">
+              <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');"></div>
+              <h4>Personal Brand Portfolio</h4>
+              <p>A premium portfolio direction built for creators and freelancers who want a cleaner layout, better positioning, and a more memorable online presence.</p>
+              <div class="project-links">
+                <a class="ghost-btn magnetic" href="#booking">Plan a Portfolio</a>
+              </div>
+            </article>
+
+            <article class="project-card glass reveal tilt-card">
+              <div class="project-thumb" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');"></div>
+              <h4>Next Client Launch</h4>
+              <p>This slot is reserved for the next business build, redesign, or landing page launch that needs the same high-end visual treatment and structured storytelling.</p>
+              <div class="project-links">
+                <a class="ghost-btn magnetic" href="https://stackops.onrender.com" target="_blank">Preview Slot</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container timeline-grid">
+        <div class="process-panel glass reveal tilt-card">
+          <div class="eyebrow">Process</div>
+          <h2 class="section-title">From idea to launch with a cleaner workflow.</h2>
+          <div class="timeline">
+            <div class="step">
+              <div class="step-num">01</div>
+              <div>
+                <h4>Discovery and direction</h4>
+                <p>We define the goal of the website, the kind of visitor you want to attract, and the overall visual tone your brand should carry.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">02</div>
+              <div>
+                <h4>Layout and content flow</h4>
+                <p>Sections are planned around real user questions: what you do, why it matters, what makes you credible, and how to contact you quickly.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">03</div>
+              <div>
+                <h4>Polish, animation, and launch</h4>
+                <p>The final stage adds motion, refinement, mobile adjustments, form flow, and practical SEO structure so the site feels finished and ready.</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="projects-grid">
-          <article class="card reveal">
-            <div class="project-media" style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');"></div>
-            <div class="card-copy">
-              <div class="project-badge">Client Website</div>
-              <h3>Gloss Boss Automotive</h3>
-              <p>Premium business website with custom domain, responsive layout, booking system, WhatsApp CTA, and polished client delivery.</p>
-              <div class="project-links">
-                <a class="primary-btn" href="https://glossbossautomotive.online" target="_blank">Live Website</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card reveal">
-            <div class="project-media" style="background-image:url('https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?auto=format&fit=crop&w=1200&q=80');"></div>
-            <div class="card-copy">
-              <div class="project-badge">Premium Spare Parts Website</div>
-              <h3>Website Development</h3>
-              <p>Reserved space for your strongest Farm examples, Agricultural covers, promo visuals, and cinematic presentation work.</p>
-              <div class="project-links">
-                <a class="ghost-btn" href="https://kiratveersinghralhan-hue.github.io/AgroTitan/"></a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card reveal">
-            <div class="project-media" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');"></div>
-            <div class="card-copy">
-              <div class="project-badge">Next Addition</div>
-              <h3>Future Premium Build</h3>
-              <p>Keep this slot open for your next client, portfolio experiment, redesign case study, or another signature website.</p>
-              <div class="project-links">
-                <a class="ghost-btn" href="https://stackops.onrender.com"></a>
-              </div>
-            </div>
-          </article>
+        <div class="results-panel glass reveal tilt-card">
+          <div class="eyebrow">Why this works</div>
+          <h2 class="section-title">Better presentation creates better trust.</h2>
+          <p class="section-sub">A premium website is not only about visuals. It helps your business look more established, makes your offer easier to understand, and gives people more confidence to reach out.</p>
+          <div class="result-cards">
+            <div class="result-card"><strong>Clearer</strong><span>Messaging across every major section</span></div>
+            <div class="result-card"><strong>Stronger</strong><span>Brand impression on mobile and desktop</span></div>
+            <div class="result-card"><strong>Faster</strong><span>Path from landing to enquiry</span></div>
+            <div class="result-card"><strong>Smarter</strong><span>SEO-ready semantic page structure</span></div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="booking">
       <div class="container booking-grid">
-        <div class="panel booking-panel reveal">
-          <div class="eyebrow">Premium Inquiry</div>
-          <h2 class="section-title">Book a project.</h2>
-          <p class="section-sub" style="margin-bottom:0;">This area is intentionally different from the client booking layout. It feels more premium, more personal-brand focused, and better suited for service inquiries from your Instagram bio.</p>
-
+        <div class="booking-panel glass reveal tilt-card">
+          <div class="eyebrow">Book a Project</div>
+          <h2 class="section-title">Tell me what you want to build.</h2>
+          <p class="section-sub">Use the form to share the kind of website you need, your budget range, and the style you want. I keep the process simple, direct, and focused on getting the right visual result.</p>
           <div class="booking-features">
             <div class="booking-feature">
-              <strong>Website Projects</strong>
-              <span>Business websites, portfolio sites, landing pages, and redesign work.</span>
+              <strong>Best for businesses</strong>
+              <span>Ideal for local services, personal brands, freelancers, and businesses that need a more polished site.</span>
             </div>
             <div class="booking-feature">
-              <strong>Creative Visual Work</strong>
-              <span>Showcase covers, digital presentation visuals, and social content styling.</span>
+              <strong>Best for redesigns</strong>
+              <span>Perfect when your current website feels dated, too plain, or does not represent your quality properly.</span>
             </div>
             <div class="booking-feature">
-              <strong>High-End Feel</strong>
-              <span>Designed to feel more elegant and premium than a basic contact form block.</span>
+              <strong>Best for launches</strong>
+              <span>Useful when you need a clean landing page or portfolio page that looks premium from the first screen.</span>
             </div>
           </div>
         </div>
 
-        <div class="panel reveal">
-  <form class="form" id="portfolioForm">
-  <input type="hidden" name="_subject" value="New Portfolio Inquiry">
-  <input type="hidden" name="_captcha" value="false">
-  <div class="form-row">
-    <label>
-      Full Name
-      <input type="text" name="name" placeholder="Your name" required>
-    </label>
+        <div class="form-panel glass reveal tilt-card">
+          <form class="form" id="portfolioForm">
+            <input type="hidden" name="_subject" value="New Portfolio Inquiry">
+            <input type="hidden" name="_captcha" value="false">
 
-    <label>
-      Email Address
-      <input type="email" name="email" placeholder="yourmail@example.com" required>
-    </label>
-  </div>
+            <div class="form-row">
+              <label>
+                Full Name
+                <input type="text" name="name" placeholder="Your full name" required>
+              </label>
+              <label>
+                Email Address
+                <input type="email" name="email" placeholder="yourmail@example.com" required>
+              </label>
+            </div>
 
-  <div class="form-row">
-    <label>
-      Project Type
-      <select name="project_type" required>
-        <option value="">Select project type</option>
-        <option>Business Website</option>
-        <option>Portfolio Website</option>
-        <option>Landing Page</option>
-        <option>Creative Editing</option>
-        <option>Website Redesign</option>
-      </select>
-    </label>
+            <div class="form-row">
+              <label>
+                Project Type
+                <select name="project_type" required>
+                  <option value="">Select project type</option>
+                  <option>Business Website</option>
+                  <option>Portfolio Website</option>
+                  <option>Landing Page</option>
+                  <option>Creative Editing</option>
+                  <option>Website Redesign</option>
+                </select>
+              </label>
+              <label>
+                Budget Range
+                <select name="budget" required>
+                  <option value="">Select budget</option>
+                  <option>₹500 – ₹1,000</option>
+                  <option>₹1,000 – ₹3,000</option>
+                  <option>₹3,000 – ₹5,000</option>
+                  <option>₹5,000 – ₹10,000</option>
+                  <option>₹10,000+</option>
+                </select>
+              </label>
+            </div>
 
-    <label>
-      Budget Range
-      <select name="budget" required>
-        <option value="">Select budget</option>
- <option>₹5,00 - ₹1,000</option>
- <option>₹1,000 - ₹3,000</option>
+            <label>
+              Project Details
+              <textarea name="details" placeholder="Describe your website, your brand style, and the sections or features you need."></textarea>
+            </label>
 
-        <option>₹3,000 - ₹5,000</option>
-        <option>₹5,000 - ₹10,000</option>
-        <option>₹10,000+</option>
-      </select>
-    </label>
-  </div>
-
-  <label>
-    Project Details
-    <textarea name="details" placeholder="Tell me what you want, what style you prefer, and any useful details."></textarea>
-  </label>
-
-  <div class="hero-actions" style="margin-top:4px;">
-    <button type="submit" class="primary-btn">Send Inquiry</button>
-    <a href="https://wa.me/919814800017" target="_blank" class="ghost-btn">WhatsApp Instead</a>
-  </div>
-  <p id="formStatus" class="form-note" style="display:none;"></p>
-
-</form>
-
-
-
+            <div class="stack-actions">
+              <button type="submit" class="primary-btn magnetic">Send Inquiry</button>
+              <a href="https://wa.me/919814800017" target="_blank" class="ghost-btn magnetic">WhatsApp Instead</a>
+            </div>
+            <p id="formStatus" class="form-note" style="display:none;"></p>
+          </form>
         </div>
       </div>
     </section>
 
     <section class="cta">
       <div class="container">
-        <div class="cta-box reveal">
-          <div class="eyebrow" style="justify-content:center;">Open for Work</div>
-          <h2 class="section-title">Need something elegant and different?</h2>
-          <p>If you want a website or digital presentation that feels cleaner, more premium, and more intentional than standard template work, this is the direction I build in.</p>
+        <div class="cta-box glass reveal tilt-card">
+          <div class="eyebrow" style="justify-content:center;">Ready to Upgrade</div>
+          <h2 class="section-title">Need a website that feels more premium, modern, and believable?</h2>
+          <p>I can help you launch a site that looks more complete, communicates more clearly, and gives your business a stronger digital first impression.</p>
           <div class="hero-actions" style="justify-content:center;">
-            <a href="#contact" class="primary-btn">Contact Me</a>
-            <a href="https://glossbossautomotive.online" target="_blank" class="ghost-btn">See Client Website</a>
+            <a href="#contact" class="primary-btn magnetic">Contact Me</a>
+            <a href="https://glossbossautomotive.online" target="_blank" class="ghost-btn magnetic">See Client Website</a>
           </div>
         </div>
       </div>
@@ -769,46 +730,54 @@
 
     <section class="section" id="contact">
       <div class="container contact-grid">
-        <div class="panel reveal">
+        <div class="contact-panel glass reveal tilt-card">
           <div class="eyebrow">Contact</div>
-          <h2 class="section-title">Let’s build something stronger.</h2>
-          <p class="section-sub" style="margin-bottom:0;">Replace these placeholders with your real Instagram, email, and WhatsApp details before adding this link to your bio.</p>
+          <h2 class="section-title">Let’s create a website that looks like your business has already grown.</h2>
+          <p class="section-sub">You can reach out by email, WhatsApp, or Instagram. If you already know what you need, send the project details through the form above and I will review them directly.</p>
         </div>
-
-        <div class="panel reveal">
-          <div class="footer-col">
-            <div class="footer-title">Reach Me</div>
-            <a href="https://instagram.com/yourusername" target="_blank">Instagram: @ralhanx</a>
-            <a href="mailto:yourmail@example.com">Email: qq299629@gmail.com</a>
-            <a href="https://wa.me/919814800017" target="_blank">WhatsApp: +91 9814800017</a>
+        <div class="contact-list glass reveal tilt-card">
+          <div class="contact-cards">
+            <div class="contact-card">
+              <strong>Instagram</strong>
+              <span><a href="https://instagram.com/ralhanx" target="_blank">@ralhanx</a></span>
+            </div>
+            <div class="contact-card">
+              <strong>Email</strong>
+              <span><a href="mailto:qq299629@gmail.com">qq299629@gmail.com</a></span>
+            </div>
+            <div class="contact-card">
+              <strong>WhatsApp</strong>
+              <span><a href="https://wa.me/919814800017" target="_blank">+91 9814800017</a></span>
+            </div>
           </div>
         </div>
       </div>
     </section>
+  </main>
 
-    <footer>
-      <div class="container footer-grid">
-        <div class="footer-col">
-          <div class="footer-title">Kiratveer</div>
-          <p>Luxury-style digital portfolio for web design, premium presentation, and creative visual work.</p>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">Quick Links</div>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#projects">Projects</a>
-          <a href="#booking">Book</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">Featured Project</div>
-          <a href="https://glossbossautomotive.online" target="_blank">Gloss Boss Automotive</a>
-        </div>
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-title">Kiratveer</div>
+        <p>Web designer and creative developer focused on premium websites, landing pages, redesigns, and polished digital presentation.</p>
       </div>
-      <div class="copyright">© 2026 Kiratveer Portfolio. All rights reserved.</div>
-    </footer>
-  </div>
+      <div class="footer-col">
+        <div class="footer-title">Quick Links</div>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#booking">Book</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">Featured Project</div>
+        <a href="https://glossbossautomotive.online" target="_blank">Gloss Boss Automotive</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Kiratveer Portfolio. All rights reserved.</div>
+  </footer>
 
   <script>
+    const root = document.documentElement;
     const toggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
     const backdrop = document.querySelector('.mobile-backdrop');
@@ -819,30 +788,109 @@
       mobileMenu.classList.add('open');
       backdrop.classList.add('show');
       toggle.classList.add('active');
-      document.body.classList.add('menu-open');
+      toggle.setAttribute('aria-expanded','true');
+      document.body.style.overflow = 'hidden';
     }
     function closeMenu(){
       mobileMenu.classList.remove('open');
       backdrop.classList.remove('show');
       toggle.classList.remove('active');
-      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
     }
-
-    toggle.addEventListener('click', () => {
-      if (mobileMenu.classList.contains('open')) closeMenu();
-      else openMenu();
-    });
-    closeBtn.addEventListener('click', closeMenu);
-    backdrop.addEventListener('click', closeMenu);
+    if(toggle){toggle.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());}
+    if(closeBtn){closeBtn.addEventListener('click', closeMenu);}
+    if(backdrop){backdrop.addEventListener('click', closeMenu);}
     mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting) entry.target.classList.add('show');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ entry.target.classList.add('show'); }
       });
-    }, {threshold:0.15});
-    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    }, {threshold: 0.14});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+    window.addEventListener('scroll', () => {
+      root.style.setProperty('--scroll', window.scrollY.toFixed(2));
+    }, {passive:true});
+
+    window.addEventListener('mousemove', (e) => {
+      root.style.setProperty('--spot-x', `${e.clientX}px`);
+      root.style.setProperty('--spot-y', `${e.clientY}px`);
+    });
+
+    const ring = document.querySelector('.cursor-ring');
+    const dot = document.querySelector('.cursor-dot');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let ringX = mouseX, ringY = mouseY;
+    if (ring && dot) {
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        dot.style.left = `${mouseX}px`;
+        dot.style.top = `${mouseY}px`;
+      });
+      const animateCursor = () => {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = `${ringX}px`;
+        ring.style.top = `${ringY}px`;
+        requestAnimationFrame(animateCursor);
+      };
+      animateCursor();
+      document.querySelectorAll('a, button, input, textarea, select, .tilt-card').forEach((el) => {
+        el.addEventListener('mouseenter', () => ring.classList.add('active'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('active'));
+      });
+    }
+
+    document.querySelectorAll('.magnetic').forEach((el) => {
+      el.addEventListener('mousemove', (e) => {
+        if (window.innerWidth < 920) return;
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0,0)';
+      });
+    });
+
+    document.querySelectorAll('.tilt-card').forEach((card) => {
+      const intensity = Number(card.dataset.intensity || 10);
+      card.addEventListener('mousemove', (e) => {
+        if (window.innerWidth < 920) return;
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rx = (0.5 - py) * intensity;
+        const ry = (px - 0.5) * intensity;
+        card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const end = Number(el.dataset.count);
+        const duration = 1200;
+        const startTime = performance.now();
+        const step = (now) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const value = Math.floor(progress * end);
+          el.textContent = value + (end === 100 ? '%' : end === 24 ? 'h' : '+');
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
+      });
+    }, {threshold: .7});
+    counters.forEach(counter => counterObserver.observe(counter));
 
     const form = document.getElementById('portfolioForm');
     const formStatus = document.getElementById('formStatus');
@@ -850,45 +898,37 @@
     if (form) {
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
-
         if (!form.checkValidity()) {
           form.reportValidity();
           return;
         }
-
         formStatus.style.display = 'block';
-        formStatus.style.color = '#b9c0cf';
+        formStatus.style.color = '#cad5f5';
         formStatus.textContent = 'Sending inquiry...';
-
         const submitButton = form.querySelector('button[type="submit"]');
         if (submitButton) submitButton.disabled = true;
-
         const formData = new FormData(form);
-
         try {
           const response = await fetch('https://formspree.io/f/xjgadypw', {
             method: 'POST',
             body: formData,
             headers: { 'Accept': 'application/json' }
           });
-
           if (response.ok) {
             window.location.href = 'thankyou.html';
           } else {
             const data = await response.json().catch(() => ({}));
-            formStatus.style.color = '#ff9b9b';
+            formStatus.style.color = '#ff9acb';
             formStatus.textContent = data.errors?.[0]?.message || 'Something went wrong. Please try again.';
           }
         } catch (error) {
-          formStatus.style.color = '#ff9b9b';
+          formStatus.style.color = '#ff9acb';
           formStatus.textContent = 'Submission failed. Please check your internet and try again.';
         } finally {
           if (submitButton) submitButton.disabled = false;
         }
       });
     }
-
-
   </script>
 </body>
 </html>
