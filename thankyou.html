@@ -3,95 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thank You | Kiratveer</title>
-  <meta name="description" content="Thank you for contacting Kiratveer. Your website enquiry has been received successfully." />
+  <title>Thank You | Kiratveer Studio</title>
+  <meta name="description" content="Thank you for contacting Kiratveer Studio. Your enquiry for premium reel editing or website services has been received." />
   <meta name="robots" content="noindex, follow" />
-  <meta name="theme-color" content="#081120" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#050916;
-      --surface:rgba(10,16,34,.78);
-      --line:rgba(255,255,255,.1);
-      --text:#f6f8ff;
-      --muted:#9eaed4;
-      --cyan:#85f7ff;
-      --violet:#8f7cff;
-      --pink:#ff7bd8;
-      --gold:#f0d28b;
-      --shadow:0 28px 80px rgba(0,0,0,.48);
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
-      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);
-      background:
-        radial-gradient(circle at 12% 10%, rgba(143,124,255,.16), transparent 24%),
-        radial-gradient(circle at 88% 12%, rgba(133,247,255,.14), transparent 20%),
-        radial-gradient(circle at 20% 85%, rgba(255,123,216,.1), transparent 18%),
-        linear-gradient(180deg, #050916 0%, #081120 100%);
-      overflow:hidden;position:relative;
-    }
-    body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg, rgba(0,0,0,.35), transparent 94%);pointer-events:none}
-    body::after{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 18%, rgba(133,247,255,.08), transparent 22%),radial-gradient(circle at 50% 20%, transparent 0 34%, rgba(133,247,255,.05) 34.2%, transparent 34.8%),radial-gradient(circle at 50% 20%, transparent 0 46%, rgba(143,124,255,.05) 46.2%, transparent 46.8%)}
-    .orb,.orb::before,.orb::after{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-    .orb{width:260px;height:260px;left:10%;top:16%;background:rgba(143,124,255,.16);animation:floaty 10s ease-in-out infinite}
-    .orb::before,.orb::after{content:""}
-    .orb::before{width:220px;height:220px;right:-68vw;top:28vh;background:rgba(133,247,255,.12);animation:floaty 12s ease-in-out infinite reverse}
-    .orb::after{width:180px;height:180px;left:24vw;top:46vh;background:rgba(255,123,216,.1);animation:floaty 13s ease-in-out infinite}
-    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
-    .card{width:100%;max-width:860px;padding:56px 34px;border-radius:34px;border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:var(--shadow);backdrop-filter:blur(18px);position:relative;overflow:hidden;text-align:center}
-    .card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg, rgba(133,247,255,.48), rgba(143,124,255,.22), rgba(240,210,139,.12), transparent 75%);-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-    .card::after{content:"";position:absolute;width:260px;height:260px;right:-80px;top:-90px;border-radius:50%;background:radial-gradient(circle, rgba(133,247,255,.16), transparent 65%);pointer-events:none}
-    .badge{display:inline-flex;align-items:center;justify-content:center;padding:10px 18px;border-radius:999px;border:1px solid rgba(133,247,255,.22);background:rgba(255,255,255,.03);color:var(--cyan);font-size:.8rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:24px}
-    h1{font-size:clamp(2.4rem,5vw,4.8rem);line-height:.92;letter-spacing:-1.8px;margin-bottom:16px}
-    h1 span{background:linear-gradient(135deg,#fff 16%, var(--cyan) 45%, var(--violet) 70%, var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
-    p{max-width:650px;margin:0 auto 12px;color:var(--muted);font-size:1.04rem;line-height:1.8}
-    .status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 10px}
-    .status-box{padding:18px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04)}
-    .status-box strong{display:block;font-size:1rem;margin-bottom:6px}.status-box span{color:var(--muted);font-size:.92rem}
-    .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-width:210px;min-height:54px;padding:0 24px;border-radius:999px;text-decoration:none;font-weight:800;transition:.28s ease;border:1px solid transparent;position:relative;overflow:hidden}
-    .btn::before{content:"";position:absolute;inset:0;transform:translateX(-120%);background:linear-gradient(110deg, transparent 15%, rgba(255,255,255,.26) 50%, transparent 85%);transition:transform .75s ease}
-    .btn:hover::before{transform:translateX(120%)}.btn:hover{transform:translateY(-2px)}
-    .btn-primary{color:#07111c;background:linear-gradient(135deg, var(--cyan), var(--violet), var(--pink));box-shadow:0 16px 38px rgba(95,128,255,.24)}
-    .btn-secondary{color:#fff;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14)}
-    .btn-secondary:hover{border-color:rgba(133,247,255,.28);background:rgba(255,255,255,.07)}
-    .note{margin-top:24px;font-size:.94rem;color:#b7c3e1}
-    @media (max-width:700px){.card{padding:40px 22px}.status-grid{grid-template-columns:1fr}.actions{flex-direction:column}.btn{width:100%}}
-  </style>
+  <meta name="theme-color" content="#080604" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;display:grid;place-items:center;padding:24px;font-family:Inter,system-ui,sans-serif;color:#fff8e7;background:radial-gradient(circle at 15% 8%,rgba(232,202,133,.18),transparent 28%),radial-gradient(circle at 88% 18%,rgba(139,30,23,.22),transparent 28%),linear-gradient(180deg,#070503,#100905)}body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(232,202,133,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(232,202,133,.055) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(180deg,#000,transparent 92%)}.card{width:min(100%,860px);position:relative;text-align:center;padding:58px 32px;border-radius:36px;border:1px solid rgba(232,202,133,.18);background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.028));backdrop-filter:blur(18px);box-shadow:0 30px 90px rgba(0,0,0,.58);overflow:hidden}.card:after{content:"";position:absolute;right:-100px;top:-100px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(232,202,133,.16),transparent 66%)}.badge{display:inline-flex;padding:10px 18px;border-radius:999px;border:1px solid rgba(232,202,133,.24);color:#e8ca85;font-size:.78rem;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:22px}h1{font-family:"Cormorant Garamond",serif;font-size:clamp(3.2rem,7vw,6rem);line-height:.85;margin-bottom:14px;background:linear-gradient(135deg,#fff,#e8ca85,#b8873a);-webkit-background-clip:text;background-clip:text;color:transparent}p{max-width:680px;margin:0 auto 12px;color:#c7bca9;line-height:1.8}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0}.box{padding:18px;border-radius:20px;background:rgba(255,255,255,.045);border:1px solid rgba(232,202,133,.16)}.box strong{display:block;color:#e8ca85}.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;border-radius:999px;font-weight:900;text-decoration:none}.primary{background:linear-gradient(135deg,#e8ca85,#fff0b5,#b8873a);color:#100b05}.dark{border:1px solid rgba(232,202,133,.18);color:#fff8e7;background:rgba(255,255,255,.045)}@media(max-width:700px){.grid{grid-template-columns:1fr}.card{padding:42px 22px}.btn{width:100%}}</style>
 </head>
 <body>
-  <div class="orb"></div>
-  <div class="card">
-    <div class="badge">Inquiry Sent Successfully</div>
-    <h1><span>Thank You.</span></h1>
-    <p>Your website enquiry has been received successfully.</p>
-    <p>I now have your project details and will review them carefully. If your project is time-sensitive, you can also continue the conversation directly on WhatsApp using the link below.</p>
-
-    <div class="status-grid">
-      <div class="status-box">
-        <strong>Message received</strong>
-        <span>Your form submission was sent correctly.</span>
-      </div>
-      <div class="status-box">
-        <strong>Project review</strong>
-        <span>Your requirements will be checked next.</span>
-      </div>
-      <div class="status-box">
-        <strong>Quick follow-up</strong>
-        <span>WhatsApp is open for faster replies.</span>
-      </div>
-    </div>
-
-    <div class="actions">
-      <a href="index.html" class="btn btn-primary">Back to Portfolio</a>
-      <a href="https://wa.me/919814800017" target="_blank" class="btn btn-secondary">Chat on WhatsApp</a>
-    </div>
-
-    <div class="note">Thanks for reaching out. Your details have been sent and saved successfully.</div>
-  </div>
+  <main class="card">
+    <div class="badge">Inquiry Received</div>
+    <h1>Thank You.</h1>
+    <p>Your message has been sent to Kiratveer Studio. Your reel editing / website enquiry will be reviewed now.</p>
+    <p>For faster communication, continue directly on WhatsApp and send your raw clips, Instagram page, or website idea.</p>
+    <div class="grid"><div class="box"><strong>Step 1</strong><span>Message received</span></div><div class="box"><strong>Step 2</strong><span>Project checked</span></div><div class="box"><strong>Step 3</strong><span>Free sample planned</span></div></div>
+    <div class="actions"><a class="btn primary" href="index.html">Back to Website</a><a class="btn dark" href="https://wa.me/919814800017" target="_blank">Chat on WhatsApp</a></div>
+  </main>
 </body>
 </html>
