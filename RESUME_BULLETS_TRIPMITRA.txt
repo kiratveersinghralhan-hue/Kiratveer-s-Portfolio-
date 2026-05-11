@@ -1,0 +1,11 @@
+Resume Bullet Points — TripMitra AI Studio
+
+• Built and launched TripMitra AI Studio, a full-stack AI-powered trip planning platform for group travel.
+• Developed AI trip generation workflows with plan comparison, group voting, RSVP, food preferences and final plan locking.
+• Implemented budget-aware planning with transport, stay, food, shopping and activity recommendations.
+• Integrated Firebase Auth, Firestore and Firebase Functions for authentication, database and backend workflows.
+• Added Razorpay payment integration for subscription-based trip website creation.
+• Built founder/admin dashboard with notifications, feedback review, affiliate approvals and payout tracking.
+• Added affiliate referral system with approval flow, referral links, conversion tracking and payout request handling.
+• Set up Google Analytics, SEO metadata, sitemap and custom domain deployment for a live production website.
+• Designed responsive UI for mobile and desktop with modern landing page, pricing, dashboard and trip pages.
