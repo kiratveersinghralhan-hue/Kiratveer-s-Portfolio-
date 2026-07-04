@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b0b0b">
+  <title>Studio Admin — Kiratveer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css?v=20260704-premium2">
+  <script src="site-data.js?v=20260704-premium2" defer></script>
+  <script src="admin.js?v=20260704-premium2" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="admin-brand" href="index.html"><img src="logo-premium.png" alt="Kiratveer Studio logo" width="42" height="42"><div><strong>KIRATVEER</strong><small>Studio Admin</small></div></a>
+    <nav aria-label="Admin sections">
+      <a class="active" href="#dashboard"><i>01</i> Dashboard</a>
+      <a href="#projects"><i>02</i> Projects</a>
+      <a href="#references"><i>03</i> References</a>
+      <a href="#settings"><i>04</i> Settings</a>
+    </nav>
+    <div class="local-note"><span></span><strong>Local CMS mode</strong><p>Content is stored in this browser. Export a backup after major edits.</p></div>
+    <a class="back-link" href="index.html">← View portfolio</a>
+  </aside>
+
+  <main>
+    <header class="topbar"><div><p>CONTENT CONTROL / 2026</p><h1>Good morning, Kiratveer.</h1></div><a href="index.html" target="_blank">Open live view ↗</a></header>
+
+    <section id="dashboard" class="admin-section">
+      <div class="section-title"><div><span>01</span><h2>Overview</h2></div><p>Local portfolio activity from this browser.</p></div>
+      <div class="metric-grid">
+        <article><span>Page views</span><strong id="metricViews">0</strong><small>Public portfolio loads</small></article>
+        <article><span>Sessions</span><strong id="metricSessions">0</strong><small>Unique browser sessions</small></article>
+        <article><span>Contact intent</span><strong id="metricContact">0</strong><small>Contact + WhatsApp clicks</small></article>
+        <article><span>Project visits</span><strong id="metricProjects">0</strong><small>Live-project clicks</small></article>
+      </div>
+      <div class="dashboard-grid">
+        <article class="panel activity-panel"><div class="panel-head"><div><span>Interaction report</span><h3>Event activity</h3></div><button id="resetAnalytics" type="button">Reset</button></div><div class="event-list" id="eventList"></div></article>
+        <article class="panel pulse-panel"><span>Studio pulse</span><h3 id="pulseScore">0</h3><p>tracked interactions</p><div class="pulse-ring"><i></i></div><small id="lastVisit">No visits tracked yet</small></article>
+      </div>
+    </section>
+
+    <section id="projects" class="admin-section">
+      <div class="section-title"><div><span>02</span><h2>Projects</h2></div><button class="primary-button" type="button" id="newProject">+ Add project</button></div>
+      <div class="manager-grid">
+        <div class="panel item-panel"><div class="panel-head"><div><span>Portfolio order</span><h3>Featured projects</h3></div><small id="projectCount">0 items</small></div><div class="item-list" id="projectList"></div></div>
+        <form class="panel editor" id="projectForm">
+          <div class="panel-head"><div><span>Project editor</span><h3 id="projectFormTitle">Add new project</h3></div><button class="ghost-button" type="button" id="cancelProject">Clear</button></div>
+          <input type="hidden" id="projectId">
+          <div class="form-grid">
+            <label>Project name<input id="projectTitle" required placeholder="e.g. VEYRATH"></label>
+            <label>Status<input id="projectStatus" required placeholder="Ongoing project"></label>
+            <label class="full">Category<input id="projectCategory" required placeholder="Fashion Commerce / Brand System"></label>
+            <label class="full">Description<textarea id="projectDescription" required rows="4" placeholder="What was built and why it matters"></textarea></label>
+            <label>Live URL<input id="projectUrl" type="url" placeholder="https://..."></label>
+            <label>Monogram<input id="projectMonogram" maxlength="3" placeholder="KR"></label>
+            <label class="full">Tags<input id="projectTags" placeholder="Strategy, Web design, Development"></label>
+            <label>Accent colour<input id="projectColor" type="color" value="#171717"></label>
+            <label>Cover image URL<input id="projectImage" placeholder="image.jpg or https://..."></label>
+            <label class="full upload-label">Upload cover image<input id="projectUpload" type="file" accept="image/jpeg,image/png,image/webp"><span>Choose JPG, PNG or WebP under 1.5 MB</span></label>
+          </div>
+          <p class="form-message" id="projectMessage"></p>
+          <button class="save-button" type="submit">Save project <span>↗</span></button>
+        </form>
+      </div>
+    </section>
+
+    <section id="references" class="admin-section">
+      <div class="section-title"><div><span>03</span><h2>References</h2></div><p>Social pages, brands and properties in the reference carousel.</p></div>
+      <div class="manager-grid">
+        <div class="panel item-panel"><div class="panel-head"><div><span>Reference orbit</span><h3>Profiles & brands</h3></div><small id="referenceCount">0 items</small></div><div class="item-list" id="referenceList"></div></div>
+        <form class="panel editor" id="referenceForm">
+          <div class="panel-head"><div><span>Reference editor</span><h3 id="referenceFormTitle">Add reference</h3></div><button class="ghost-button" type="button" id="cancelReference">Clear</button></div>
+          <input type="hidden" id="referenceId">
+          <div class="form-grid">
+            <label>Name<input id="referenceName" required placeholder="@gaane.gpt"></label>
+            <label>Type<input id="referenceType" required placeholder="Music / Culture"></label>
+            <label class="full">Short note<textarea id="referenceNote" required rows="3" placeholder="What this property represents"></textarea></label>
+            <label class="full">URL<input id="referenceUrl" type="url" placeholder="https://instagram.com/..."></label>
+            <label class="full">Cover image<input id="referenceImage" placeholder="project-cover.png or https://..."></label>
+            <label>Accent colour<input id="referenceColor" type="color" value="#d7ff3f"></label>
+          </div>
+          <p class="form-message" id="referenceMessage"></p>
+          <button class="save-button" type="submit">Save reference <span>↗</span></button>
+        </form>
+      </div>
+    </section>
+
+    <section id="settings" class="admin-section">
+      <div class="section-title"><div><span>04</span><h2>Settings & Backup</h2></div><p>Control the public offer and keep a portable copy of your content.</p></div>
+      <div class="settings-grid">
+        <form class="panel settings-card" id="offerForm"><span>Public offer</span><h3>Announcement bar</h3><label>Offer text<textarea id="offerText" rows="4"></textarea></label><button class="save-button" type="submit">Update offer <span>↗</span></button></form>
+        <article class="panel settings-card"><span>Content backup</span><h3>Export / Import</h3><p>Download all projects, references and offer text as JSON. Import it later on this browser or another local copy.</p><div class="settings-actions"><button class="primary-button" id="exportContent" type="button">Export JSON</button><label class="import-button">Import JSON<input id="importContent" type="file" accept="application/json"></label></div></article>
+        <article class="panel settings-card warning"><span>Reset</span><h3>Restore defaults</h3><p>Remove local edits and return to the content shipped in <code>site-data.js</code>. This cannot be undone unless you exported a backup.</p><button class="danger-button" id="resetContent" type="button">Restore original content</button></article>
+      </div>
+      <div class="deployment-note"><strong>Deployment note</strong><p>This is a polished local CMS, not a secure multi-user backend. To publish edits to every visitor and manage them across devices, connect this data layer to Supabase or Firebase before launch.</p></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+</body>
+</html>

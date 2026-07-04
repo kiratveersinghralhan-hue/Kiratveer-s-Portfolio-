@@ -1,169 +1,255 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Kiratveer Studio | Websites, Reels & Launch Content</title>
-<meta name="description" content="Kiratveer Studio builds clean business websites, premium reels and launch content for small brands that want to look trusted online." />
-<meta name="keywords" content="website developer India, reel editor India, business website, Instagram reel editor, Kiratveer Studio, TripMitra" />
-<meta name="theme-color" content="#050816" />
-<link rel="icon" href="logo.svg" type="image/svg+xml" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<meta property="og:title" content="Kiratveer Studio | Websites & Reels" />
-<meta property="og:description" content="Premium websites and reels for small businesses, startups and creators." />
-<meta property="og:image" content="preview.jpg" />
-<style>
-:root{
-  --bg:#050816;
-  --bg2:#020617;
-  --panel:rgba(15,23,42,.72);
-  --panel2:rgba(2,6,23,.66);
-  --text:#f8fafc;
-  --muted:#aab7cf;
-  --line:rgba(148,163,184,.18);
-  --gold:#f6c453;
-  --gold2:#ffe8a3;
-  --cyan:#38bdf8;
-  --blue:#2563eb;
-  --violet:#7c3aed;
-  --green:#22c55e;
-  --danger:#fb7185;
-  --max:1180px;
-  --radius:28px;
-  --shadow:0 32px 90px rgba(0,0,0,.45);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100dvh}
-body:before{content:"";position:fixed;inset:0;z-index:-4;background:radial-gradient(circle at 15% 12%,rgba(56,189,248,.22),transparent 25%),radial-gradient(circle at 85% 6%,rgba(246,196,83,.18),transparent 26%),radial-gradient(circle at 76% 70%,rgba(124,58,237,.2),transparent 28%),linear-gradient(180deg,#050816 0%,#020617 62%,#070812 100%)}
-body:after{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:.08;background-image:linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(180deg,#000 0%,transparent 82%)}
-a{color:inherit;text-decoration:none}img,video{max-width:100%;display:block}.container{width:min(92%,var(--max));margin-inline:auto}.section{padding:90px 0;position:relative}.grid{display:grid;gap:22px}.muted{color:var(--muted)}.gold{background:linear-gradient(135deg,#fff 8%,var(--gold2) 28%,var(--gold) 58%,var(--cyan) 92%);-webkit-background-clip:text;background-clip:text;color:transparent}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--cyan);font-size:.76rem;letter-spacing:3.2px;text-transform:uppercase;font-weight:900;margin-bottom:14px}.eyebrow:before{content:"";height:1px;width:38px;background:linear-gradient(90deg,var(--cyan),transparent)}.title,h1{font-family:"Space Grotesk",Inter,sans-serif;font-weight:800;letter-spacing:-.055em}.title{font-size:clamp(2.25rem,5vw,5.2rem);line-height:.94}.sub{font-size:1.06rem;color:var(--muted);max-width:760px}.glass{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));box-shadow:var(--shadow);backdrop-filter:blur(18px);overflow:hidden}.glass:before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 30%,rgba(56,189,248,.08) 65%,transparent);pointer-events:none}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;border:1px solid transparent;font-weight:900;white-space:nowrap;transition:.25s;position:relative;overflow:hidden}.btn:after{content:"";position:absolute;inset:0;transform:translateX(-125%);background:linear-gradient(110deg,transparent,rgba(255,255,255,.48),transparent);transition:.65s}.btn:hover{transform:translateY(-3px)}.btn:hover:after{transform:translateX(125%)}.btn-primary{background:linear-gradient(135deg,var(--gold),#fff1a8,var(--cyan));color:#07111f;box-shadow:0 18px 42px rgba(56,189,248,.18)}.btn-dark{background:rgba(255,255,255,.055);border-color:var(--line);color:#fff}.btn-soft{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.28);color:#dff7ff}.tag{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.045);font-size:.86rem;font-weight:800;color:#e9f3ff}.orb{position:absolute;border-radius:50%;filter:blur(14px);opacity:.62;pointer-events:none}.orb.one{width:160px;height:160px;background:rgba(56,189,248,.24);right:-50px;top:20px}.orb.two{width:180px;height:180px;background:rgba(246,196,83,.18);left:-70px;bottom:-50px}.section-head{margin-bottom:30px;max-width:860px}.section-head.center{text-align:center;margin-inline:auto}.section-head.center .eyebrow{justify-content:center}.section-head.center .eyebrow:after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,var(--cyan))}
-/* cinematic loader */
-.loader{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#020617;overflow:hidden;animation:loaderExit .75s ease 2.75s forwards}.loader:before{content:"";position:absolute;inset:-30%;background:conic-gradient(from 180deg,transparent,rgba(56,189,248,.2),transparent,rgba(246,196,83,.18),transparent);animation:spin 4.8s linear infinite}.loader:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent);transform:translateX(-120%);animation:scanner 1.8s cubic-bezier(.2,.9,.2,1) .55s forwards}.loader-card{position:relative;width:min(86vw,520px);padding:38px 28px;text-align:center;border:1px solid rgba(255,255,255,.14);border-radius:34px;background:rgba(2,6,23,.68);box-shadow:0 30px 110px rgba(0,0,0,.6);backdrop-filter:blur(22px);animation:loaderPop .9s cubic-bezier(.2,.9,.2,1) both}.loader-logo{width:112px;height:112px;margin:0 auto 18px;border-radius:28px;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,#172554,#020617 72%);box-shadow:0 0 0 1px rgba(255,255,255,.16),0 0 70px rgba(56,189,248,.22);position:relative;overflow:hidden}.loader-logo svg{width:78px;height:78px;filter:drop-shadow(0 0 18px rgba(56,189,248,.55))}.draw{stroke-dasharray:360;stroke-dashoffset:360;animation:drawLine 1.45s ease .45s forwards}.loader-title{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(1.3rem,5vw,2.1rem);font-weight:800;letter-spacing:.08em;text-transform:uppercase}.loader-small{margin-top:6px;color:var(--muted);font-size:.82rem;letter-spacing:.3em;text-transform:uppercase}.loader-line{height:3px;width:min(300px,70vw);margin:24px auto 0;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}.loader-line span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--gold));animation:loadbar 2.1s ease .28s forwards}@keyframes spin{to{transform:rotate(360deg)}}@keyframes scanner{to{transform:translateX(120%)}}@keyframes loaderPop{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}@keyframes drawLine{to{stroke-dashoffset:0}}@keyframes loadbar{to{width:100%}}@keyframes loaderExit{to{opacity:0;visibility:hidden}}
-/* header */
-header{position:sticky;top:0;z-index:1000;background:rgba(2,6,23,.72);border-bottom:1px solid var(--line);backdrop-filter:blur(22px)}.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 0}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand img{width:50px;height:50px;border-radius:15px;box-shadow:0 0 32px rgba(56,189,248,.22)}.brand strong{display:block;font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:.05em;text-transform:uppercase;line-height:1}.brand span{display:block;color:var(--muted);font-size:.75rem;font-weight:800;margin-top:3px}.menu{display:flex;align-items:center;gap:18px}.menu a{font-weight:800;color:#dbeafe;font-size:.92rem}.menu a:hover{color:var(--gold)}.hamb,.x{display:none;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff}.hamb{width:48px;height:48px;border-radius:15px;font-size:1.45rem}.mobile-panel{position:fixed;right:0;top:0;height:100dvh;width:min(86vw,360px);z-index:10000;background:#020617;border-left:1px solid var(--line);transform:translateX(110%);transition:.3s ease;padding:78px 20px 20px;display:flex;flex-direction:column;gap:12px}.mobile-panel.open{transform:none}.mobile-panel a{padding:15px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.05);font-weight:900}.x{position:absolute;display:block;top:20px;right:20px;width:44px;height:44px;border-radius:14px;font-size:1.4rem}.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:9999;opacity:0;visibility:hidden;transition:.3s}.backdrop.show{opacity:1;visibility:visible}
-/* hero */
-.hero{padding:74px 0 54px}.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:34px;align-items:center}.hero-card{padding:34px}.status{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border-radius:999px;border:1px solid rgba(34,197,94,.28);background:rgba(34,197,94,.09);color:#d7ffe1;font-weight:900;font-size:.86rem;margin-bottom:18px}.status i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green)}h1{font-size:clamp(3.15rem,7.3vw,7.1rem);line-height:.88;margin-bottom:20px}.lead{font-size:1.12rem;color:var(--muted);max-width:750px;margin-bottom:24px}.actions{display:flex;gap:12px;flex-wrap:wrap}.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.hero-visual{padding:18px;min-height:620px;display:grid;place-items:center}.device{width:min(100%,390px);border-radius:42px;padding:14px;background:#020617;border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 0 0 1px rgba(56,189,248,.12),0 30px 80px rgba(0,0,0,.54);animation:float 5s ease-in-out infinite}.screen{position:relative;height:570px;border-radius:31px;overflow:hidden;background:linear-gradient(180deg,rgba(2,6,23,.1),rgba(2,6,23,.86)),url('preview.jpg') center/cover}.screen:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 10%,rgba(56,189,248,.25),transparent 38%),linear-gradient(120deg,transparent,rgba(255,255,255,.08),transparent);mix-blend-mode:screen}.screen-content{position:absolute;inset:0;z-index:2;padding:22px;display:flex;flex-direction:column;justify-content:space-between}.mini-badge{width:max-content;padding:8px 12px;border-radius:999px;background:rgba(2,6,23,.72);border:1px solid rgba(255,255,255,.14);font-weight:900;color:var(--gold);font-size:.78rem}.phone-caption{background:rgba(2,6,23,.74);border:1px solid rgba(255,255,255,.12);border-radius:25px;padding:18px}.phone-caption h3{font-size:1.45rem;line-height:1.05;margin-bottom:8px}.phone-caption p{color:#d8e6ff;font-size:.92rem}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.stat{padding:18px;text-align:center;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.stat strong{display:block;font-size:1.3rem;font-family:"Space Grotesk",Inter}.stat span{display:block;color:var(--muted);font-size:.82rem;font-weight:700}@keyframes float{50%{transform:translateY(-13px)}}
-.marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.035);padding:14px 0}.marquee-track{display:flex;width:max-content;animation:marquee 28s linear infinite}.marquee span{padding-right:44px;color:#dbeafe;letter-spacing:.16em;text-transform:uppercase;font-size:.82rem;font-weight:900}@keyframes marquee{to{transform:translateX(-50%)}}
-/* cards */
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{padding:26px}.icon{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(56,189,248,.2),rgba(246,196,83,.17));border:1px solid var(--line);font-size:1.45rem;margin-bottom:16px}.card h3,.project h3,.price h3{font-size:1.28rem;line-height:1.2;margin-bottom:8px}.small{color:var(--muted);font-size:.96rem}.list{list-style:none;margin-top:16px;display:grid;gap:9px}.list li{position:relative;padding-left:23px;color:#d7e6ff}.list li:before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.8rem}.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.product-card{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding:28px}.browser{border-radius:24px;border:1px solid var(--line);background:#020617;overflow:hidden;box-shadow:0 18px 58px rgba(0,0,0,.35)}.browser-bar{height:42px;display:flex;align-items:center;gap:8px;padding:0 15px;background:rgba(255,255,255,.055);border-bottom:1px solid var(--line)}.dot{width:11px;height:11px;border-radius:50%;background:#64748b}.browser-screen{min-height:300px;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(circle at 70% 25%,rgba(56,189,248,.28),transparent 32%),linear-gradient(135deg,#172554,#020617 55%,#111827)}.browser-screen.trip{background:linear-gradient(180deg,rgba(2,6,23,.06),rgba(2,6,23,.83)),url('preview.jpg') center/cover}.badge{width:max-content;display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(56,189,248,.14);color:#dff7ff;border:1px solid rgba(56,189,248,.26);font-weight:900;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}.video-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;margin-top:22px}.video-card{padding:22px}.video-shell{position:relative;border-radius:24px;overflow:hidden;background:#020617;border:1px solid var(--line);min-height:320px;display:grid;place-items:center}.video-shell.landscape video{width:100%;height:340px;object-fit:cover}.video-shell.reel{width:min(100%,315px);margin-inline:auto}.video-shell.reel video{height:560px;width:100%;object-fit:cover}.video-label{position:absolute;left:14px;top:14px;z-index:3;padding:6px 10px;border-radius:999px;background:rgba(2,6,23,.78);border:1px solid rgba(255,255,255,.13);font-size:.76rem;font-weight:900;color:#fff}.play-glow{position:absolute;inset:auto 14px 14px;z-index:3;border-radius:18px;background:rgba(2,6,23,.74);border:1px solid rgba(255,255,255,.12);padding:14px}.play-glow strong{display:block}.play-glow span{color:var(--muted);font-size:.85rem}.packages{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.price{padding:28px;display:flex;flex-direction:column}.price.popular{border-color:rgba(246,196,83,.36);box-shadow:0 32px 90px rgba(246,196,83,.1)}.amount{font-family:"Space Grotesk",Inter;font-size:2.15rem;font-weight:800;letter-spacing:-.06em;margin:12px 0}.amount small{font-family:Inter;font-size:.86rem;color:var(--muted);letter-spacing:0}.price .btn{margin-top:auto}.process{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;align-items:start}.steps{display:grid;gap:14px}.step{display:grid;grid-template-columns:76px 1fr;gap:18px;align-items:center;padding:20px}.step b{font-family:"Space Grotesk",Inter;font-size:1.7rem;color:var(--gold)}.booking{display:grid;grid-template-columns:.85fr 1.15fr;gap:22px;align-items:start}.booking .panel{padding:28px}.form{display:grid;gap:13px}.row{display:grid;grid-template-columns:1fr 1fr;gap:13px}label{display:grid;gap:7px;color:#e8f1ff;font-size:.9rem;font-weight:800}input,select,textarea{width:100%;border:1px solid var(--line);background:rgba(2,6,23,.56);color:#fff;border-radius:16px;padding:14px 15px;font:inherit;outline:none}textarea{min-height:132px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(56,189,248,.62);box-shadow:0 0 0 4px rgba(56,189,248,.09)}footer{border-top:1px solid var(--line);padding:28px 0;background:rgba(2,6,23,.55)}footer .container{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.floating{position:fixed;right:18px;bottom:18px;z-index:999;display:flex;gap:10px;align-items:center}.float-btn{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(2,6,23,.72);backdrop-filter:blur(14px);font-weight:900;box-shadow:0 18px 42px rgba(0,0,0,.35)}.wa{background:linear-gradient(135deg,#22c55e,#14b8a6);color:#04130b}.topbtn{color:#fff;cursor:pointer;opacity:0;visibility:hidden;transition:.25s}.topbtn.show{opacity:1;visibility:visible}.bottom-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:999;background:rgba(2,6,23,.84);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:10px 12px;gap:10px}.bottom-cta .btn{flex:1;min-height:46px}.reveal{opacity:0;transform:translateY(22px);transition:.75s ease}.reveal.show{opacity:1;transform:none}.slide-left{transform:translateX(-28px)}.slide-right{transform:translateX(28px)}.zoom{transform:scale(.97)}
-@media(max-width:940px){.menu{display:none}.hamb{display:block}.hero-grid,.product-card,.proof-grid,.process,.booking{grid-template-columns:1fr}.hero-visual{min-height:auto}.service-grid,.packages{grid-template-columns:1fr 1fr}.video-grid{grid-template-columns:1fr}.screen{height:520px}.section{padding:70px 0}}
-@media(max-width:620px){.container{width:min(93%,var(--max))}.brand span{display:none}.hero{padding-top:46px}.hero-card{padding:24px}.actions .btn{width:100%}.service-grid,.packages,.stats{grid-template-columns:1fr}.row{grid-template-columns:1fr}.title{font-size:clamp(2rem,12vw,3.6rem)}h1{font-size:clamp(2.75rem,14vw,4.8rem)}.screen{height:470px}.video-shell.landscape video{height:260px}.video-shell.reel video{height:520px}.floating{display:none}.bottom-cta{display:flex}body{padding-bottom:74px}.section{padding:58px 0}.step{grid-template-columns:1fr}.loader-card{padding:32px 20px}}
-@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.loader{display:none!important}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4efe7">
+  <meta name="description" content="Kiratveer Studio builds premium websites, videos and growth systems for ambitious brands.">
+  <title>Kiratveer Studio — Websites, Visuals & Growth</title>
+  <link rel="icon" href="logo-premium.png" type="image/png">
+  <script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('kiratveerTheme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260704-premium2">
+  <script src="site-data.js?v=20260704-premium2" defer></script>
+  <script src="app.js?v=20260704-premium2" defer></script>
 </head>
 <body>
-<div class="loader" aria-hidden="true">
-  <div class="loader-card">
-    <div class="loader-logo">
-      <svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="draw" d="M18 76V20H31V44L54 20H70L44 47L73 76H57L31 49V76H18Z" stroke="url(#lg)" stroke-width="2.5" fill="none"/>
-        <path class="draw" d="M58 76L36 20H51L66 60L81 20H96L73 76H58Z" stroke="url(#lg)" stroke-width="2.5" fill="none"/>
-        <circle class="draw" cx="48" cy="48" r="42" stroke="url(#lg)" stroke-width="3"/>
-        <defs><linearGradient id="lg" x1="5" y1="8" x2="90" y2="90"><stop stop-color="#fff7c2"/><stop offset=".46" stop-color="#f6c453"/><stop offset="1" stop-color="#38bdf8"/></linearGradient></defs>
-      </svg>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="luxury-intro" id="intro" aria-label="Kiratveer Studio introduction">
+    <button class="intro-skip" type="button">Skip intro</button>
+    <div class="intro-lines"><i></i><i></i></div>
+    <div class="luxury-mark">
+      <div class="luxury-orbit"><i></i><i></i><i></i></div>
+      <div class="intro-word"><span>K</span><span>I</span><span>R</span><span>A</span><span>T</span><span>V</span><span>E</span><span>E</span><span>R</span></div>
+      <small>Independent Digital Studio</small>
     </div>
-    <div class="loader-title">Kiratveer Studio</div>
-    <div class="loader-small">websites • reels • launch</div>
-    <div class="loader-line"><span></span></div>
+    <div class="intro-curtain intro-curtain-left"></div>
+    <div class="intro-curtain intro-curtain-right"></div>
   </div>
-</div>
-<header>
-  <div class="container nav">
-    <a class="brand" href="#home" aria-label="Kiratveer Studio home"><img src="logo.svg" alt="Kiratveer Studio logo"><span><strong>Kiratveer Studio</strong><span>Websites • Reels • Branding</span></span></a>
-    <nav class="menu" aria-label="Main menu">
-      <a href="#services">Services</a><a href="#work">Work</a><a href="#packages">Packages</a><a href="#process">Process</a><a href="#booking">Contact</a><a class="btn btn-soft" href="https://wa.me/919814800017" target="_blank" rel="noopener">WhatsApp</a>
-    </nav>
-    <button class="hamb" aria-label="Open menu">☰</button>
+
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-aura" aria-hidden="true"></div>
+  <div class="offer-bar">
+    <p><span>Studio Note</span> Complimentary 7-point digital audit with every qualified enquiry.</p>
+    <a href="#contact">Claim yours <span aria-hidden="true">↗</span></a>
   </div>
-</header>
-<div class="backdrop"></div>
-<nav class="mobile-panel" aria-label="Mobile menu"><button class="x" aria-label="Close menu">×</button><a href="#services">Services</a><a href="#work">Work</a><a href="#packages">Packages</a><a href="#process">Process</a><a href="#booking">Contact</a><a href="https://wa.me/919814800017" target="_blank" rel="noopener">WhatsApp</a></nav>
-<main id="home">
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-card glass reveal">
-        <div class="orb one"></div><div class="orb two"></div>
-        <div class="status"><i></i> Available for 2 new projects this month</div>
-        <h1>Websites & reels that make brands look <span class="gold">premium.</span></h1>
-        <p class="lead">I help small businesses, creators and startup ideas look trusted online with clean websites, sharp short-form videos and launch content that feels professional from the first click.</p>
-        <div class="actions"><a class="btn btn-primary" href="#booking">Get a free audit</a><a class="btn btn-dark" href="#work">View work</a></div>
-        <div class="hero-tags"><span class="tag">🌐 Business websites</span><span class="tag">🎬 Reels & launch videos</span><span class="tag">🚀 TripMitra founder project</span></div>
-        <div class="stats"><div class="stat"><strong>2+</strong><span>real client projects</span></div><div class="stat"><strong>48h</strong><span>sample edit target</span></div><div class="stat"><strong>₹5k+</strong><span>website starting</span></div></div>
-      </div>
-      <div class="hero-visual glass reveal slide-right">
-        <div class="device"><div class="screen"><div class="screen-content"><span class="mini-badge">Client-ready digital presence</span><div class="phone-caption"><h3>From raw idea to premium launch.</h3><p>Website, reel, poster and launch message — built to make people trust the brand faster.</p></div></div></div></div>
+
+  <header class="site-header" id="top">
+    <div class="shell nav-wrap">
+      <a class="brand" href="#top" aria-label="Kiratveer Studio home">
+        <img src="logo-premium.png" alt="Kiratveer Studio KR monogram" width="42" height="42">
+        <span><strong>KIRATVEER</strong><small>Independent Digital Studio</small></span>
+      </a>
+      <div class="header-actions">
+        <a class="header-contact" href="#contact">Start a project <span>↗</span></a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><span class="theme-icon">◐</span><b>Light</b></button>
+        <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+          <span></span><span></span><span></span><b>Menu</b>
+        </button>
       </div>
     </div>
-  </section>
-  <div class="marquee"><div class="marquee-track"><span>Clean websites</span><span>Premium reels</span><span>Launch videos</span><span>Business branding</span><span>TripMitra AI project</span><span>Free audit available</span><span>Clean websites</span><span>Premium reels</span><span>Launch videos</span><span>Business branding</span><span>TripMitra AI project</span><span>Free audit available</span></div></div>
-  <section class="section" id="services">
-    <div class="container">
-      <div class="section-head reveal"><div class="eyebrow">Services</div><h2 class="title">One focused studio for your online presence.</h2><p class="sub">No confusing “everything agency” vibe. These are the services a small business actually needs to look professional and get enquiries.</p></div>
-      <div class="service-grid">
-        <article class="card glass reveal"><div class="icon">🌐</div><h3>Business Websites</h3><p class="small">Landing pages, business websites and startup-style web apps that look clean on mobile.</p><ul class="list"><li>Homepage + enquiry CTA</li><li>Fast responsive design</li><li>WhatsApp / form integration</li></ul></article>
-        <article class="card glass reveal"><div class="icon">🎬</div><h3>Reels & Launch Videos</h3><p class="small">Short videos for products, shops, travel, fitness, cars, creators and launch announcements.</p><ul class="list"><li>Hook, captions and sound</li><li>Clean cuts and pacing</li><li>Premium motion polish</li></ul></article>
-        <article class="card glass reveal"><div class="icon">⚡</div><h3>Brand Launch Kit</h3><p class="small">Logo direction, social banners, launch copy and a simple content plan for first impressions.</p><ul class="list"><li>Launch post design</li><li>Offer positioning</li><li>Portfolio-ready visuals</li></ul></article>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <button class="drawer-close" id="drawerClose" type="button" aria-label="Close menu"><span></span><span></span></button>
+    <p>KIRATVEER / MENU</p>
+    <a href="#top">Home <span>01</span></a>
+    <a href="#work">Selected work <span>02</span></a>
+    <a href="#services">Capabilities <span>03</span></a>
+    <a href="#pricing">Investment <span>04</span></a>
+    <a href="#about">Studio <span>05</span></a>
+    <a class="drawer-accent" href="#contact">Start a project <b>↗</b></a>
+    <div class="drawer-footer"><small>Websites · Visuals · Growth</small><a href="https://instagram.com/ralhanx" target="_blank" rel="noopener">Instagram ↗</a></div>
+  </nav>
+  <button class="nav-scrim" type="button" aria-label="Close menu"></button>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-grid shell">
+        <div class="hero-copy reveal" data-reveal="left">
+          <p class="kicker"><span></span> Websites · Visuals · Growth</p>
+          <h1><span class="hero-line">Digital work</span><span class="hero-line">built to feel</span><em class="hero-line">unmistakable.</em></h1>
+          <p class="hero-lead">I design high-trust websites, launch visuals and growth systems for ambitious businesses that have outgrown the ordinary.</p>
+          <div class="hero-actions">
+            <a class="button button-light" href="#work">Explore selected work <span>↘</span></a>
+            <a class="text-link" href="https://wa.me/919814800017?text=Hi%20Kiratveer%2C%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener">Talk on WhatsApp <span>↗</span></a>
+          </div>
+        </div>
+        <div class="hero-stage reveal" data-reveal="scale">
+          <div class="stage-number">STUDIO SYSTEM / 01</div>
+          <div class="studio-showcase">
+            <article class="showcase-main"><img src="project-tripmitra.png" alt="AI-generated visual for the TripMitra travel platform"><span>Live product</span><strong>TripMitra</strong></article>
+            <div class="showcase-stack">
+              <article><img src="project-veyrath.png" alt="AI-generated visual for the VEYRATH fashion project"><span>Ongoing</span><strong>VEYRATH</strong></article>
+              <article><img src="project-harvesterparts.png" alt="AI-generated visual for Harvester Parts"><span>Commerce</span><strong>Harvester Parts</strong></article>
+            </div>
+          </div>
+          <div class="stage-capabilities"><span>Web</span><span>Video</span><span>Growth</span></div>
+          <small>Strategy to launch — one focused studio</small>
+        </div>
+      </div>
+      <div class="hero-footer shell reveal">
+        <div><strong>03+</strong><span>Live digital products</span></div>
+        <div><strong>₹7,999</strong><span>Website entry point</span></div>
+        <div><strong>01 studio</strong><span>Web · Video · Growth</span></div>
+        <a href="#about">Scroll to discover <i>↓</i></a>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Studio capabilities">
+      <div class="ticker-track">
+        <span>Web design</span><i>✦</i><span>Development</span><i>✦</i><span>Video direction</span><i>✦</i><span>SEO</span><i>✦</i><span>Social growth</span><i>✦</i><span>Web design</span><i>✦</i><span>Development</span><i>✦</i><span>Video direction</span><i>✦</i><span>SEO</span><i>✦</i><span>Social growth</span><i>✦</i>
       </div>
     </div>
-  </section>
-  <section class="section" id="work">
-    <div class="container">
-      <div class="section-head reveal"><div class="eyebrow">Featured Work</div><h2 class="title">Real projects, product thinking and editing samples.</h2><p class="sub">TripMitra is the strongest proof of development skill, while the video samples show editing style and presentation quality.</p></div>
-      <article class="product-card glass reveal zoom">
-        <div class="browser"><div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="browser-screen trip"><span class="badge">Main project</span><h3>TripMitra AI Studio</h3><p class="small">AI trip websites with voting, RSVP, budget planning, payments, affiliates and founder dashboard.</p></div></div>
-        <div><div class="eyebrow">Startup Project</div><h2 class="title">A live AI travel product built from idea to launch.</h2><p class="sub">Built to solve group-trip chaos with smart planning, shareable trip pages, payments, admin workflows and launch content.</p><br><div class="actions"><a class="btn btn-primary" href="https://tripmitra.store" target="_blank" rel="noopener">View TripMitra</a><a class="btn btn-dark" href="#booking">Build similar</a></div></div>
-      </article>
-      <div class="video-grid">
-        <article class="video-card glass reveal slide-left"><div class="eyebrow">Cinematic Video</div><h3>Manali Travel Edit</h3><p class="small">A landscape-style video sample for travel, lifestyle and premium brand mood.</p><br><div class="video-shell landscape"><span class="video-label">manali.mp4</span><video autoplay muted loop playsinline preload="metadata"><source src="manali.mp4" type="video/mp4"></video><div class="play-glow"><strong>Cinematic pacing</strong><span>Auto-play muted loop for a strong first impression.</span></div></div></article>
-        <article class="video-card glass reveal slide-right"><div class="eyebrow">Reel Sample</div><h3>Gloss Boss Reel</h3><p class="small">Vertical client-style reel sample with quick pacing and premium presentation.</p><br><div class="video-shell reel"><span class="video-label">gb1.mp4</span><video autoplay muted loop playsinline preload="metadata"><source src="gb1.mp4" type="video/mp4"></video></div></article>
+
+    <section class="section section-work" id="work">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">01 / Selected Work</p><h2>Proof, not promises.</h2></div>
+          <p>Products, stores and brand systems shaped from strategy to the final interaction.</p>
+        </div>
+        <div class="carousel-toolbar reveal">
+          <p><span id="projectCurrent">01</span> / <span id="projectTotal">04</span></p>
+          <div>
+            <button class="round-button" type="button" data-carousel-prev="projects" aria-label="Previous project">←</button>
+            <button class="round-button" type="button" data-carousel-next="projects" aria-label="Next project">→</button>
+          </div>
+        </div>
+        <div class="project-carousel carousel" data-carousel="projects">
+          <div class="project-track" id="projectTrack"></div>
+        </div>
       </div>
-      <article class="product-card glass reveal zoom" style="margin-top:22px">
-        <div class="browser"><div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="browser-screen"><span class="badge">Client website</span><h3>Gloss Boss Automotive</h3><p class="small">Clean automotive business website built to make the brand look trusted and easy to contact.</p></div></div>
-        <div><div class="eyebrow">Website Project</div><h2 class="title">Client website proof + business presentation.</h2><p class="sub">Shows that the studio can do more than edits: structure, design, copy, CTAs and a live web presence.</p><br><div class="actions"><a class="btn btn-primary" href="https://glossbossautomotive.online" target="_blank" rel="noopener">View Live Website</a><a class="btn btn-dark" href="#booking">Book a website</a></div></div>
-      </article>
-    </div>
-  </section>
-  <section class="section" id="packages">
-    <div class="container">
-      <div class="section-head center reveal"><div class="eyebrow">Packages</div><h2 class="title">Simple pricing for serious owners.</h2><p class="sub">These are starter ranges. Final pricing depends on pages, edits, deadline and content needed.</p></div>
-      <div class="packages">
-        <article class="price glass reveal"><span class="badge">Starter</span><h3>Reel Editing</h3><div class="amount">₹800+ <small>/ reel</small></div><p class="small">For simple Instagram-ready edits with captions, cuts, music and basic polish.</p><ul class="list"><li>Short-form reel</li><li>Captions + hook</li><li>Preview before final</li></ul><br><a class="btn btn-dark" href="#booking">Ask for edit</a></article>
-        <article class="price glass popular reveal"><span class="badge">Most useful</span><h3>Website Launch</h3><div class="amount">₹5,000+ <small>/ site</small></div><p class="small">A clean landing page or business website with mobile layout and WhatsApp/contact CTA.</p><ul class="list"><li>Modern landing page</li><li>Mobile responsive</li><li>Lead/contact setup</li></ul><br><a class="btn btn-primary" href="#booking">Get website audit</a></article>
-        <article class="price glass reveal"><span class="badge">Growth</span><h3>Website + Reels</h3><div class="amount">₹12,000+ <small>/ package</small></div><p class="small">Best for businesses that need a website plus content to announce and promote it.</p><ul class="list"><li>Website / landing page</li><li>3–5 short reels</li><li>Launch content plan</li></ul><br><a class="btn btn-dark" href="#booking">Discuss package</a></article>
+    </section>
+
+    <section class="section section-dark" id="services">
+      <div class="shell">
+        <div class="section-heading light reveal">
+          <div><p class="eyebrow">02 / Capabilities</p><h2>One studio.<br>Full digital presence.</h2></div>
+          <p>No disconnected freelancers. Strategy, website, launch media and growth thinking live in one coherent system.</p>
+        </div>
+        <div class="service-list">
+          <article class="service-row reveal"><span>01</span><h3>Websites & Digital Products</h3><p>Landing pages, business sites, commerce and custom digital experiences built for clarity and conversion.</p><i>↗</i></article>
+          <article class="service-row reveal"><span>02</span><h3>Video & Launch Visuals</h3><p>Reels, product edits, cinematic launch films and social-first creative that earns attention.</p><i>↗</i></article>
+          <article class="service-row reveal"><span>03</span><h3>SEO & Discoverability</h3><p>Technical foundations, on-page optimisation and content direction designed for long-term visibility.</p><i>↗</i></article>
+          <article class="service-row reveal"><span>04</span><h3>Social Media & SMMA</h3><p>Positioning, content systems, campaign creative and monthly account direction for consistent growth.</p><i>↗</i></article>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="section" id="process">
-    <div class="container process">
-      <div class="reveal"><div class="eyebrow">Process</div><h2 class="title">Fast, clear and built for busy people.</h2><p class="sub">The goal is simple: understand your business, create a premium version, then make it easy for customers to contact you.</p></div>
-      <div class="steps">
-        <div class="step glass reveal"><b>01</b><div><h3>Send business details</h3><p class="small">Share your Instagram, website, offer, photos/videos and what you want customers to do.</p></div></div>
-        <div class="step glass reveal"><b>02</b><div><h3>I build the premium version</h3><p class="small">Website structure, design, edits, captions, animation and clear CTA polish.</p></div></div>
-        <div class="step glass reveal"><b>03</b><div><h3>Review, revise and launch</h3><p class="small">You approve the preview. Final files/site are delivered after revisions and confirmation.</p></div></div>
+    </section>
+
+    <section class="section section-showreel">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">03 / Motion Archive</p><h2>Ideas that move.</h2></div>
+          <p>A selection of launch films, travel cuts and vertical edits made to stop the scroll without losing the brand.</p>
+        </div>
+        <div class="media-carousel carousel reveal" data-carousel="media">
+          <div class="media-track">
+            <article class="media-card media-wide">
+              <video muted loop playsinline preload="metadata" poster="preview.jpg"><source src="main-demo.mp4" type="video/mp4"></video>
+              <button class="video-toggle" type="button" aria-label="Play main showreel">Play</button>
+              <div><span>Launch Film / 2026</span><h3>TripMitra Product Story</h3></div>
+            </article>
+            <article class="media-card media-tall">
+              <video muted loop playsinline preload="metadata"><source src="gb1.mp4" type="video/mp4"></video>
+              <button class="video-toggle" type="button" aria-label="Play automotive reel">Play</button>
+              <div><span>Automotive / Reel</span><h3>Gloss Boss</h3></div>
+            </article>
+            <article class="media-card media-wide">
+              <video muted loop playsinline preload="metadata"><source src="manali.mp4" type="video/mp4"></video>
+              <button class="video-toggle" type="button" aria-label="Play travel film">Play</button>
+              <div><span>Travel / Cinematic</span><h3>Manali in Motion</h3></div>
+            </article>
+          </div>
+        </div>
+        <div class="media-controls reveal">
+          <p>Drag, swipe or use the controls.</p>
+          <div><button class="round-button" type="button" data-carousel-prev="media" aria-label="Previous video">←</button><button class="round-button" type="button" data-carousel-next="media" aria-label="Next video">→</button></div>
+        </div>
       </div>
+    </section>
+
+    <section class="section section-pricing" id="pricing">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">04 / Investment</p><h2>Built for where<br>you are going.</h2></div>
+          <p>Clear starting points, adaptable scope. Every package is tailored after a focused discovery call.</p>
+        </div>
+        <div class="pricing-note reveal"><span>Website plans</span><p>Hosting and third-party subscriptions are quoted separately. GST, if applicable, is additional.</p></div>
+        <div class="pricing-grid">
+          <article class="price-card reveal"><p>01 / Starter</p><h3>Launch Page</h3><div class="price">₹7,999</div><span>For a focused offer or personal brand.</span><ul><li>One premium landing page</li><li>Mobile-first responsive build</li><li>WhatsApp + enquiry setup</li><li>Basic SEO foundation</li><li>1 revision round</li></ul><a href="#contact">Choose Starter <b>↗</b></a></article>
+          <article class="price-card reveal"><p>02 / Business</p><h3>Business Core</h3><div class="price">₹15,999</div><span>For businesses ready to look established.</span><ul><li>Up to 5 tailored pages</li><li>Conversion-led page structure</li><li>Contact, maps and analytics</li><li>On-page SEO setup</li><li>2 revision rounds</li></ul><a href="#contact">Choose Business <b>↗</b></a></article>
+          <article class="price-card featured reveal"><div class="recommended">Most selected</div><p>03 / Growth</p><h3>Growth Commerce</h3><div class="price">₹29,999</div><span>For service brands and growing stores.</span><ul><li>Up to 8 pages or store setup</li><li>CMS / product catalogue</li><li>Lead funnel integrations</li><li>Performance + SEO pass</li><li>30-day launch support</li></ul><a href="#contact">Choose Growth <b>↗</b></a></article>
+          <article class="price-card reveal"><p>04 / Premium</p><h3>Brand System</h3><div class="price">₹49,999</div><span>For a complete premium repositioning.</span><ul><li>Strategy + custom art direction</li><li>Up to 12 designed pages</li><li>Advanced motion interactions</li><li>Launch creative mini-kit</li><li>60-day support</li></ul><a href="#contact">Choose Premium <b>↗</b></a></article>
+          <article class="price-card reveal"><p>05 / Flagship</p><h3>Digital Product</h3><div class="price">₹99,999<span>+</span></div><span>For ambitious platforms and ecosystems.</span><ul><li>Custom product experience</li><li>Dashboard or app workflows</li><li>Payments / API integrations</li><li>Scalable design system</li><li>Priority build partnership</li></ul><a href="#contact">Discuss Flagship <b>↗</b></a></article>
+        </div>
+
+        <div class="retainer-heading reveal"><p class="eyebrow">Add-ons & Retainers</p><h3>Keep the momentum after launch.</h3></div>
+        <div class="retainer-grid">
+          <article class="retainer-card reveal"><span>Video</span><h4>Reels & Short-form</h4><strong>₹1,499<small> / edit</small></strong><p>Hooks, captions, sound design and polished delivery.</p></article>
+          <article class="retainer-card reveal"><span>Launch</span><h4>Visual Launch Pack</h4><strong>₹14,999<small> / campaign</small></strong><p>1 hero film, 4 reels and launch-day creative direction.</p></article>
+          <article class="retainer-card reveal"><span>Search</span><h4>SEO Growth</h4><strong>₹9,999<small> / month</small></strong><p>Technical checks, on-page work, tracking and monthly insight.</p></article>
+          <article class="retainer-card reveal"><span>Social</span><h4>SMMA Direction</h4><strong>₹14,999<small> / month</small></strong><p>Strategy, content calendar, 12 creatives and performance review.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-about" id="about">
+      <div class="shell about-grid">
+        <div class="about-index reveal"><img src="logo-premium.png" alt="Kiratveer Studio monogram"><p>Independent<br>Digital Studio</p></div>
+        <div class="about-copy reveal">
+          <p class="eyebrow">05 / About</p>
+          <h2>I build like an owner,<br>not an order-taker.</h2>
+          <p>From founding TripMitra to shaping VEYRATH and business platforms, I work across strategy, product thinking, design and launch. That means the work is not just attractive—it understands what the business needs to do next.</p>
+          <div class="about-points"><span>Founder mindset</span><span>Conversion thinking</span><span>Fast, direct collaboration</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-references">
+      <div class="shell">
+        <div class="section-heading compact reveal"><div><p class="eyebrow">06 / Reference Orbit</p><h2>Built across different worlds.</h2></div></div>
+        <div class="reference-carousel carousel reveal" data-carousel="references">
+          <div class="reference-track" id="referenceTrack"></div>
+        </div>
+        <div class="reference-controls reveal"><p>Brands, products and pages connected to the studio.</p><div><button class="round-button" type="button" data-carousel-prev="references" aria-label="Previous reference">←</button><button class="round-button" type="button" data-carousel-next="references" aria-label="Next reference">→</button></div></div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="shell contact-grid">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">07 / Start a Project</p>
+          <h2>Have an idea worth<br><em>building properly?</em></h2>
+          <p>Send the rough version. I will help shape the sharper one.</p>
+          <a href="mailto:kiratveersinghralhan@gmail.com">kiratveersinghralhan@gmail.com <span>↗</span></a>
+          <a href="https://instagram.com/ralhanx" target="_blank" rel="noopener">Instagram / @ralhanx <span>↗</span></a>
+        </div>
+        <form class="contact-form reveal" id="portfolioForm">
+          <input type="hidden" name="_subject" value="New premium portfolio enquiry">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="field"><label for="name">Your name</label><input id="name" name="name" required placeholder="Name / Brand"></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@brand.com"></div>
+          <div class="field"><label for="service">What do you need?</label><select id="service" name="service" required><option value="">Select a service</option><option>Website / Digital Product</option><option>Video / Launch Campaign</option><option>SEO Growth</option><option>Social Media / SMMA</option><option>Complete Brand Launch</option></select></div>
+          <div class="field"><label for="budget">Investment range</label><select id="budget" name="budget" required><option value="">Choose a range</option><option>₹7,999 – ₹15,999</option><option>₹16,000 – ₹30,000</option><option>₹30,000 – ₹50,000</option><option>₹50,000 – ₹1,00,000</option><option>₹1,00,000+</option></select></div>
+          <div class="field field-full"><label for="details">Tell me about the idea</label><textarea id="details" name="details" rows="4" placeholder="What are you building, where are you now, and what should this project achieve?"></textarea></div>
+          <div class="form-footer field-full"><button class="button button-dark" type="submit">Send project brief <span>↗</span></button><p id="formStatus" role="status"></p></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div><strong>KIRATVEER</strong><p>Websites · Visuals · Growth</p></div>
+      <div><p>Punjab, India</p><span>Working globally / 2026</span></div>
+      <div><a href="https://instagram.com/ralhanx" target="_blank" rel="noopener">Instagram ↗</a><a href="https://wa.me/919814800017" target="_blank" rel="noopener">WhatsApp ↗</a><a href="admin.html">Studio Admin</a></div>
     </div>
-  </section>
-  <section class="section" id="booking">
-    <div class="container booking">
-      <div class="panel glass reveal"><div class="eyebrow">Contact</div><h2 class="title">Want your page to look more trusted?</h2><p class="sub">Send your Instagram/website link and I’ll reply with a quick improvement idea. Best for business owners, creators and startup ideas.</p><br><div class="actions"><a class="btn btn-primary" href="https://wa.me/919814800017" target="_blank" rel="noopener">WhatsApp Now</a><a class="btn btn-dark" href="https://instagram.com/ralhanx" target="_blank" rel="noopener">Instagram</a></div></div>
-      <div class="panel glass reveal"><form class="form" id="portfolioForm"><input type="hidden" name="_subject" value="New Kiratveer Studio Lead"><input type="hidden" name="_captcha" value="false"><div class="row"><label>Full Name<input name="name" required placeholder="Your name"></label><label>Email<input type="email" name="email" required placeholder="yourmail@example.com"></label></div><div class="row"><label>Service<select name="service" required><option value="">Select service</option><option>Website / Landing Page</option><option>Reel Editing</option><option>Website + Reels Package</option><option>Brand Launch Kit</option></select></label><label>Budget<select name="budget" required><option value="">Select budget</option><option>₹800 – ₹2,500</option><option>₹5,000 – ₹15,000</option><option>₹15,000 – ₹40,000</option><option>₹40,000+</option><option>Not sure yet</option></select></label></div><label>Project Details<textarea name="details" placeholder="Business type, Instagram/website link, what you need, deadline, and reference style."></textarea></label><div class="actions"><button class="btn btn-primary" type="submit">Send Inquiry</button><a class="btn btn-dark" href="https://wa.me/919814800017" target="_blank" rel="noopener">WhatsApp Instead</a></div><p id="formStatus" class="small" style="display:none"></p></form></div>
-    </div>
-  </section>
-</main>
-<footer><div class="container"><strong>Kiratveer Studio © 2026</strong><p class="muted">Websites, reels, launch videos and digital presence for small businesses.</p></div></footer>
-<div class="floating"><a class="float-btn wa" href="https://wa.me/919814800017" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a><button class="float-btn topbtn" id="topBtn" aria-label="Scroll to top">↑</button></div>
-<div class="bottom-cta"><a class="btn btn-primary" href="#booking">Free Audit</a><a class="btn btn-dark" href="https://wa.me/919814800017" target="_blank" rel="noopener">WhatsApp</a></div>
-<script>
-const mobile=document.querySelector('.mobile-panel'),backdrop=document.querySelector('.backdrop'),hamb=document.querySelector('.hamb'),x=document.querySelector('.x');
-function openMenu(){mobile.classList.add('open');backdrop.classList.add('show');document.body.style.overflow='hidden'}
-function closeMenu(){mobile.classList.remove('open');backdrop.classList.remove('show');document.body.style.overflow=''}
-hamb?.addEventListener('click',openMenu);x?.addEventListener('click',closeMenu);backdrop?.addEventListener('click',closeMenu);document.querySelectorAll('.mobile-panel a').forEach(a=>a.addEventListener('click',closeMenu));
-const reveals=document.querySelectorAll('.reveal');const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});reveals.forEach(el=>io.observe(el));
-const topBtn=document.getElementById('topBtn');window.addEventListener('scroll',()=>topBtn.classList.toggle('show',window.scrollY>520),{passive:true});topBtn?.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
-const form=document.getElementById('portfolioForm'),status=document.getElementById('formStatus');if(form){form.addEventListener('submit',async e=>{e.preventDefault();status.style.display='block';status.textContent='Sending...';try{const res=await fetch('https://formspree.io/f/xjgadypw',{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});if(res.ok)location.href='thanks.html';else status.textContent='Could not send. Please WhatsApp instead.'}catch(err){status.textContent='Could not send. Please WhatsApp instead.'}})}
-</script>
+    <div class="footer-word">KIRATVEER</div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/919814800017?text=Hi%20Kiratveer%2C%20I%20have%20a%20project%20idea." target="_blank" rel="noopener" aria-label="Start a WhatsApp conversation"><span>Let’s talk</span><b>↗</b></a>
 </body>
 </html>
