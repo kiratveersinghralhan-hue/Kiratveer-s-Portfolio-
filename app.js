@@ -183,7 +183,7 @@
     document.body.classList.add("intro-lock");
     requestAnimationFrame(() => requestAnimationFrame(() => intro.classList.add("is-ready")));
     intro.querySelector(".intro-skip")?.addEventListener("click", closeIntro);
-    setTimeout(closeIntro, 3900);
+    setTimeout(closeIntro, 3300);
     setTimeout(() => {
       if (document.body.classList.contains("intro-lock")) document.body.classList.remove("intro-lock");
       document.body.classList.add("page-ready");
@@ -289,7 +289,7 @@
   }, {passive:true});
 
   const mediaVideos = Array.from(document.querySelectorAll(".media-card video"));
-  const leanVideoMode = () => false;
+  const mobileMediaMode = window.matchMedia("(max-width: 760px)");
   const updateVideoCard = video => {
     const card = video.closest(".media-card");
     const button = card?.querySelector(".video-toggle");
@@ -305,22 +305,38 @@
     video.muted = true;
     video.playsInline = true;
     video.controls = true;
-    video.preload = "auto";
-    video.autoplay = true;
-    video.setAttribute("autoplay", "");
+    video.preload = mobileMediaMode.matches ? "metadata" : "auto";
+    if (mobileMediaMode.matches) {
+      video.autoplay = false;
+      video.removeAttribute("autoplay");
+      video.pause();
+    } else {
+      video.autoplay = true;
+      video.setAttribute("autoplay", "");
+    }
+    const setVideoFormat = () => {
+      const card = video.closest(".media-card");
+      const portrait = video.videoHeight > video.videoWidth;
+      card?.classList.toggle("is-portrait", portrait);
+      card?.classList.toggle("is-landscape", !portrait);
+    };
     ["loadeddata","canplay","play","pause","ended"].forEach(type => video.addEventListener(type, () => updateVideoCard(video)));
+    video.addEventListener("loadedmetadata", setVideoFormat);
     video.addEventListener("error", () => video.closest(".media-card")?.classList.add("video-error"));
     const attempt = () => video.play().catch(() => updateVideoCard(video));
-    if (video.readyState >= 2) attempt();
-    else video.addEventListener("canplay", attempt, {once:true});
+    if (video.readyState >= 1) setVideoFormat();
+    if (!mobileMediaMode.matches) {
+      if (video.readyState >= 2) attempt();
+      else video.addEventListener("canplay", attempt, {once:true});
+    }
     updateVideoCard(video);
   });
   if ("IntersectionObserver" in window) {
     const videoObserver = new IntersectionObserver(entries => entries.forEach(entry => {
       const video = entry.target;
-      if (entry.intersectionRatio > .45 && (!leanVideoMode() || video.dataset.userPlayed === "true")) video.play().catch(() => updateVideoCard(video));
+      if (entry.intersectionRatio > .75) video.play().catch(() => updateVideoCard(video));
       else if (!video.paused) video.pause();
-    }), {threshold:[0,.45,.75]});
+    }), {threshold:[0,.75,.9]});
     mediaVideos.forEach(video => videoObserver.observe(video));
   }
   document.querySelectorAll(".video-toggle").forEach(button => button.addEventListener("click", () => {
