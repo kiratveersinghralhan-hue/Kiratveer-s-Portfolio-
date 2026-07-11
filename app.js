@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  const STORAGE_KEY = "kiratveerStudioContentV3";
+  const STORAGE_KEY = "kiratveerStudioContentV4";
   const ANALYTICS_KEY = "kiratveerStudioAnalyticsV1";
   const defaults = window.KS_DEFAULTS || {projects: [], references: []};
   let saved = {};
@@ -166,6 +166,7 @@
   }
   attachImageFallbacks();
   preloadStudioImages();
+  window.addEventListener("load", attachImageFallbacks, {once:true});
 
   const intro = document.getElementById("intro");
   const closeIntro = () => {
@@ -251,6 +252,7 @@
   }
   document.querySelectorAll("[data-carousel-next]").forEach(button => button.addEventListener("click", () => moveCarousel(button.dataset.carouselNext, 1)));
   document.querySelectorAll("[data-carousel-prev]").forEach(button => button.addEventListener("click", () => moveCarousel(button.dataset.carouselPrev, -1)));
+  const compactMedia = window.matchMedia("(max-width: 760px)");
   Object.entries(carousels).forEach(([name, carousel]) => {
     let raf = 0;
     carousel.root.addEventListener("scroll", () => {
@@ -266,7 +268,9 @@
       });
     }, {passive:true});
     const delay = name === "projects" ? 6500 : name === "references" ? 5200 : 7600;
-    carousel.timer = window.setInterval(() => { if (!carousel.paused && !document.hidden) moveCarousel(name, 1); }, delay);
+    if (!compactMedia.matches) {
+      carousel.timer = window.setInterval(() => { if (!carousel.paused && !document.hidden) moveCarousel(name, 1); }, delay);
+    }
     ["pointerenter","focusin"].forEach(type => carousel.root.addEventListener(type, () => { carousel.paused = true; }));
     ["pointerleave","focusout"].forEach(type => carousel.root.addEventListener(type, () => { carousel.paused = false; }));
   });
@@ -285,6 +289,7 @@
   }, {passive:true});
 
   const mediaVideos = Array.from(document.querySelectorAll(".media-card video"));
+  const leanVideoMode = () => compactMedia.matches;
   const updateVideoCard = video => {
     const card = video.closest(".media-card");
     const button = card?.querySelector(".video-toggle");
@@ -300,18 +305,21 @@
     video.muted = true;
     video.playsInline = true;
     video.controls = true;
-    video.preload = "auto";
+    video.preload = leanVideoMode() ? "metadata" : "auto";
+    video.autoplay = !leanVideoMode();
     ["loadeddata","canplay","play","pause","ended"].forEach(type => video.addEventListener(type, () => updateVideoCard(video)));
     video.addEventListener("error", () => video.closest(".media-card")?.classList.add("video-error"));
     const attempt = () => video.play().catch(() => updateVideoCard(video));
-    if (video.readyState >= 2) attempt();
-    else video.addEventListener("canplay", attempt, {once:true});
+    if (!leanVideoMode()) {
+      if (video.readyState >= 2) attempt();
+      else video.addEventListener("canplay", attempt, {once:true});
+    }
     updateVideoCard(video);
   });
   if ("IntersectionObserver" in window) {
     const videoObserver = new IntersectionObserver(entries => entries.forEach(entry => {
       const video = entry.target;
-      if (entry.intersectionRatio > .45) video.play().catch(() => updateVideoCard(video));
+      if (entry.intersectionRatio > .45 && (!leanVideoMode() || video.dataset.userPlayed === "true")) video.play().catch(() => updateVideoCard(video));
       else if (!video.paused) video.pause();
     }), {threshold:[0,.45,.75]});
     mediaVideos.forEach(video => videoObserver.observe(video));
@@ -319,8 +327,11 @@
   document.querySelectorAll(".video-toggle").forEach(button => button.addEventListener("click", () => {
     const video = button.closest(".media-card")?.querySelector("video");
     if (!video) return;
-    if (video.paused) { video.play().then(() => track("video:play")).catch(() => updateVideoCard(video)); }
-    else { video.pause(); track("video:pause"); }
+    if (video.paused) {
+      video.dataset.userPlayed = "true";
+      video.preload = "auto";
+      video.play().then(() => track("video:play")).catch(() => updateVideoCard(video));
+    } else { video.pause(); track("video:pause"); }
   }));
 
   document.querySelectorAll("[data-track]").forEach(link => link.addEventListener("click", () => track(link.dataset.track)));
