@@ -226,9 +226,10 @@
   revealElements.forEach((element, index) => {
     if (!element.dataset.reveal) element.dataset.reveal = index % 4 === 0 ? "left" : index % 4 === 2 ? "right" : "up";
   });
+  const compactReveal = window.matchMedia("(max-width: 760px)").matches;
   const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
     if (entry.isIntersecting) { entry.target.classList.add("visible"); revealObserver.unobserve(entry.target); }
-  }), {threshold: .1, rootMargin: "0px 0px -7%"});
+  }), {threshold: compactReveal ? .03 : .1, rootMargin: compactReveal ? "0px 0px -2%" : "0px 0px -7%"});
   revealElements.forEach(element => revealObserver.observe(element));
 
   const carousels = {};

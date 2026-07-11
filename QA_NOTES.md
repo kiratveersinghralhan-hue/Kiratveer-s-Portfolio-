@@ -10,6 +10,9 @@ Tested locally on July 11, 2026.
 - Changed mobile selected-work layout to stacked cards, so TripMitra, Harvester Parts, gaane.gpt and Gloss Boss covers are directly visible while scrolling instead of hidden behind a swipe carousel.
 - Fixed mobile reference/project cover visibility so cards no longer depend on a subtle fade before looking complete.
 - Rebuilt the mobile showreel as a stacked cinematic gallery instead of an off-screen horizontal rail.
+- Removed sideways mobile reveal transforms that temporarily pushed headings, service rows and controls outside the phone canvas.
+- Normalized 12px mobile gutters across the header, hero, work cards, media, pricing, references, contact form and footer.
+- Added explicit small-screen containment for grids, long text, form controls and floating actions.
 - Matched each card to the real video format: portrait reels use 9:16 and the Manali film uses 16:9.
 - Added matching project artwork as video posters so every film has a visible cover before playback starts.
 - Restored muted autoplay when a film is substantially in view and automatically pauses off-screen films to reduce mobile load.
@@ -17,7 +20,7 @@ Tested locally on July 11, 2026.
 - Disabled automatic carousel movement on mobile so cards do not slide away while users are reading or playing media.
 - Replaced the source videos with compressed, valid MP4s for faster mobile loading and GitHub-safe upload.
 - Optimized the generated logo/project artwork into lightweight WebP display assets while keeping PNG fallbacks.
-- Updated public and admin cache-busting to `20260711-royalmobile4`.
+- Updated public and admin cache-busting to `20260711-responsive5`.
 - Bumped local CMS storage to `kiratveerStudioContentV5` so old cached admin content does not override the repaired media defaults.
 - Added image preloading and fallback recovery so broken or old image paths fall back to bundled artwork.
 - Removed lazy-loading from carousel artwork so project/reference slides do not appear blank while swiping.
@@ -33,6 +36,7 @@ Tested locally on July 11, 2026.
 - Desktop live audit: 16/16 images loaded, no missing images and no console errors.
 - Mobile intro at 390 px: black/gold intro reaches ready state, logo loads and letters reveal one-by-one.
 - Mobile project cards: 5/5 cover images complete, stacked vertically, full-width and visible at opacity `1`.
+- Mobile alignment at 360 px: document, body and viewport content widths match with no horizontal overflow; hidden reveals stay centered.
 - Mobile video cards: 3/3 load without errors, use correct portrait/landscape ratios and hand off autoplay as the visitor scrolls.
 - Mobile intro at 390 px: intro reaches ready state, logo loads, page is locked during intro, then unlocks after exit.
 - Mobile main page: no actual horizontal scrolling, logo visible, no missing images, project counter shows `05`.
