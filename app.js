@@ -1,15 +1,27 @@
 (() => {
   "use strict";
-  const STORAGE_KEY = "kiratveerStudioContentV2";
+  const STORAGE_KEY = "kiratveerStudioContentV3";
   const ANALYTICS_KEY = "kiratveerStudioAnalyticsV1";
   const defaults = window.KS_DEFAULTS || {projects: [], references: []};
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (_) { saved = {}; }
+
+  const keyOf = value => String(value || "").trim().toLowerCase();
+  const mergeCollection = (savedItems, defaultItems, labelKey = "title") => {
+    if (!Array.isArray(savedItems) || !savedItems.length) return Array.isArray(defaultItems) ? defaultItems : [];
+    const defaultsById = new Map((defaultItems || []).map((item, index) => [keyOf(item.id || item[labelKey] || index), item]));
+    const defaultsByName = new Map((defaultItems || []).map(item => [keyOf(item[labelKey] || item.name), item]));
+    return savedItems.map((item, index) => {
+      const fallback = defaultsById.get(keyOf(item.id || item[labelKey] || index)) || defaultsByName.get(keyOf(item[labelKey] || item.name)) || (defaultItems || [])[index] || {};
+      return {...fallback, ...item, image: item.image || fallback.image || ""};
+    });
+  };
+
   const data = {
     ...defaults,
     ...saved,
-    projects: Array.isArray(saved.projects) && saved.projects.length ? saved.projects : defaults.projects,
-    references: Array.isArray(saved.references) && saved.references.length ? saved.references : defaults.references
+    projects: mergeCollection(saved.projects, defaults.projects, "title"),
+    references: mergeCollection(saved.references, defaults.references, "name")
   };
 
   const root = document.documentElement;
@@ -36,7 +48,63 @@
 
   const esc = (value = "") => String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
   const safeUrl = value => /^(https?:\/\/|mailto:)/i.test(String(value || "")) ? String(value) : "";
-  const safeMedia = value => /^(https?:\/\/|data:image\/|[\w./-]+\.(?:jpg|jpeg|png|webp|gif))/i.test(String(value || "")) ? String(value) : "";
+  const safeMedia = value => /^(https?:\/\/|data:image\/|[\w./-]+\.(?:jpg|jpeg|png|webp|gif)(?:\?.*)?$)/i.test(String(value || "")) ? String(value) : "";
+  const fallbackPng = src => {
+    const value = String(src || "");
+    if (!value) return "";
+    if (/logo-premium-display\.webp/i.test(value)) return "logo-premium.png";
+    return value.replace(/\.webp(?:\?.*)?$/i, ".png");
+  };
+  const defaultProjectImage = (project, index) => {
+    const source = (defaults.projects || []).find(item => keyOf(item.id) === keyOf(project.id) || keyOf(item.title) === keyOf(project.title)) || (defaults.projects || [])[index] || {};
+    return safeMedia(source.image) || "";
+  };
+  const defaultReferenceImage = (item, index) => {
+    const source = (defaults.references || []).find(ref => keyOf(ref.name) === keyOf(item.name)) || (defaults.references || [])[index] || {};
+    return safeMedia(source.image) || "";
+  };
+  const fallbackAttrs = fallback => {
+    const first = safeMedia(fallback) || "";
+    const final = safeMedia(fallbackPng(first)) || "";
+    return `${first ? ` data-fallback="${esc(first)}"` : ""}${final && final !== first ? ` data-fallback-final="${esc(final)}"` : ""}`;
+  };
+  function attachImageFallbacks() {
+    document.querySelectorAll("img").forEach(img => {
+      if (img.dataset.fallbackReady) return;
+      img.dataset.fallbackReady = "1";
+      img.classList.toggle("is-loaded", img.complete && img.naturalWidth > 0);
+      img.addEventListener("load", () => img.classList.add("is-loaded"));
+      img.addEventListener("error", () => {
+        const next = img.dataset.fallback || "";
+        const final = img.dataset.fallbackFinal || "";
+        const current = img.getAttribute("src") || "";
+        if (next && current !== next) {
+          img.dataset.fallback = final;
+          img.removeAttribute("srcset");
+          img.src = next;
+          return;
+        }
+        if (final && current !== final) {
+          img.dataset.fallbackFinal = "";
+          img.src = final;
+          return;
+        }
+        img.classList.add("image-missing");
+      });
+    });
+  }
+  function preloadStudioImages() {
+    const sources = new Set(["logo-premium-display.webp", "logo-premium.png"]);
+    [...(defaults.projects || []), ...(defaults.references || []), ...(data.projects || []), ...(data.references || [])]
+      .map(item => safeMedia(item.image))
+      .filter(Boolean)
+      .forEach(src => sources.add(src));
+    sources.forEach(src => {
+      const image = new Image();
+      image.decoding = "async";
+      image.src = src;
+    });
+  }
 
   function analytics() {
     let state = {pageViews: 0, sessions: 0, events: {}, lastVisit: ""};
@@ -61,11 +129,12 @@
   const projectTrack = document.getElementById("projectTrack");
   if (projectTrack) {
     projectTrack.innerHTML = data.projects.map((project, index) => {
-      const image = safeMedia(project.image);
+      const fallback = defaultProjectImage(project, index);
+      const image = safeMedia(project.image) || fallback;
       const url = safeUrl(project.url);
       return `<article class="project-card" style="--project-color:${esc(project.color || "#222")}" data-project-id="${esc(project.id || index)}">
         <div class="project-visual">
-          ${image ? `<img src="${esc(image)}" alt="${esc(project.title)} project preview" loading="${index ? "lazy" : "eager"}">` : `<div class="project-monogram">${esc(project.monogram || project.title.slice(0,2))}</div>`}
+          ${image ? `<img src="${esc(image)}"${fallbackAttrs(fallback || fallbackPng(image))} alt="${esc(project.title)} project preview" width="1536" height="1024" loading="eager" decoding="async" fetchpriority="${index < 2 ? "high" : "auto"}">` : `<div class="project-monogram">${esc(project.monogram || project.title.slice(0,2))}</div>`}
           <span class="project-status">${esc(project.status || "Selected project")}</span>
         </div>
         <div class="project-info">
@@ -85,15 +154,18 @@
   if (referenceTrack) {
     referenceTrack.innerHTML = data.references.map((item, index) => {
       const url = safeUrl(item.url);
-      const image = safeMedia(item.image);
+      const fallback = defaultReferenceImage(item, index);
+      const image = safeMedia(item.image) || fallback;
       return `<article class="reference-card${image ? " has-image" : ""}" style="--ref-color:${esc(item.color || "#ccc")}">
-        ${image ? `<img class="reference-image" src="${esc(image)}" alt="AI-generated visual for ${esc(item.name)}" loading="lazy"><span class="reference-shade"></span>` : ""}
+        ${image ? `<img class="reference-image" src="${esc(image)}"${fallbackAttrs(fallback || fallbackPng(image))} alt="AI-generated visual for ${esc(item.name)}" width="1536" height="1024" loading="eager" decoding="async"><span class="reference-shade"></span>` : ""}
         <span>${String(index + 1).padStart(2,"0")} / ${esc(item.type)}</span>
         <strong>${esc(item.name)}</strong><p>${esc(item.note)}</p>
         ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener" aria-label="Open ${esc(item.name)}" data-track="reference:${esc(item.name)}">↗</a>` : ""}
       </article>`;
     }).join("");
   }
+  attachImageFallbacks();
+  preloadStudioImages();
 
   const intro = document.getElementById("intro");
   const closeIntro = () => {
@@ -212,11 +284,43 @@
     aura?.style.setProperty("--cursor-y", `${event.clientY}px`);
   }, {passive:true});
 
+  const mediaVideos = Array.from(document.querySelectorAll(".media-card video"));
+  const updateVideoCard = video => {
+    const card = video.closest(".media-card");
+    const button = card?.querySelector(".video-toggle");
+    const playing = !video.paused && !video.ended;
+    card?.classList.toggle("is-playing", playing);
+    card?.classList.toggle("is-ready", video.readyState >= 2);
+    if (button) {
+      button.textContent = playing ? "Pause" : "Play";
+      button.setAttribute("aria-label", `${playing ? "Pause" : "Play"} ${card?.querySelector("h3")?.textContent || "video"}`);
+    }
+  };
+  mediaVideos.forEach(video => {
+    video.muted = true;
+    video.playsInline = true;
+    video.controls = true;
+    video.preload = "auto";
+    ["loadeddata","canplay","play","pause","ended"].forEach(type => video.addEventListener(type, () => updateVideoCard(video)));
+    video.addEventListener("error", () => video.closest(".media-card")?.classList.add("video-error"));
+    const attempt = () => video.play().catch(() => updateVideoCard(video));
+    if (video.readyState >= 2) attempt();
+    else video.addEventListener("canplay", attempt, {once:true});
+    updateVideoCard(video);
+  });
+  if ("IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.intersectionRatio > .45) video.play().catch(() => updateVideoCard(video));
+      else if (!video.paused) video.pause();
+    }), {threshold:[0,.45,.75]});
+    mediaVideos.forEach(video => videoObserver.observe(video));
+  }
   document.querySelectorAll(".video-toggle").forEach(button => button.addEventListener("click", () => {
-    const video = button.parentElement.querySelector("video");
+    const video = button.closest(".media-card")?.querySelector("video");
     if (!video) return;
-    if (video.paused) { video.play(); button.textContent = "Pause"; track("video:play"); }
-    else { video.pause(); button.textContent = "Play"; }
+    if (video.paused) { video.play().then(() => track("video:play")).catch(() => updateVideoCard(video)); }
+    else { video.pause(); track("video:pause"); }
   }));
 
   document.querySelectorAll("[data-track]").forEach(link => link.addEventListener("click", () => track(link.dataset.track)));

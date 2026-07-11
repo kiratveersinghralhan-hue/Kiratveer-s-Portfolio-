@@ -1,36 +1,36 @@
-# QA Notes — Premium Correction Pass
+# QA Notes — Premium Wow Repair Pass
 
-Tested locally on July 4, 2026.
+Tested locally on July 11, 2026.
 
-## Fixed from the previous build
+## Fixed in this pass
 
-- Replaced the desktop-only link navbar with a VEYRATH-style glass header and right-side navigation drawer on every screen size.
-- Added an explicit close control inside the drawer so it is never trapped behind the overlay.
-- Rebuilt the intro using the VEYRATH orbit, letter reveal and curtain-exit pattern. The intro removes itself after exit and has a fallback release timer.
-- Added persistent Light and Dark themes. Light uses white, beige and brown; Dark uses black, teal and red.
-- Replaced transformed carousel rails with native scroll-snap carousels to avoid black rendering blocks and improve touch swiping.
-- Added stronger staged hero animation, directional section reveals, card hover motion, video motion and automatic carousel progression.
-- Replaced abstract initials in the hero and About section with a generated logo and an understandable project showcase.
-- Added generated covers for VEYRATH, TripMitra, Harvester Parts, gaane.gpt and Gloss Boss.
-- Added gaane.gpt to the main project carousel and converted all reference cards to image-backed cards.
-- Updated the public email to `kiratveersinghralhan@gmail.com`.
-- Updated the local CMS data version and reference editor to support cover images.
+- Optimized the generated logo/project artwork into lightweight WebP display assets while keeping PNG fallbacks.
+- Updated public and admin cache-busting to `20260711-wow`.
+- Bumped local CMS storage to `kiratveerStudioContentV3` so old cached admin content does not override the repaired media defaults.
+- Added image preloading and fallback recovery so broken or old image paths fall back to bundled artwork.
+- Removed lazy-loading from carousel artwork so project/reference slides do not appear blank while swiping.
+- Made all showreel videos native-playable with controls, `autoplay`, `muted`, `playsinline`, `preload="auto"` and JS viewport play/pause support.
+- Added loading/ready/error states for image and video cards.
+- Made the top logo visible with a small optimized display asset.
+- Upgraded the intro with a visible logo mark, glow sweep, progress line and stronger premium motion.
+- Rebuilt the thank-you page with animated logo, orbit, beam, status chips and smoother CTAs.
+- Added horizontal overflow containment for mobile pages and decorative thanks-page layers.
 
 ## Verified
 
-- Desktop Light and Dark themes render with the intended palettes and theme preference survives reload.
-- Mobile layouts checked at 390 px and 360 px without page-level horizontal overflow.
-- Mobile/desktop drawer opens, locks the page, fits within the viewport and closes from its own close button.
-- Intro reaches its ready state, exits, unlocks page scroll and leaves no overlay blocking interaction.
-- Five image-backed project slides render; project counter shows `05` and next/previous controls advance the native carousel.
-- Six image-backed reference cards render and lazy-loaded images resolve when the section is reached.
-- Hero project showcase and generated logo load on desktop and mobile.
-- Admin loads five projects, six references and the reference cover-image field.
+- Desktop live audit: 16/16 images loaded, no missing images and no console errors.
+- Desktop videos: 3/3 showreel videos loaded, autoplayed, stayed muted, exposed controls and had no media errors.
+- Mobile intro at 390 px: intro reaches ready state, logo loads, page is locked during intro, then unlocks after exit.
+- Mobile main page: no actual horizontal scrolling, logo visible, no missing images, project counter shows `05`.
+- Mobile video section: carousel remains swipeable and the first visible video plays with native controls.
+- Thank-you page: logo loads, animated status chips/buttons render and `scrollX` remains `0` after overflow fix.
+- Theme toggle switches to dark mode and keeps the logo/video/media state intact.
+- Admin loads the optimized logo, five projects, six references and the reference cover-image field.
 - JavaScript syntax checks pass for `app.js`, `admin.js` and `site-data.js`.
-- Browser console checked with no JavaScript errors.
 
 ## Manual checks after deployment
 
+- Upload the entire folder, including the new `.webp` files, the PNG fallback files and all `.mp4` videos.
 - Submit one real enquiry to confirm the existing Formspree endpoint delivers to the intended inbox.
 - Connect Firebase or Supabase before expecting admin edits or analytics to sync across devices and visitors.
 - Recheck external project and Instagram URLs from the final production domain.

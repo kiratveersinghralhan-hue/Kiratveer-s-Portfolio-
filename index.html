@@ -11,20 +11,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260704-premium2">
-  <script src="site-data.js?v=20260704-premium2" defer></script>
-  <script src="app.js?v=20260704-premium2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260711-wow">
+  <script src="site-data.js?v=20260711-wow" defer></script>
+  <script src="app.js?v=20260711-wow" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="luxury-intro" id="intro" aria-label="Kiratveer Studio introduction">
     <button class="intro-skip" type="button">Skip intro</button>
+    <div class="intro-glow" aria-hidden="true"></div>
     <div class="intro-lines"><i></i><i></i></div>
     <div class="luxury-mark">
       <div class="luxury-orbit"><i></i><i></i><i></i></div>
+      <div class="intro-brandmark"><img src="logo-premium-display.webp" alt="" width="92" height="92"></div>
       <div class="intro-word"><span>K</span><span>I</span><span>R</span><span>A</span><span>T</span><span>V</span><span>E</span><span>E</span><span>R</span></div>
       <small>Independent Digital Studio</small>
+      <div class="intro-progress" aria-hidden="true"><i></i></div>
     </div>
     <div class="intro-curtain intro-curtain-left"></div>
     <div class="intro-curtain intro-curtain-right"></div>
@@ -40,7 +43,7 @@
   <header class="site-header" id="top">
     <div class="shell nav-wrap">
       <a class="brand" href="#top" aria-label="Kiratveer Studio home">
-        <img src="logo-premium.png" alt="Kiratveer Studio KR monogram" width="42" height="42">
+        <img src="logo-premium-display.webp" data-fallback="logo-premium.png" alt="Kiratveer Studio KR monogram" width="42" height="42" decoding="async" fetchpriority="high">
         <span><strong>KIRATVEER</strong><small>Independent Digital Studio</small></span>
       </a>
       <div class="header-actions">
@@ -81,10 +84,10 @@
         <div class="hero-stage reveal" data-reveal="scale">
           <div class="stage-number">STUDIO SYSTEM / 01</div>
           <div class="studio-showcase">
-            <article class="showcase-main"><img src="project-tripmitra.png" alt="AI-generated visual for the TripMitra travel platform"><span>Live product</span><strong>TripMitra</strong></article>
+            <article class="showcase-main"><img src="project-tripmitra.webp" data-fallback="project-tripmitra.png" alt="AI-generated visual for the TripMitra travel platform" width="1536" height="1024" decoding="async" fetchpriority="high"><span>Live product</span><strong>TripMitra</strong></article>
             <div class="showcase-stack">
-              <article><img src="project-veyrath.png" alt="AI-generated visual for the VEYRATH fashion project"><span>Ongoing</span><strong>VEYRATH</strong></article>
-              <article><img src="project-harvesterparts.png" alt="AI-generated visual for Harvester Parts"><span>Commerce</span><strong>Harvester Parts</strong></article>
+              <article><img src="project-veyrath.webp" data-fallback="project-veyrath.png" alt="AI-generated visual for the VEYRATH fashion project" width="1536" height="1024" decoding="async" fetchpriority="high"><span>Ongoing</span><strong>VEYRATH</strong></article>
+              <article><img src="project-harvesterparts.webp" data-fallback="project-harvesterparts.png" alt="AI-generated visual for Harvester Parts" width="1536" height="1024" decoding="async" fetchpriority="high"><span>Commerce</span><strong>Harvester Parts</strong></article>
             </div>
           </div>
           <div class="stage-capabilities"><span>Web</span><span>Video</span><span>Growth</span></div>
@@ -148,18 +151,18 @@
         <div class="media-carousel carousel reveal" data-carousel="media">
           <div class="media-track">
             <article class="media-card media-wide">
-              <video muted loop playsinline preload="metadata" poster="preview.jpg"><source src="main-demo.mp4" type="video/mp4"></video>
-              <button class="video-toggle" type="button" aria-label="Play main showreel">Play</button>
+              <video autoplay muted loop playsinline controls preload="auto" poster="preview.jpg" controlslist="nodownload noplaybackrate"><source src="main-demo.mp4" type="video/mp4"></video>
+              <button class="video-toggle" type="button" aria-label="Pause main showreel">Pause</button>
               <div><span>Launch Film / 2026</span><h3>TripMitra Product Story</h3></div>
             </article>
             <article class="media-card media-tall">
-              <video muted loop playsinline preload="metadata"><source src="gb1.mp4" type="video/mp4"></video>
-              <button class="video-toggle" type="button" aria-label="Play automotive reel">Play</button>
+              <video autoplay muted loop playsinline controls preload="auto" poster="preview.jpg" controlslist="nodownload noplaybackrate"><source src="gb1.mp4" type="video/mp4"></video>
+              <button class="video-toggle" type="button" aria-label="Pause automotive reel">Pause</button>
               <div><span>Automotive / Reel</span><h3>Gloss Boss</h3></div>
             </article>
             <article class="media-card media-wide">
-              <video muted loop playsinline preload="metadata"><source src="manali.mp4" type="video/mp4"></video>
-              <button class="video-toggle" type="button" aria-label="Play travel film">Play</button>
+              <video autoplay muted loop playsinline controls preload="auto" poster="preview.jpg" controlslist="nodownload noplaybackrate"><source src="manali.mp4" type="video/mp4"></video>
+              <button class="video-toggle" type="button" aria-label="Pause travel film">Pause</button>
               <div><span>Travel / Cinematic</span><h3>Manali in Motion</h3></div>
             </article>
           </div>
@@ -198,7 +201,7 @@
 
     <section class="section section-about" id="about">
       <div class="shell about-grid">
-        <div class="about-index reveal"><img src="logo-premium.png" alt="Kiratveer Studio monogram"><p>Independent<br>Digital Studio</p></div>
+        <div class="about-index reveal"><img src="logo-premium-display.webp" data-fallback="logo-premium.png" alt="Kiratveer Studio monogram" width="420" height="420" loading="eager" decoding="async"><p>Independent<br>Digital Studio</p></div>
         <div class="about-copy reveal">
           <p class="eyebrow">05 / About</p>
           <h2>I build like an owner,<br>not an order-taker.</h2>

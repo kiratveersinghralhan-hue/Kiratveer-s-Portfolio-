@@ -28,8 +28,8 @@ Upload the complete folder, including:
 
 - `index.html`, `styles.css`, `app.js`, `site-data.js`
 - `admin.html`, `admin.css`, `admin.js`
-- `thanks.html`, `logo-premium.png`, `preview.jpg`
-- all `project-*.png` AI-generated portfolio covers
+- `thanks.html`, `logo-premium.png`, `logo-premium-display.webp`, `preview.jpg`
+- all `project-*.webp` optimized portfolio covers and `project-*.png` fallback/source covers
 - all `.mp4` files
 
 Keep the same filenames and folder structure so videos and project visuals continue to load.
