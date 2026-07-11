@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  const STORAGE_KEY = "kiratveerStudioContentV4";
+  const STORAGE_KEY = "kiratveerStudioContentV5";
   const ANALYTICS_KEY = "kiratveerStudioAnalyticsV1";
   const defaults = window.KS_DEFAULTS || {projects: [], references: []};
   let saved = {};
@@ -183,12 +183,12 @@
     document.body.classList.add("intro-lock");
     requestAnimationFrame(() => requestAnimationFrame(() => intro.classList.add("is-ready")));
     intro.querySelector(".intro-skip")?.addEventListener("click", closeIntro);
-    setTimeout(closeIntro, 3200);
+    setTimeout(closeIntro, 3900);
     setTimeout(() => {
       if (document.body.classList.contains("intro-lock")) document.body.classList.remove("intro-lock");
       document.body.classList.add("page-ready");
       intro?.classList.add("is-gone");
-    }, 5100);
+    }, 6100);
   } else document.body.classList.add("page-ready");
 
   const menuButton = document.querySelector(".menu-button");
@@ -289,7 +289,7 @@
   }, {passive:true});
 
   const mediaVideos = Array.from(document.querySelectorAll(".media-card video"));
-  const leanVideoMode = () => compactMedia.matches;
+  const leanVideoMode = () => false;
   const updateVideoCard = video => {
     const card = video.closest(".media-card");
     const button = card?.querySelector(".video-toggle");
@@ -305,15 +305,14 @@
     video.muted = true;
     video.playsInline = true;
     video.controls = true;
-    video.preload = leanVideoMode() ? "metadata" : "auto";
-    video.autoplay = !leanVideoMode();
+    video.preload = "auto";
+    video.autoplay = true;
+    video.setAttribute("autoplay", "");
     ["loadeddata","canplay","play","pause","ended"].forEach(type => video.addEventListener(type, () => updateVideoCard(video)));
     video.addEventListener("error", () => video.closest(".media-card")?.classList.add("video-error"));
     const attempt = () => video.play().catch(() => updateVideoCard(video));
-    if (!leanVideoMode()) {
-      if (video.readyState >= 2) attempt();
-      else video.addEventListener("canplay", attempt, {once:true});
-    }
+    if (video.readyState >= 2) attempt();
+    else video.addEventListener("canplay", attempt, {once:true});
     updateVideoCard(video);
   });
   if ("IntersectionObserver" in window) {

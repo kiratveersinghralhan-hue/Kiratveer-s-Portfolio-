@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  const CONTENT_KEY = "kiratveerStudioContentV4";
+  const CONTENT_KEY = "kiratveerStudioContentV5";
   const ANALYTICS_KEY = "kiratveerStudioAnalyticsV1";
   const clone = value => JSON.parse(JSON.stringify(value));
   const defaults = clone(window.KS_DEFAULTS || {projects:[], references:[], offer:""});

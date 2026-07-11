@@ -2,7 +2,7 @@
 
 Upload or commit the contents of this folder, not a zip file.
 
-This mobile-gold version uses compressed MP4 files for safer repository upload and faster mobile playback:
+This auto-gold mobile version uses compressed autoplay MP4 files for safer repository upload and faster mobile playback:
 
 - `main-demo.mp4`
 - `gb1.mp4`

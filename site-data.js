@@ -1,5 +1,5 @@
 window.KS_DEFAULTS = {
-  version: 4,
+  version: 5,
   offer: "Complimentary 7-point digital audit with every qualified enquiry.",
   projects: [
     {
