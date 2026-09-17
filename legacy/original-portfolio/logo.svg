@@ -1,0 +1,30 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#172554"/>
+      <stop offset="50%" stop-color="#050816"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="88" y1="70" x2="430" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff7c2"/>
+      <stop offset="0.42" stop-color="#f6c453"/>
+      <stop offset="0.74" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="glow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.25  0 0 0 0 0.7  0 0 0 0 1  0 0 0 .6 0"/>
+      <feBlend in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="188" stroke="url(#gold)" stroke-width="10" opacity="0.95"/>
+  <path d="M86 283C137 201 226 157 349 150" stroke="#38bdf8" stroke-width="7" stroke-linecap="round" opacity="0.72"/>
+  <path d="M426 229C382 310 300 359 174 373" stroke="#F6C453" stroke-width="7" stroke-linecap="round" opacity="0.72"/>
+  <g filter="url(#glow)">
+    <path d="M153 352V160H194V241L268 160H318L237 247L327 352H274L194 259V352H153Z" fill="url(#gold)"/>
+    <path d="M329 352L252 160H299L355 305L411 160H459L381 352H329Z" fill="url(#gold)" opacity="0.97"/>
+  </g>
+  <path d="M143 403H369" stroke="url(#gold)" stroke-width="8" stroke-linecap="round"/>
+  <text x="256" y="442" text-anchor="middle" fill="#E5E7EB" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="6">STUDIO</text>
+</svg>

@@ -1,0 +1,289 @@
+window.KS_DEFAULTS = {
+  "version": 6,
+  "offer": "A complimentary digital presence audit for qualified new website and product projects.",
+  "projects": [
+    {
+      "id": "qortra",
+      "slug": "qortra",
+      "title": "QORTRA",
+      "category": "AI-powered business operations platform",
+      "shortCategory": "AI / BUSINESS OPERATIONS",
+      "summary": "Business context. Considered decisions. Controlled action.",
+      "description": "An actively developed software product bringing business knowledge, AI assistance and human approval into one organizational workspace.",
+      "challenge": "Useful business AI needs more than a conversation. It needs the right context, clear permissions and a reliable distinction between a suggestion and an action.",
+      "idea": "Build an operating layer where a business can keep its knowledge, ask for help and review proposed changes before they happen.",
+      "experience": "A Command Center connects to Business Memory, an Approval Center and workspace integrations. The interface gives knowledge, decisions and actions their own clear place.",
+      "engineering": [
+        "Organizational workspaces with authenticated identity and role-based access.",
+        "Business Memory for organizational facts, preferences, policies, processes and context.",
+        "AI assistance through registered tools, with permission checks and separate review and execution steps.",
+        "Google account integration and explicit, bounded read-only Gmail previews are being developed.",
+        "Application and database work are supported by automated tests. Development and review are ongoing."
+      ],
+      "services": [
+        "Product direction",
+        "Application architecture",
+        "AI workflows",
+        "Interface development",
+        "Integrations"
+      ],
+      "stack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "OpenAI"
+      ],
+      "status": "Actively developed",
+      "image": "/assets/images/qortra-system.svg",
+      "imageNote": "Editorial system illustration based on the current application architecture.",
+      "gallery": [],
+      "url": "",
+      "theme": "qortra",
+      "featured": true,
+      "role": "Product design & development",
+      "tags": [
+        "Product direction",
+        "Application architecture",
+        "AI workflows",
+        "Interface development",
+        "Integrations"
+      ],
+      "monogram": "QO",
+      "color": "#253e96"
+    },
+    {
+      "id": "tripmitra",
+      "slug": "tripmitra",
+      "title": "TripMitra",
+      "category": "AI-assisted group travel product",
+      "shortCategory": "TRAVEL / DIGITAL PRODUCT",
+      "summary": "From scattered plans to a shared trip.",
+      "description": "A founder-built travel platform bringing AI-assisted planning, group decisions, RSVPs and shared budgets into a common trip experience.",
+      "challenge": "Group trips bring plans, preferences and money into the same conversation. Keeping those decisions in scattered chats makes the trip harder to organize.",
+      "idea": "Give the group a shared trip website: one place to compare plans, vote, collect responses and keep the budget visible.",
+      "experience": "The supplied product work spans AI-generated itineraries, group voting, RSVP and food preferences, budgeting and a final day-by-day plan.",
+      "engineering": [
+        "Firebase authentication, database and function workflows.",
+        "Razorpay integration for subscription-based trip website creation.",
+        "Founder tools for feedback, notifications and affiliate operations.",
+        "Responsive trip and dashboard interfaces, with SEO and analytics setup."
+      ],
+      "services": [
+        "Product design",
+        "Web development",
+        "AI workflows",
+        "Payments",
+        "Launch content"
+      ],
+      "stack": [
+        "Firebase Auth",
+        "Firestore",
+        "Firebase Functions",
+        "Razorpay"
+      ],
+      "status": "Founder project / evolving",
+      "image": "/assets/images/screen-tripmitra.webp",
+      "imageNote": "Actual public TripMitra interface, captured September 2026.",
+      "gallery": [
+        {
+          "src": "/assets/images/screen-tripmitra-detail.webp",
+          "alt": "TripMitra destination and trip-style discovery interface",
+          "caption": "A public interface capture showing how travellers explore trip ideas."
+        }
+      ],
+      "url": "https://tripmitra.store",
+      "theme": "travel",
+      "featured": true,
+      "role": "Founder / product design & development",
+      "tags": [
+        "Product design",
+        "Web development",
+        "AI workflows",
+        "Payments",
+        "Launch content"
+      ],
+      "monogram": "Tr",
+      "color": "#253e96"
+    },
+    {
+      "id": "harvesterparts",
+      "slug": "harvesterparts",
+      "title": "Harvester Parts",
+      "category": "Industrial commerce & product catalogue",
+      "shortCategory": "INDUSTRIAL / COMMERCE",
+      "summary": "A specialist catalogue, made approachable.",
+      "description": "A digital storefront for agricultural machinery parts, built around clear product presentation and a credible specialist-business presence.",
+      "challenge": "A specialist parts catalogue needs to be understandable to the people searching it. Product clarity and trust are central to that experience.",
+      "idea": "Bring the catalogue into a focused web platform that makes the business and its products easier to explore.",
+      "experience": "Industrial products, catalogue navigation and business information form the centre of the site. The direction serves a practical buying journey.",
+      "engineering": [
+        "Web design for an agricultural machinery-parts business.",
+        "Product catalogue presentation shaped for a specialist B2B context."
+      ],
+      "services": [
+        "Web design",
+        "Catalogue experience",
+        "B2B presentation"
+      ],
+      "stack": [],
+      "status": "Selected commerce project",
+      "image": "/assets/images/screen-harvesterparts.webp",
+      "imageNote": "Actual public Harvester Parts interface, captured September 2026.",
+      "gallery": [
+        {
+          "src": "/assets/images/screen-harvesterparts-detail.webp",
+          "alt": "Harvester Parts marketplace features and machinery-parts listings",
+          "caption": "The public marketplace brings specialist product listings into a clear buying experience."
+        }
+      ],
+      "url": "https://harvesterparts.in",
+      "theme": "industrial",
+      "featured": true,
+      "role": "Web design & catalogue experience",
+      "tags": [
+        "Web design",
+        "Catalogue experience",
+        "B2B presentation"
+      ],
+      "monogram": "Ha",
+      "color": "#253e96"
+    },
+    {
+      "id": "veyrath",
+      "slug": "veyrath",
+      "title": "VEYRATH",
+      "category": "Fashion commerce & brand system",
+      "shortCategory": "FASHION / BRAND / COMMERCE",
+      "summary": "A brand world with a commerce engine.",
+      "description": "An ongoing fashion-commerce project connecting dark editorial brand direction with a storefront, catalogue systems and launch planning.",
+      "challenge": "A fashion brand needs its visual identity and buying experience to feel like the same world.",
+      "idea": "Develop the brand and the storefront together, carrying the editorial direction through the catalogue and the way the product is presented.",
+      "experience": "Dark, considered imagery and fashion-led composition shape a commerce experience under development.",
+      "engineering": [
+        "Brand direction and storefront experience developed as connected parts of the project.",
+        "Catalogue and admin-system development alongside launch operations."
+      ],
+      "services": [
+        "Brand direction",
+        "E-commerce",
+        "Catalogue systems",
+        "Launch planning"
+      ],
+      "stack": [],
+      "status": "In development",
+      "image": "/assets/images/project-veyrath.webp",
+      "imageNote": "Concept artwork from the original portfolio",
+      "gallery": [],
+      "url": "",
+      "theme": "fashion",
+      "featured": true,
+      "role": "Brand & commerce development",
+      "tags": [
+        "Brand direction",
+        "E-commerce",
+        "Catalogue systems",
+        "Launch planning"
+      ],
+      "monogram": "VE",
+      "color": "#253e96"
+    },
+    {
+      "id": "glossboss",
+      "slug": "glossboss",
+      "title": "Gloss Boss",
+      "category": "Automotive website & motion content",
+      "shortCategory": "AUTOMOTIVE / WEB / FILM",
+      "summary": "A sharper presence, in pixels and motion.",
+      "description": "An automotive business presence pairing service-led web design with video and social visuals.",
+      "challenge": "A detailing business needs people to understand the service and feel confident enough to make an enquiry.",
+      "idea": "Connect a clear business website with automotive motion content, so the service and the brand share one visual direction.",
+      "experience": "The website presents the business and its services. A supplied automotive reel extends that presence into motion.",
+      "engineering": [
+        "Business website design with service clarity and enquiry-focused presentation.",
+        "Video and social-first visuals extending the brand beyond the website."
+      ],
+      "services": [
+        "Web design",
+        "Video editing",
+        "Lead-generation experience"
+      ],
+      "stack": [],
+      "status": "Client project",
+      "image": "/assets/images/screen-glossboss.webp",
+      "imageNote": "Actual public Gloss Boss website, captured September 2026.",
+      "gallery": [
+        {
+          "src": "/assets/images/screen-glossboss-detail.webp",
+          "alt": "Gloss Boss service presentation and detailing website interface",
+          "caption": "Service presentation and enquiry paths on the public automotive website."
+        }
+      ],
+      "url": "https://glossbossautomotive.online",
+      "theme": "automotive",
+      "featured": true,
+      "role": "Web design & video",
+      "tags": [
+        "Web design",
+        "Video editing",
+        "Lead-generation experience"
+      ],
+      "monogram": "Gl",
+      "color": "#253e96"
+    },
+    {
+      "id": "gaane-gpt",
+      "slug": "gaane-gpt",
+      "title": "gaane.gpt",
+      "category": "Music culture & social content",
+      "shortCategory": "MUSIC / CULTURE / CONTENT",
+      "summary": "A space for music and the culture around it.",
+      "description": "A music-first social property exploring discovery, visual storytelling and repeatable content formats.",
+      "challenge": "Music discovery is also a visual and editorial experience: what gets selected, how it is framed and how it connects with a listener.",
+      "idea": "Build a music-led social property with a recognizable point of view and repeatable visual formats.",
+      "experience": "Content strategy, social design and music culture come together in an independent Instagram property.",
+      "engineering": [
+        "Content direction and visual storytelling for a music-focused social presence.",
+        "Repeatable music-led content formats and social design."
+      ],
+      "services": [
+        "Content strategy",
+        "Social design",
+        "Visual storytelling"
+      ],
+      "stack": [],
+      "status": "Independent social property",
+      "image": "/assets/images/project-gaane-gpt.webp",
+      "imageNote": "Concept artwork from the original portfolio",
+      "gallery": [],
+      "url": "https://instagram.com/gaane.gpt",
+      "theme": "music",
+      "featured": false,
+      "role": "Content strategy & social design",
+      "tags": [
+        "Content strategy",
+        "Social design",
+        "Visual storytelling"
+      ],
+      "monogram": "ga",
+      "color": "#253e96"
+    }
+  ],
+  "references": [
+    {
+      "name": "@ralhanx",
+      "type": "Creative practice",
+      "note": "Independent digital product development and creative work.",
+      "url": "https://instagram.com/ralhanx",
+      "color": "#253e96"
+    },
+    {
+      "name": "@gaane.gpt",
+      "type": "Music / culture",
+      "note": "Music discovery and visual storytelling.",
+      "url": "https://instagram.com/gaane.gpt",
+      "color": "#402e47"
+    }
+  ]
+};

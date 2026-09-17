@@ -1,0 +1,24 @@
+LinkedIn Launch Post — TripMitra AI Studio
+
+I’m excited to share one of my main projects: TripMitra AI Studio.
+
+TripMitra AI Studio is an AI-powered trip planning web app built to solve a common problem: group trip planning gets messy very fast.
+
+Instead of handling everything through scattered chats, TripMitra helps groups create one smart trip website with:
+• AI-generated trip plans
+• Group voting
+• RSVP and food preferences
+• Live fund and expense tracking
+• Budget-based planning
+• Final day-wise trip plan
+• Admin dashboard and notifications
+• Razorpay payment integration
+• Affiliate/referral program
+
+This project helped me learn how to think beyond just design and code. I worked on product flow, user experience, payments, backend logic, SEO, analytics, admin tools and launch planning.
+
+Live project: https://tripmitra.store
+
+I’m still improving it, but I’m proud that it is a real product, not just a demo.
+
+#TripMitra #AITripPlanner #WebDevelopment #Firebase #StartupIndia #TravelTech #StudentFounder

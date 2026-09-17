@@ -1,0 +1,27 @@
+export function initNavigation(){
+  const menu=document.querySelector('#mobile-menu'),toggle=document.querySelector('.menu-toggle');
+  if(menu&&toggle){
+    const close=()=>{if(menu.open)menu.close();document.body.classList.remove('menu-open');toggle.setAttribute('aria-expanded','false')};
+    toggle.addEventListener('click',()=>{menu.showModal();document.body.classList.add('menu-open');toggle.setAttribute('aria-expanded','true')});
+    menu.querySelector('.menu-close')?.addEventListener('click',close);menu.addEventListener('cancel',close);menu.addEventListener('click',event=>{if(event.target.closest('a'))close()});addEventListener('resize',()=>{if(innerWidth>767)close()},{passive:true});
+  }
+  document.querySelectorAll('.capability').forEach(item=>item.addEventListener('toggle',()=>{
+    if(!item.open)return;document.querySelectorAll('.capability').forEach(other=>{if(other!==item)other.open=false});
+    const visual=document.querySelector('.capability-visual img');if(visual){visual.style.opacity='0';setTimeout(()=>{visual.src=item.dataset.capabilityImage;visual.style.opacity='1';visual.style.transform=`scale(${1+Number(item.dataset.capabilityIndex||0)*.015})`},180)}
+  }));
+  document.querySelectorAll('.price-item').forEach((item,index)=>item.addEventListener('toggle',()=>{if(item.open){document.querySelectorAll('.price-item').forEach(other=>{if(other!==item)other.open=false});const signal=document.querySelector('[data-active-package]');if(signal)signal.textContent=String(index+1).padStart(2,'0')}}));
+  const curtain=document.querySelector('.page-curtain');
+  document.addEventListener('click',event=>{const link=event.target.closest('a');if(!link||!curtain||event.defaultPrevented||link.target==='_blank'||link.origin!==location.origin||link.hash&&link.pathname===location.pathname)return;if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;event.preventDefault();curtain.animate([{transform:'scaleY(0)'},{transform:'scaleY(1)'}],{duration:550,easing:'cubic-bezier(.76,0,.24,1)',fill:'forwards'}).finished.then(()=>location.assign(link.href))});
+}
+
+export function initFilms({track=()=>{}}={}){
+  const films=[...document.querySelectorAll('.film')],videos=films.map(f=>f.querySelector('video')).filter(Boolean),selectors=[...document.querySelectorAll('[data-film-select]')],soundButtons=[...document.querySelectorAll('.film-sound,.sound-toggle')];let sound=false;
+  const setSound=value=>{sound=value;videos.forEach(v=>v.muted=!value);soundButtons.forEach(b=>{b.setAttribute('aria-pressed',String(value));b.lastChild.textContent=value?' ON':' OFF';if(b.classList.contains('film-sound'))b.textContent=value?'SOUND ON':'SOUND OFF'})};
+  const select=index=>{films.forEach((film,i)=>film.classList.toggle('is-active',i===index));selectors.forEach((b,i)=>b.setAttribute('aria-selected',String(i===index)));videos.forEach((v,i)=>{if(i!==index)v.pause()})};
+  selectors.forEach((button,index)=>button.addEventListener('click',()=>select(index)));soundButtons.forEach(button=>button.addEventListener('click',()=>setSound(!sound)));setSound(false);
+  videos.forEach(video=>{const film=video.closest('.film'),button=film.querySelector('.film-play');video.muted=true;button?.addEventListener('click',async()=>{videos.forEach(v=>{if(v!==video)v.pause()});try{await video.play();film.classList.add('playing');track(`video:${video.id}`)}catch{video.controls=true;video.focus()}});video.addEventListener('pause',()=>film.classList.remove('playing'));video.addEventListener('ended',()=>film.classList.remove('playing'))});
+  const observer=new IntersectionObserver(entries=>entries.forEach(({isIntersecting,target})=>{if(!isIntersecting)target.pause()}),{threshold:.05});videos.forEach(v=>observer.observe(v));document.addEventListener('visibilitychange',()=>{if(document.hidden)videos.forEach(v=>v.pause())});
+}
+
+// Retains the legacy form enhancement for generated/archived routes.
+export function initForm({track=()=>{}}={}){const form=document.querySelector('#project-form');if(!form)return;const status=form.querySelector('[role=status]')||document.querySelector('#form-status'),button=form.querySelector('[type=submit]');form.addEventListener('submit',async event=>{event.preventDefault();if(button.disabled||!form.reportValidity())return;if(form.elements._gotcha?.value)return;button.disabled=true;if(status)status.textContent='Sending your brief…';try{const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});if(!response.ok)throw new Error();track('form:submitted');location.assign('/thank-you/')}catch{if(status)status.textContent='Your brief could not be sent. Your details are still here. Try again, or use WhatsApp.';button.disabled=false}})}
