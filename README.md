@@ -52,7 +52,8 @@ No commit, push or deployment was performed as part of this local rebuild. Forms
 | Identity, contact, navigation, services and process | `src/data/site.js` |
 | Prices, currencies, exchange rates and buffers | `src/data/pricing.js` |
 | Page composition | `src/components.js` |
-| Visual system and responsive layout | `src/styles.css` |
+| Final themes, visual system and responsive layout | `src/themes.css` |
+| Theme preference and early initialization | `src/modules/theme.js` |
 | 3D book | `src/modules/book.js` |
 | Scroll, cursor and microinteractions | `src/modules/motion.js` |
 | Forms, videos and navigation | `src/modules/interactions.js` |
@@ -65,4 +66,4 @@ Read [REDESIGN_NOTES.md](REDESIGN_NOTES.md) for maintenance, architecture and sa
 
 ## Validation status
 
-Complete locally. Production build and ESLint passed, 24 unit/SEO tests passed, and all 28 production browser checks passed. All 18 specified viewports passed overflow checks, with actual visual review at the six required representative sizes. See [QA_REPORT.md](QA_REPORT.md) for evidence, commands and practical limits.
+The final day/night pass includes 28 unit/SEO tests, 30 portfolio browser checks, 10 enquiry-flow groups and 8 theme/WebGL checks. The responsive suite covers all 18 specified viewports; additional screenshots cover both palettes at 13 mobile, tablet and desktop sizes. See [QA_REPORT.md](QA_REPORT.md) for final results, commands and practical limits.

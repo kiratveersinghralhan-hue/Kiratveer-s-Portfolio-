@@ -2,7 +2,7 @@
 
 ## Concept and preserved work
 
-The portfolio unfolds as a directed digital film: a dark studio reveals a physical portfolio volume, the book opens into five project worlds, and the experience moves through film, capabilities, process, investment and a focused project brief. Warm paper is reserved for editorial contrast while graphite, cobalt light, depth and restrained glass establish the main cinematic system. Real photography connects the work to Kirat.
+The portfolio unfolds as a directed digital film: a dark studio reveals a physical portfolio volume, the book opens into five project worlds, and the experience moves through film, capabilities, process, investment and a focused project brief. Two complete palettes carry the same edition: graphite and warm ivory at night; bone, stone and deep ink by day. Restrained cobalt, metallic details, depth and glass connect the chapters. Real photography connects the work to Kirat.
 
 The supplied portfolio was static HTML/CSS/JavaScript. The rebuild keeps that lightweight model, adds a Vite build and modular JavaScript, and generates readable static pages. It does not introduce React, an application backend, a database or authentication. The existing Formspree endpoint, verified contact information, local content editor, all legitimate original media and the supplied new photographs are preserved.
 
@@ -16,17 +16,17 @@ The supplied portfolio was static HTML/CSS/JavaScript. The rebuild keeps that li
 
 | Element | Current direction |
 |---|---|
-| Night | `--night: #070909` |
-| Graphite | `--graphite: #101312` |
-| Warm paper | `--bone: #ece9e0` |
-| Electric cobalt | `--cobalt: #315efb`, `--acid: #8ca7ff` |
-| Champagne | `--champagne: #d7c6a4` |
+| Night backgrounds | Primary #08090B; secondary #111318; surfaces #171A20 / #1D2027 |
+| Day backgrounds | Primary #F3EFE7; secondary #EAE5DC; surfaces #FAF8F3 / #FFFFFF |
+| Text | Night #F2EFE8 / #AAAEB5; day #111317 / #555A62 |
+| Cobalt | Fill #5875F5 at night / #3559D9 by day; night text accent #839BFF for contrast |
+| Metal | Muted champagne, adjusted for readable contrast in each theme |
 | Display serif | Instrument Serif, regular and italic |
 | Interface sans | Manrope, weights 400/500/600 |
 | Layout | Fluid `clamp()` typography, CSS Grid/Flexbox, restrained rules and broad margins |
 | Glass | Navigation and selected interface layers; not a repeated card system |
 
-Fonts are installed through Fontsource and served locally. Retain the font packages' licenses when redistributing the source. Change the cinematic tokens in `src/cinematic.css`; the preserved base and case-study styles remain in `src/styles.css`.
+Fonts are installed through Fontsource and served locally. Retain the font packages' licenses when redistributing the source. The final semantic palette, typography, spacing and responsive refinements live in `src/themes.css`, loaded after the preserved `src/styles.css`, `src/cinematic.css` and enquiry styles. Edit `--bg-*`, `--text-*`, `--accent-*`, `--rule`, `--page-gutter`, `--section-space-*`, `--content-max` and `--copy-max` there. Do not replace a semantic token with an unrelated per-section color.
 
 ## Architecture and dependencies
 
@@ -38,9 +38,11 @@ Fonts are installed through Fontsource and served locally. Retain the font packa
 | `src/components.js` | Shared HTML composition for home, case studies and thank-you page |
 | `src/components-flow.js` | Eight-step project brief and confirmation-page composition |
 | `src/start-project.css` | Purpose-built enquiry and confirmation experience |
+| `src/themes.css` | Final night/day palettes, shared proportions and responsive polish |
+| `src/modules/theme.js` | Early theme initialization, accessible toggle, persistence and cross-tab/system updates |
 | `src/main.js` | Progressive enhancement and browser-local content integration |
 | `src/modules/book.js` | Lazy Three.js book and its fallback lifecycle |
-| `src/modules/motion.js` | Lenis/GSAP scroll choreography, scene progress, header contrast, cursor and CTA feedback |
+| `src/modules/motion.js` | Lenis/GSAP scroll choreography, scene progress, reading indicator, cursor and CTA feedback |
 | `src/modules/project-flow.js` | Step validation, review/edit, currency-aware ranges and protected Formspree submission |
 | `src/modules/interactions.js` | Mobile dialog, capability index, films and Formspree submission |
 | `src/modules/safety.js` | Text escaping and URL/media validation |
@@ -55,20 +57,24 @@ Runtime dependencies have specific roles: **Three.js** renders the book; **GSAP/
 
 The book is a real Three.js object with cover board, spine, paper block, fine paper-edge lines, printed page textures, a hinged cover and a curved turning sheet. Canvas textures are composed from central project information and real project images. Captions retain each asset's screenshot/illustration distinction. No QORTRA application UI is fabricated.
 
-Scroll progress controls the entrance, camera distance, opening hinge, sequential page turns and final page-to-world portal. Page curvature is calculated on a modest segmented plane rather than a physics simulation. The scene uses warm key lighting, cool edge lighting, rough paper/cloth materials, a raised metallic KR and restrained shadows. Its HTML surroundings provide project titles, narrative and real links independently of the canvas.
+Scroll progress controls approach (0–12%), rotation (12–28%), cover lift (28–45%), full opening (45–68%), page turns (68–88%) and the final approach into QORTRA (88–100%). The last spread reuses the first QORTRA textures to connect the edition to the flagship world. Page curvature is calculated on a modest segmented plane rather than a physics simulation. The scene uses warm key lighting, cool edge lighting, rough paper/cloth materials, a raised metallic KR and restrained shadows. Its HTML surroundings provide project titles, narrative and real links independently of the canvas.
 
-The Three.js import starts only when the book approaches the viewport. Rendering is requested on scroll, resize and image readiness; there is no permanent idle animation loop. Hidden/offscreen scenes stop rendering. DPR is capped at 1.5 for high capability and 1 for medium. Medium uses smaller textures and fewer page segments and disables dynamic shadows. Disposal releases textures, materials, geometries, shadows, renderer/context, observers and listeners. Context failure restores the magazine presentation.
+The Three.js import starts only when the book approaches the viewport. Rendering is requested on scroll, pointer movement, resize, image readiness and a bounded 420ms theme transition; there is no permanent idle animation loop. Hidden/offscreen scenes stop rendering. DPR is capped at 1.5 for high capability and 1 for medium. Medium uses smaller textures and fewer page segments and disables dynamic shadows. Disposal releases textures, materials, geometries, shadows, renderer/context, observers and listeners. Context failure restores the magazine presentation.
 
-Other motion is deliberately lighter: pinned project-world depth, QORTRA system planes, scroll-selected films, process progression, reading progress, scene-aware navigation, page curtains, link feedback and magnetic CTAs. Lenis runs only on fine-pointer, non-reduced-motion portfolio pages; touch, forms, keyboard navigation and browser history remain native. Case studies retain their own URLs and browser back behavior.
+Day uses a graphite/stone cover, softer shadows and daylight illumination; night uses matte cloth, a warm metallic monogram and cool rim light. The same renderer, geometry and page textures survive theme switches. Cover textures are generated once, and lights/materials interpolate in place.
+
+Other motion is deliberately lighter: pinned project-world depth, QORTRA system planes, scroll-selected films, process progression, reading progress, themed navigation, page curtains, link feedback and magnetic CTAs. Lenis runs only on fine-pointer, non-reduced-motion portfolio pages; touch, forms, keyboard navigation and browser history remain native. Case studies retain their own URLs and browser back behavior. Lenis duration is 0.78s. Each project has one shared trigger for its entrance mask and spatial progression; section measurements and film selectors are cached. The scroll loop stops in hidden tabs. The film frame contracts toward the capability index; process stages share one continuous line.
+
+The entry sequence runs for 2.6s, with an accessible Skip button and a 3s safety timeout. `sessionStorage["kirat-entry-seen"]` prevents repeat playback during navigation. Use `/?intro=replay` to review it. Reduced motion uses a short fade.
 
 ## Responsive and mobile strategy
 
-- Desktop with a fine pointer and sufficient capability receives the 3D book.
-- Reduced-motion, coarse/touch, small-screen, data-saving and low-capability conditions select a DOM magazine.
-- Medium capable devices reduce rendering resolution and geometry.
+- Desktop and tablet WebGL2 devices above 767px receive real 3D, including touch-capable Windows screens. Pointer detection affects only parallax and cursor behavior.
+- Reduced-motion and mobile screens use the DOM magazine. Data-saving devices below 1100px also use it. Low memory/core counts select the medium 3D tier rather than disabling desktop 3D.
+- Medium devices reduce rendering resolution and geometry. Tablet portrait uses a stacked text/book composition and an adjusted camera; landscape keeps the spatial desktop layout.
 - The mobile layout has its own CSS 3D volume, horizontal project portal, stacked project worlds, tap accordions and fullscreen navigation dialog.
 - The mobile magazine uses actual images and links; it does not depend on WebGL or hover, and its movement remains linked to scroll.
-- Images use intrinsic dimensions; hero/about photographs have responsive WebP variants. Films keep their portrait or landscape presentation.
+- Images reserve their display geometry; supplied photographs retain optimized WebP variants. Films keep their portrait or landscape presentation.
 - Mobile has no custom cursor or magnetic movement. Reduced motion disables nonessential transitions and scroll-driven transforms.
 
 When changing layouts, inspect 320–430 px phones, 768–834 px tablets, landscape tablet/laptop, 1366/1440 px desktops and 1920/2560 px screens. Do not solve clipping by hiding important text or horizontal overflow globally.
@@ -87,9 +93,9 @@ All six projects currently have generated case-study URLs. QORTRA leads the coll
 
 ## Replacing photographs and videos
 
-Keep originals in `legacy/` and export appropriately sized WebP/AVIF assets for the public site. The existing real portrait variants use 480/960/1440 widths. Update the corresponding `srcset`, dimensions, alt text and crop in `src/components.js` and `src/styles.css` when replacing a portrait with a different aspect ratio.
+Keep originals in `legacy/` and export appropriately sized WebP/AVIF assets for the public site. The existing real portrait variants use 480/960/1440 widths. Update the selected size, dimensions, alt text and crop in `src/components.js` and `src/themes.css` when replacing a portrait with a different aspect ratio.
 
-Edit `motionWorks` in `src/data/projects.js` for films. Place MP4 files in `public/assets/video/` and genuine still-frame posters in `public/assets/images/`. The current originals are TripMitra's product film, Gloss Boss's automotive reel and the Manali travel film. Playback is user initiated, muted initially and uses native sound, seek and fullscreen controls. Videos use `preload="none"`; offscreen/hidden clips pause. Do not use unrelated promotional artwork as a film still.
+Edit `motionWorks` in `src/data/projects.js` for films. Place MP4 files in `public/assets/video/` and genuine still-frame posters in `public/assets/images/`. The current originals are TripMitra's product film, Gloss Boss's automotive reel and the Manali travel film. Playback is user initiated and muted initially, with explicit play/pause and sound controls. Native controls remain available without JavaScript and after playback failure. Film tabs support arrow keys/Home/End; inactive films are inert. Videos use `preload="none"`; offscreen/hidden clips pause. Do not use unrelated promotional artwork as a film still.
 
 ## Prices and currency estimates
 
@@ -123,6 +129,12 @@ Change email, WhatsApp digits/message, Formspree endpoint, socials and navigatio
 
 Anonymous interaction counters remain local under `kiratveerStudioAnalyticsV1`; they are not aggregate production analytics. Events include contact, project, case study, social, pricing/currency, video and confirmed form interactions. No form text or personal information is stored in those counters. Do Not Track and Global Privacy Control disable counter collection where exposed. No new external analytics provider or ad tracker is installed.
 
+## Theme behavior
+
+The renderer inlines the small `initializeTheme` function before stylesheets. It selects `localStorage["kirat-theme"]` (`day` or `night`) when valid, otherwise the system color scheme. This prevents a wrong-theme first paint. The main module wires the keyboard-accessible navigation button, keeps its label/pressed state and browser theme color synchronized, and notifies the existing book through `kirat:theme`. Without an explicit choice, system changes remain live. Storage failures leave the toggle functional for the current page. Theme selection is shared across pages/tabs; it does not affect pricing or visitor location.
+
+Palette transitions last 400ms and are restricted to selected color/background/border properties. No layout properties or global wildcard transitions are used. Reduced motion shortens color transitions and retains readable, composed static alternatives.
+
 ## SEO and accessibility
 
 Static generated HTML exposes important content without waiting for JavaScript. Pages have an individual title/description, one main heading, semantic content, social metadata, favicon, theme color and Person/CreativeWork structured data using verified information. The admin and thank-you pages are excluded from indexing.
@@ -135,7 +147,7 @@ The interface includes a skip link, focus indicators, meaningful alt text, label
 
 Use the commands in [README.md](README.md). `npm run dev` and `npm run build` regenerate HTML; generated files should never be the source of a content edit. Unit tests cover conversion and local-content compatibility. The source check and browser suite provide additional structural and interaction checks. No TypeScript compiler is needed for this vanilla JavaScript project.
 
-**Final validation:** production build, ESLint, source checks and the Git no-index whitespace check passed; all 28 unit/SEO regressions, 28 production portfolio browser checks and 10 dedicated project-flow browser groups passed with no page errors. All 18 viewport sizes were checked, and actual visual review covered the six required representative sizes and key scroll states. Real Formspree submissions remained blocked during testing.
+**Final validation:** see `QA_REPORT.md` and the machine-readable results in `test-results/`. This JavaScript project uses ESLint, syntax/source checks, unit/SEO regressions, portfolio browser checks, dedicated enquiry-flow checks and theme/WebGL lifecycle checks. Real Formspree submissions are intercepted during testing.
 
 Only `dist/` belongs on static hosting. The current Vite base is `/`, intended for a domain root. There has been no commit, push, deployment or deployment-credential change.
 

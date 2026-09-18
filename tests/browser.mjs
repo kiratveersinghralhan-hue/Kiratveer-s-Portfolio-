@@ -29,7 +29,9 @@ async function context(options = {}) {
 async function open(page, path = '/') {
   const response = await page.goto(path, { waitUntil: 'networkidle' });
   assert(response?.ok(), `${path} returned ${response?.status()}`);
-  await page.waitForTimeout(2000);
+  const skip = page.locator('.entry-sequence.play-entry button');
+  if (await skip.count() && await skip.isVisible()) await skip.click();
+  await page.waitForTimeout(350);
 }
 async function overflow(page) {
   const measurements = await page.evaluate(() => ({ viewport: innerWidth, width: document.documentElement.scrollWidth, body: document.body.scrollWidth }));
@@ -42,6 +44,27 @@ async function settledScroll(page, selector) {
 }
 try {
   browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL || 'chrome', headless: true });
+  await check('Fresh-session intro remains visible, completes cleanly and plays once', async () => {
+    const ctx = await context();
+    try {
+      const page = await ctx.newPage();
+      await page.goto('/?intro=replay', { waitUntil: 'domcontentloaded' });
+      await page.waitForSelector('.entry-sequence.play-entry', { state: 'visible' });
+      const started = Date.now();
+      await page.waitForTimeout(1200);
+      assert(await page.locator('.entry-sequence').isVisible(), 'Intro disappears before its identity sequence resolves');
+      await page.locator('.entry-sequence').waitFor({ state: 'detached', timeout: 2200 });
+      const elapsed = Date.now() - started;
+      assert(elapsed >= 2200 && elapsed <= 2900, `Intro duration ${elapsed}ms is outside the 2.3–2.8 second target tolerance`);
+      await page.evaluate(() => sessionStorage.removeItem('kirat-entry-seen'));
+      await page.reload({ waitUntil: 'domcontentloaded' });
+      assert(await page.locator('.entry-sequence.play-entry').isVisible());
+      await page.locator('.entry-sequence button').click();
+      await page.goto('/', { waitUntil: 'networkidle' });
+      assert.equal(await page.locator('.entry-sequence').count(), 0);
+      return { elapsed, replayQuery: '?intro=replay', sessionKey: 'kirat-entry-seen' };
+    } finally { await ctx.close(); }
+  });
   for (const [width, height] of viewports) {
     const size = `${width}x${height}`;
     await check(`Responsive ${size}`, async () => {
@@ -62,6 +85,11 @@ try {
           }
         }
         if (width < 768) assert.equal(await page.locator('#book-scene').getAttribute('data-book-mode'), 'magazine');
+        if (width >= 1024) {
+          await page.waitForFunction(() => document.querySelector('#book-scene')?.dataset.bookMode === '3d');
+          assert(await page.locator('#book-scene canvas').isVisible());
+          assert.equal(await page.locator('#book-scene').getAttribute('data-book-diagnostic'), 'active');
+        }
         return { width, height, bookMode: await page.locator('#book-scene').getAttribute('data-book-mode') };
       } finally { await ctx.close(); }
     });
@@ -155,6 +183,9 @@ try {
       const first = page.locator('.film').first();
       await first.locator('.film-play').click();
       await page.waitForFunction(() => { const video = document.querySelector('.film video'); return !video.paused && video.currentTime > 0; }, null, { timeout: 20000 });
+      await first.locator('.film-play').click();
+      assert(await first.locator('video').evaluate(video => video.paused));
+      await first.locator('.film-play').click();
       await settledScroll(page, '#pricing');
       assert(await first.locator('video').evaluate(video => video.paused));
     } finally { await ctx.close(); }
@@ -206,6 +237,15 @@ try {
       assert.equal(await page.locator('.book-stage canvas').count(), 0);
       assert.equal(await page.locator('.entry-sequence').isVisible(), false);
       await page.screenshot({ path: resolve(output, 'reduced-motion-book.png') });
+    } finally { await ctx.close(); }
+  });
+  await check('Touch-capable Windows-sized desktop still receives the real 3D book', async () => {
+    const ctx = await context({ viewport: { width: 1366, height: 768 }, screen: { width: 1366, height: 768 }, hasTouch: true });
+    try {
+      const page = await ctx.newPage(); await open(page);
+      await page.waitForFunction(() => document.querySelector('#book-scene')?.dataset.bookMode === '3d');
+      assert(await page.locator('#book-scene canvas').isVisible());
+      assert.equal(await page.locator('#book-scene').getAttribute('data-book-diagnostic'), 'active');
     } finally { await ctx.close(); }
   });
   await check('WebGL unavailable and image failure preserve the magazine and project story', async () => {

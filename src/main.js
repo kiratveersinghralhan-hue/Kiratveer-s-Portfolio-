@@ -3,10 +3,12 @@ import { loadLocalContent } from './modules/local-content.js';
 import { track, initAnalytics } from './modules/analytics.js';
 import { initPricing } from './modules/pricing.js';
 import { initNavigation, initFilms, initForm } from './modules/interactions.js';
+import { initTheme } from './modules/theme.js';
 import { initMotion } from './modules/motion.js';
 import { escapeHtml, safeUrl } from './modules/safety.js';
 
 document.documentElement.classList.add('js');
+const disposeTheme=initTheme();
 const content=loadLocalContent(projects);
 if(content.isCustomized){
   const {projectWorld,projectArchive}=await import('./components.js');
@@ -30,17 +32,24 @@ document.addEventListener('click',event=>{
 document.querySelectorAll('.price-item').forEach(el=>el.addEventListener('toggle',()=>{if(el.open)track('pricing:opened');}));
 initNavigation();initFilms({track});initForm({track});initPricing({track});
 if(document.querySelector('.project-flow,.flow-confirmation')){const {initProjectFlow}=await import('./modules/project-flow.js');initProjectFlow({track});}
+const entry=document.querySelector('.entry-sequence');
+try{
+  const replay=new URLSearchParams(location.search).get('intro')==='replay';
+  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(entry&&(replay||!sessionStorage.getItem('kirat-entry-seen'))&&!location.hash){
+    entry.classList.add('play-entry');
+    if(reduced)entry.classList.add('reduced-entry');
+    sessionStorage.setItem('kirat-entry-seen','1');
+    let fallbackTimer;
+    const removeEntry=()=>{clearTimeout(fallbackTimer);entry.remove()};
+    entry.addEventListener('animationend',event=>{if(event.target===entry)removeEntry()});
+    entry.querySelector('button')?.addEventListener('click',removeEntry,{once:true});
+    fallbackTimer=setTimeout(removeEntry,reduced?650:3000);
+  }else entry?.remove();
+}catch{entry?.remove();}
 const disposeMotion=initMotion();
 let disposeBook=()=>{};
 const root=document.querySelector('#book-scene');
 if(root&&!root.hidden){const {initBook}=await import('./modules/book.js');disposeBook=await initBook({root,projects:content.projects.filter(p=>p.featured)});}
-const entry=document.querySelector('.entry-sequence');
-try{
-  if(entry&&!sessionStorage.getItem('kirat-entry-seen')&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&!location.hash){
-    entry.classList.add('play-entry');sessionStorage.setItem('kirat-entry-seen','1');
-    const removeEntry=()=>entry.remove();entry.querySelector('button')?.addEventListener('click',removeEntry,{once:true});
-    setTimeout(removeEntry,1550);
-  }
-}catch{entry?.remove();}
 document.querySelectorAll('[data-year]').forEach(el=>el.textContent=String(new Date().getFullYear()));
-addEventListener('pagehide',event=>{if(!event.persisted){disposeMotion();disposeBook();}});
+addEventListener('pagehide',event=>{if(!event.persisted){disposeMotion();disposeBook();disposeTheme();}});

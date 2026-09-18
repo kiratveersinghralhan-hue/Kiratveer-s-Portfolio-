@@ -6,7 +6,8 @@ export async function initBook({ root, projects = [] } = {}) {
   const fallback = root.querySelector('.book-fallback');
   const status = root.querySelector('.book-status');
   const progressFill = root.querySelector('.book-progress');
-  const edition = projects.filter((project) => project?.title).slice(0, 6);
+  const selected = projects.filter((project) => project?.title).slice(0, 6);
+  const edition = selected.length ? [...selected, selected[0]] : []; // Return to the flagship for the portal.
   if (!stage || !edition.length) return () => {};
 
   const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -27,15 +28,15 @@ export async function initBook({ root, projects = [] } = {}) {
   const smooth = (value) => { const t = clamp(value); return t * t * (3 - 2 * t); };
   const mix = (start, end, amount) => start + (end - start) * amount;
   const tier = () => {
-    if (motionQuery.matches || !pointerQuery.matches || window.innerWidth <= 767 ||
-      navigator.connection?.saveData || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
-      (navigator.deviceMemory && navigator.deviceMemory <= 2)) return 'magazine';
+    if (motionQuery.matches || window.innerWidth <= 767) return 'magazine';
+    if (navigator.connection?.saveData && window.innerWidth < 1100) return 'magazine';
     return window.innerWidth < 1100 || navigator.deviceMemory <= 4 || navigator.hardwareConcurrency <= 4 ? 'medium' : 'high';
   };
 
-  function showMagazine() {
+  function showMagazine(reason = 'fallback') {
     root.classList.remove('book-ready');
     root.dataset.bookMode = 'magazine';
+    root.dataset.bookDiagnostic = reason;
     if (fallback) fallback.hidden = false;
     if (status) status.textContent = 'THE INDEPENDENT EDITION / SELECTED WORK';
     lastStatus = '';
@@ -62,7 +63,7 @@ export async function initBook({ root, projects = [] } = {}) {
   function onContextLost(event) {
     event.preventDefault();
     failed = true;
-    showMagazine();
+    showMagazine('context-lost');
     releaseGraphics();
   }
 
@@ -72,8 +73,9 @@ export async function initBook({ root, projects = [] } = {}) {
   }
 
   function onEnvironmentChange() {
+    if (!pointerQuery.matches) { pointerX = 0; pointerY = 0; }
     if (tier() === 'magazine') {
-      showMagazine();
+      showMagazine('reduced-or-mobile');
       releaseGraphics();
     } else {
       if (near && !graphics && !pending) void start();
@@ -103,10 +105,11 @@ export async function initBook({ root, projects = [] } = {}) {
       }
 
       const p = getProgress();
-      const opening = smooth((p - 0.12) / 0.20);
-      const entered = smooth(p / 0.11);
-      const story = clamp((p - 0.34) / 0.50);
-      const portal = smooth((p - 0.84) / 0.14);
+      const entered = smooth(p / 0.12);
+      const rotated = smooth((p - 0.12) / 0.16);
+      const opening = p < .45 ? smooth((p - .28) / .17) * .48 : .48 + smooth((p - .45) / .23) * .52;
+      const story = clamp((p - 0.68) / 0.20);
+      const portal = smooth((p - 0.88) / 0.12);
       const spreadProgress = story * Math.max(0, edition.length - 1);
       const spread = Math.min(edition.length - 1, Math.floor(spreadProgress));
       const local = spreadProgress - spread;
@@ -115,8 +118,8 @@ export async function initBook({ root, projects = [] } = {}) {
       const turning = next !== spread && turn > 0 && turn < 1;
 
       current.book.position.set(mix(-current.pageWidth / 2, mix(0, -0.9, portal), opening), mix(-0.38, -0.10, entered), 0);
-      current.book.rotation.set(mix(-0.16, -0.28, opening) + pointerY * 0.035, mix(-0.55, 0.06, opening) + pointerX * 0.05, mix(-0.04, -0.025, opening));
-      current.book.scale.setScalar(mix(0.86, mix(1, 1.16, portal), entered));
+      current.book.rotation.set(mix(-0.12, -0.24, rotated) + pointerY * 0.035, mix(-0.62, -0.42, rotated) + mix(0, 0.5, opening) + pointerX * 0.05, mix(-0.02, -0.045, rotated));
+      current.book.scale.setScalar(mix(0.94, mix(1.08, 1.22, portal), entered));
       current.coverPivot.rotation.y = -opening * Math.PI;
       current.coverBoard.castShadow = opening < 0.99;
       current.leftPage.visible = opening > 0.95;
@@ -125,9 +128,12 @@ export async function initBook({ root, projects = [] } = {}) {
       const visibleHeight = Math.max(6.7, (current.pageWidth * 2 + 1.5) / current.camera.aspect);
       const cameraDistance = visibleHeight / (2 * Math.tan((current.camera.fov * Math.PI) / 360));
       // Give lifted paper room in perspective, clear of the navigation and folio.
-      const motionClearance = 1 + Math.sin(opening * Math.PI) * 0.14 + (turning ? Math.sin(turn * Math.PI) * 0.16 : 0);
-      current.camera.position.set(mix(0.35, mix(0, 0.6, portal), opening) + pointerX * 0.12, 0.24 - pointerY * 0.08, cameraDistance * mix(1.2, mix(1, .78, portal), entered) * motionClearance);
-      current.camera.lookAt(mix(0, .45, portal), 0, 0);
+      const motionClearance = 1 + Math.sin(opening * Math.PI) * 0.35 + (turning ? Math.sin(turn * Math.PI) * 0.28 : 0);
+      const portraitTablet = innerWidth <= 1100 && innerHeight > innerWidth;
+      const heroOffset = portraitTablet ? 0 : current.camera.aspect < 1.25 ? -1.25 : -1.9;
+      const heroLift = portraitTablet ? mix(2.1, 0, opening) : 0;
+      current.camera.position.set(mix(heroOffset, mix(0, 0.6, portal), opening) + pointerX * 0.12, 0.24 + heroLift - pointerY * 0.08, cameraDistance * mix(1.08, mix(.92, .76, portal), entered) * motionClearance);
+      current.camera.lookAt(mix(heroOffset, mix(0, .45, portal), opening), heroLift, 0);
 
       const rightIndex = turn > 0 ? next : spread;
       const leftIndex = turn >= 1 ? next : spread;
@@ -143,7 +149,7 @@ export async function initBook({ root, projects = [] } = {}) {
 
       const labelIndex = turn > 0.72 ? next : spread;
       const label = opening < 0.98 ? 'THE INDEPENDENT EDITION / SCROLL TO OPEN' :
-        `${String(labelIndex + 1).padStart(2, '0')} / ${String(edition.length).padStart(2, '0')} — ${edition[labelIndex].title.toUpperCase()}`;
+        `${String(labelIndex % selected.length + 1).padStart(2, '0')} / ${String(selected.length).padStart(2, '0')} — ${edition[labelIndex].title.toUpperCase()}`;
       if (status && label !== lastStatus) { status.textContent = label; lastStatus = label; }
       if (progressFill) {
         progressFill.style.transformOrigin = 'left center';
@@ -152,12 +158,15 @@ export async function initBook({ root, projects = [] } = {}) {
       root.style.setProperty('--book-progress', p.toFixed(4));
       root.style.setProperty('--book-open', opening.toFixed(4));
       root.style.setProperty('--book-portal', portal.toFixed(4));
-      root.dataset.bookChapter = p < .12 ? 'object' : p < .34 ? 'opening' : p < .84 ? 'edition' : 'portal';
+      root.dataset.bookChapter = p < .12 ? 'approach' : p < .28 ? 'rotation' : p < .68 ? 'opening' : p < .84 ? 'edition' : 'portal';
       current.renderer.shadowMap.needsUpdate = true;
+      const themeChanging = current.updateTheme?.();
       current.renderer.render(current.scene, current.camera);
+      if (themeChanging) requestFrame();
       if (!root.classList.contains('book-ready')) {
         root.classList.add('book-ready');
         root.dataset.bookMode = '3d';
+        root.dataset.bookDiagnostic = 'active';
         if (fallback) fallback.hidden = true;
       }
     } catch {
@@ -170,6 +179,7 @@ export async function initBook({ root, projects = [] } = {}) {
   async function start() {
     if (disposed || failed || pending || graphics || tier() === 'magazine') return;
     pending = true;
+    root.dataset.bookDiagnostic = 'initializing';
     const token = generation;
     let localGraphics;
     try {
@@ -188,7 +198,7 @@ export async function initBook({ root, projects = [] } = {}) {
       canvas.setAttribute('aria-hidden', 'true');
       canvas.style.cssText = 'display:block;width:100%;height:100%;pointer-events:none;';
       const context = canvas.getContext('webgl2', { alpha: true, antialias: true, powerPreference: tier() === 'medium' ? 'low-power' : 'high-performance' });
-      if (!context) { failed = true; return; }
+      if (!context) { failed = true; showMagazine('webgl2-unavailable'); return; }
 
       const geometries = new Set();
       const materials = new Set();
@@ -201,7 +211,7 @@ export async function initBook({ root, projects = [] } = {}) {
       const renderer = new WebGLRenderer({ canvas, context, antialias: true, alpha: true });
       renderer.outputColorSpace = SRGBColorSpace;
       renderer.toneMapping = ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.08;
+      renderer.toneMappingExposure = 1.16;
       renderer.setClearColor(0x08090b, 0);
       renderer.shadowMap.enabled = tier() === 'high';
       renderer.shadowMap.type = PCFSoftShadowMap;
@@ -216,8 +226,9 @@ export async function initBook({ root, projects = [] } = {}) {
       localGraphics = { canvas, renderer, scene, camera, book, pageWidth, geometries, materials, textures, images, shadows, width: 0, height: 0 };
       graphics = localGraphics;
 
-      scene.add(new HemisphereLight(0xf6f1e7, 0x424759, 1.2));
-      const keyLight = new DirectionalLight(0xfff4e2, 1.8);
+      const ambient = new HemisphereLight(0xf6f1e7, 0x424759, 1.42);
+      scene.add(ambient);
+      const keyLight = new DirectionalLight(0xfff4e2, 2.15);
       keyLight.position.set(-3.5, 5, 8);
       keyLight.castShadow = true;
       keyLight.shadow.mapSize.set(1024, 1024);
@@ -231,7 +242,7 @@ export async function initBook({ root, projects = [] } = {}) {
       keyLight.shadow.normalBias = 0.025;
       shadows.add(keyLight.shadow);
       scene.add(keyLight);
-      const rim = new DirectionalLight(0x96a9ff, 0.7);
+      const rim = new DirectionalLight(0x96a9ff, 0.92);
       rim.position.set(5, -1, 4);
       scene.add(rim);
 
@@ -354,7 +365,7 @@ export async function initBook({ root, projects = [] } = {}) {
       // Keep the print subdued so the raised metallic KR remains the focal mark.
       coverContext.fillStyle = '#303236';
       coverContext.font = `600 ${cw * 0.27}px "Manrope", Arial, sans-serif`;
-      coverContext.fillText('KR', cw * 0.09, ch * 0.39);
+      // The raised monogram is the sole mark on this part of the cover.
       coverContext.strokeStyle = '#314fbb';
       coverContext.lineWidth = cw * 0.004;
       coverContext.beginPath();
@@ -373,7 +384,7 @@ export async function initBook({ root, projects = [] } = {}) {
       const relief = new Group();
       relief.position.set(pageWidth * 0.34, 0.55, 0.082);
       coverPivot.add(relief);
-      const metal = new MeshStandardMaterial({ color: 0xc8b98e, roughness: 0.24, metalness: 0.82 });
+      const metal = new MeshStandardMaterial({ color: 0xd3c2a0, emissive: 0x443821, emissiveIntensity: .22, roughness: 0.24, metalness: 0.72 });
       const reliefBar = (w, h, x, y, rotation = 0) => { const bar = mesh(new BoxGeometry(w, h, 0.032), metal, relief); bar.position.set(x, y, 0); bar.rotation.z = rotation; bar.castShadow = true; return bar; };
       reliefBar(.055, .62, 0, 0);
       reliefBar(.055, .39, .13, .135, -.66);
@@ -382,7 +393,48 @@ export async function initBook({ root, projects = [] } = {}) {
       reliefBar(.29, .055, .56, .275);
       reliefBar(.29, .055, .56, .03);
       reliefBar(.055, .28, .7, .15);
-      reliefBar(.055, .36, .59, -.14, -.62);
+      reliefBar(.055, .36, .59, -.14, .62);
+
+      const nightMap = outerCover.material.map;
+      const dayCanvas = newPageCanvas();
+      const dayContext = dayCanvas.getContext('2d');
+      dayContext.drawImage(coverCanvas, 0, 0);
+      dayContext.globalCompositeOperation = 'screen';
+      dayContext.fillStyle = '#34363a';
+      dayContext.fillRect(0, 0, cw, ch);
+      const dayMap = canvasTexture(dayCanvas);
+      let themeMix = document.documentElement.dataset.theme === 'day' ? 1 : 0;
+      let themeTarget = themeMix;
+      let themeStarted = 0;
+      let themeFrom = themeMix;
+      const graphite = coverBoard.material.color.clone().set('#191a1e');
+      const stone = graphite.clone().set('#505258');
+      const coolRim = rim.color.clone();
+      const daylight = rim.color.clone().set('#e4edff');
+      localGraphics.setTheme = () => {
+        themeFrom = themeMix;
+        themeTarget = document.documentElement.dataset.theme === 'day' ? 1 : 0;
+        themeStarted = performance.now();
+        outerCover.material.map = themeTarget ? dayMap : nightMap;
+        requestFrame();
+      };
+      localGraphics.updateTheme = () => {
+        const progress = smooth((performance.now() - themeStarted) / 420);
+        themeMix = mix(themeFrom, themeTarget, progress);
+        coverBoard.material.color.lerpColors(graphite, stone, themeMix);
+        backCover.material.color.copy(coverBoard.material.color);
+        ambient.intensity = mix(1.25, 1.65, themeMix);
+        keyLight.intensity = mix(2.0, 2.6, themeMix);
+        rim.intensity = mix(.95, .65, themeMix);
+        rim.color.lerpColors(coolRim, daylight, themeMix);
+        metal.roughness = mix(.24, .36, themeMix);
+        metal.metalness = mix(.72, .55, themeMix);
+        floor.material.opacity = mix(.28, .15, themeMix);
+        contactShadow.material.opacity = mix(1, .5, themeMix);
+        renderer.toneMappingExposure = mix(1.12, 1.02, themeMix);
+        return progress < 1;
+      };
+      localGraphics.setTheme();
 
       const insideCanvas = newPageCanvas();
       const insideContext = insideCanvas.getContext('2d');
@@ -397,7 +449,7 @@ export async function initBook({ root, projects = [] } = {}) {
       insideCover.position.set(pageWidth / 2, 0, -0.038);
       insideCover.rotation.y = Math.PI;
 
-      const pageTextures = edition.map((project, index) => {
+      const pageTextures = selected.map((project, index) => {
         const leftCanvas = newPageCanvas();
         const rightCanvas = newPageCanvas();
         const left = canvasTexture(leftCanvas);
@@ -412,7 +464,7 @@ export async function initBook({ root, projects = [] } = {}) {
           label(a, 'KIRAT / SELECTED WORK', w * 0.105, h * 0.071, w * 0.018);
           a.fillStyle = '#2546af';
           a.font = `400 ${w * 0.24}px "Instrument Serif", Georgia, serif`;
-          a.fillText(String(index + 1).padStart(2, '0'), w * 0.1, h * 0.276);
+          a.fillText(String(index % selected.length + 1).padStart(2, '0'), w * 0.1, h * 0.276);
           a.strokeStyle = '#b7b3a8';
           a.beginPath(); a.moveTo(w * 0.105, h * 0.322); a.lineTo(w * 0.88, h * 0.322); a.stroke();
           a.fillStyle = '#191a1c';
@@ -428,7 +480,7 @@ export async function initBook({ root, projects = [] } = {}) {
           const b = rightCanvas.getContext('2d');
           b.fillStyle = '#f4f0e7';
           b.fillRect(0, 0, w, h);
-          label(b, `${String(index + 1).padStart(2, '0')} / ${project.title.toUpperCase()}`, w * 0.075, h * 0.071, w * 0.018);
+          label(b, `${String(index % selected.length + 1).padStart(2, '0')} / ${project.title.toUpperCase()}`, w * 0.075, h * 0.071, w * 0.018);
           b.fillStyle = index === 0 ? '#111820' : '#e2dfd7';
           b.fillRect(w * 0.065, h * 0.132, w * 0.87, h * 0.69);
           if (source) drawContainedImage(b, source, w * 0.065, h * 0.132, w * 0.87, h * 0.69);
@@ -441,7 +493,7 @@ export async function initBook({ root, projects = [] } = {}) {
           b.font = `400 ${w * 0.018}px "Manrope", Arial, sans-serif`;
           b.fillStyle = '#55574f';
           wrappedText(b, project.imageNote || 'Selected project artwork.', w * 0.075, h * 0.867, w * 0.80, w * 0.028, 3);
-          label(b, `K / ${String(index + 1).padStart(2, '0')}`, w * 0.805, h * 0.946, w * 0.017, '#66685f');
+          label(b, `K / ${String(index % selected.length + 1).padStart(2, '0')}`, w * 0.805, h * 0.946, w * 0.017, '#66685f');
           left.needsUpdate = true;
           right.needsUpdate = true;
           requestFrame();
@@ -461,6 +513,8 @@ export async function initBook({ root, projects = [] } = {}) {
         }
         return { left, right };
       });
+
+      pageTextures.push(pageTextures[0]);
 
       const rightPage = mesh(new PlaneGeometry(pageWidth, pageHeight), new MeshStandardMaterial({ map: pageTextures[0].right, roughness: 0.92 }));
       rightPage.position.set(pageWidth / 2, 0, 0.108);
@@ -524,7 +578,7 @@ export async function initBook({ root, projects = [] } = {}) {
       requestFrame();
     } catch {
       failed = true;
-      showMagazine();
+      showMagazine('initialization-failed');
       if (graphics === localGraphics) releaseGraphics();
     } finally {
       pending = false;
@@ -532,7 +586,7 @@ export async function initBook({ root, projects = [] } = {}) {
     }
   }
 
-  showMagazine();
+  showMagazine(tier() === 'magazine' ? 'reduced-or-mobile' : 'awaiting-viewport');
   const lazyObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver((entries) => {
     near = entries[0].isIntersecting;
     if (near) void start();
@@ -544,13 +598,18 @@ export async function initBook({ root, projects = [] } = {}) {
   }) : null;
   lazyObserver?.observe(root);
   visibilityObserver?.observe(root);
-  if (!lazyObserver) { near = true; inView = true; void start(); }
+  const initialBounds = root.getBoundingClientRect();
+  near = initialBounds.bottom >= -600 && initialBounds.top <= window.innerHeight + 600;
+  inView = initialBounds.bottom > 0 && initialBounds.top < window.innerHeight;
+  if (!lazyObserver || near) void start();
 
   const resizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(requestFrame) : null;
   resizeObserver?.observe(stage);
   window.addEventListener('scroll', requestFrame, { passive: true });
-  const onPointerMove = (event) => { pointerX = event.clientX / Math.max(1, innerWidth) - .5; pointerY = event.clientY / Math.max(1, innerHeight) - .5; requestFrame(); };
-  if (pointerQuery.matches) window.addEventListener('pointermove', onPointerMove, { passive: true });
+  const onPointerMove = (event) => { if (!pointerQuery.matches || event.pointerType === 'touch' || !inView) return; pointerX = event.clientX / Math.max(1, innerWidth) - .5; pointerY = event.clientY / Math.max(1, innerHeight) - .5; requestFrame(); };
+  window.addEventListener('pointermove', onPointerMove, { passive: true });
+  const onTheme = () => graphics?.setTheme();
+  window.addEventListener('kirat:theme', onTheme);
   window.addEventListener('resize', onEnvironmentChange, { passive: true });
   window.addEventListener('orientationchange', onEnvironmentChange, { passive: true });
   document.addEventListener('visibilitychange', requestFrame);
@@ -562,6 +621,7 @@ export async function initBook({ root, projects = [] } = {}) {
     lazyObserver?.disconnect();
     visibilityObserver?.disconnect();
     resizeObserver?.disconnect();
+    window.removeEventListener('kirat:theme', onTheme);
     window.removeEventListener('scroll', requestFrame);
     window.removeEventListener('pointermove', onPointerMove);
     window.removeEventListener('resize', onEnvironmentChange);
