@@ -84,8 +84,12 @@ try {
             await page.screenshot({ path: resolve(output, `${selector.slice(1)}-${size}.png`) });
           }
         }
-        if (width < 768) assert.equal(await page.locator('#book-scene').getAttribute('data-book-mode'), 'magazine');
-        if (width >= 1024) {
+        if ([390, 430].includes(width)) {
+          await page.waitForFunction(() => document.querySelector('#book-scene')?.dataset.bookMode === '3d');
+          assert(await page.locator('#book-scene canvas').isVisible());
+          assert.equal(await page.locator('#book-scene').getAttribute('data-book-diagnostic'), 'active');
+          assert.equal(await page.locator('#book-scene').getAttribute('data-book-tier'), 'mobile');
+        } else if (width >= 1024) {
           await page.waitForFunction(() => document.querySelector('#book-scene')?.dataset.bookMode === '3d');
           assert(await page.locator('#book-scene canvas').isVisible());
           assert.equal(await page.locator('#book-scene').getAttribute('data-book-diagnostic'), 'active');
@@ -94,6 +98,59 @@ try {
       } finally { await ctx.close(); }
     });
   }
+  await check('Capable 390px and 430px mobile devices receive scroll-directed, on-demand 3D', async () => {
+    const mobileResults = [];
+    for (const [width, height] of [[390, 844], [430, 932]]) {
+      const ctx = await context({ viewport: { width, height }, isMobile: true, hasTouch: true });
+      await ctx.addInitScript(() => {
+        window.mobileBookDraws = 0;
+        for (const Constructor of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
+          if (!Constructor) continue;
+          for (const name of ['drawElements', 'drawArrays']) {
+            const original = Constructor.prototype[name];
+            if (!original || original.__mobileQaWrapped) continue;
+            const wrapped = function(...args) { window.mobileBookDraws += 1; return original.apply(this, args); };
+            wrapped.__mobileQaWrapped = true;
+            Constructor.prototype[name] = wrapped;
+          }
+        }
+      });
+      try {
+        const page = await ctx.newPage(); await open(page);
+        await page.waitForFunction(() => document.querySelector('#book-scene')?.dataset.bookMode === '3d');
+        const book = page.locator('#book-scene');
+        assert.equal(await book.getAttribute('data-book-tier'), 'mobile');
+        assert.equal(await book.getAttribute('data-book-diagnostic'), 'active');
+        assert(await book.locator('canvas').isVisible());
+        await page.evaluate(() => {
+          const element = document.querySelector('#book-scene');
+          scrollTo({ top: element.offsetTop + .58 * (element.offsetHeight - innerHeight), behavior: 'instant' });
+        });
+        await page.waitForTimeout(400);
+        const state = await book.evaluate(element => ({
+          progress: Number(getComputedStyle(element).getPropertyValue('--book-progress')),
+          open: Number(getComputedStyle(element).getPropertyValue('--book-open')),
+          chapter: element.dataset.bookChapter,
+          overflow: document.documentElement.scrollWidth - innerWidth,
+        }));
+        assert(Math.abs(state.progress - .58) < .04, `Unexpected mobile book progress: ${state.progress}`);
+        assert(state.open > .85, `Mobile cover did not visibly open: ${state.open}`);
+        assert(state.overflow <= 1, `Mobile 3D caused overflow: ${state.overflow}`);
+        assert.equal(await page.locator('.cursor-label').evaluate(node => getComputedStyle(node).display), 'none');
+        await page.screenshot({ path: resolve(output, `mobile-book-open-${width}x${height}.png`) });
+        await page.waitForTimeout(350);
+        const idleDraws = await page.evaluate(() => window.mobileBookDraws);
+        await page.waitForTimeout(450);
+        assert.equal(await page.evaluate(() => window.mobileBookDraws), idleDraws, 'Mobile book renders continuously while idle');
+        await settledScroll(page, '#pricing');
+        const offscreenDraws = await page.evaluate(() => window.mobileBookDraws);
+        await page.waitForTimeout(450);
+        assert.equal(await page.evaluate(() => window.mobileBookDraws), offscreenDraws, 'Mobile book renders while offscreen');
+        mobileResults.push({ width, height, ...state, idleDraws });
+      } finally { await ctx.close(); }
+    }
+    return mobileResults;
+  });
   await check('Mobile menu, focus, Escape, navigation and orientation change', async () => {
     const ctx = await context({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
     try {
@@ -238,6 +295,22 @@ try {
       assert.equal(await page.locator('.entry-sequence').isVisible(), false);
       await page.screenshot({ path: resolve(output, 'reduced-motion-book.png') });
     } finally { await ctx.close(); }
+  });
+  await check('Save-data and genuinely low-resource mobile devices retain the magazine fallback', async () => {
+    for (const constraint of ['save-data', 'low-resource']) {
+      const ctx = await context({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+      await ctx.addInitScript(reason => {
+        if (reason === 'save-data') Object.defineProperty(navigator, 'connection', { configurable: true, value: { saveData: true } });
+        else Object.defineProperty(navigator, 'deviceMemory', { configurable: true, value: 2 });
+      }, constraint);
+      try {
+        const page = await ctx.newPage(); await open(page);
+        assert.equal(await page.locator('#book-scene').getAttribute('data-book-mode'), 'magazine');
+        assert.equal(await page.locator('#book-scene').getAttribute('data-book-diagnostic'), constraint);
+        assert(await page.locator('.book-fallback').isVisible());
+        assert.equal(await page.locator('.book-stage canvas').count(), 0);
+      } finally { await ctx.close(); }
+    }
   });
   await check('Touch-capable Windows-sized desktop still receives the real 3D book', async () => {
     const ctx = await context({ viewport: { width: 1366, height: 768 }, screen: { width: 1366, height: 768 }, hasTouch: true });

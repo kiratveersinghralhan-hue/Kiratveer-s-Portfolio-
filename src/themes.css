@@ -303,6 +303,116 @@ body:has(.project-flow), body:has(.flow-confirmation) { background: var(--bg-pri
   .world-links { margin-top: 18px; }
   .practice-intro, .capability-index { top: 20%; }
 }
+/* The large-screen edition uses space and object scale instead of unbounded type. */
+@media (min-width:1101px) {
+  .hero-world, .hero-world.book-ready { height: 370svh; }
+  .hero-copy { top: 20%; width: min(38%, 590px); }
+  .hero-copy h1 { font-size: clamp(58px, 4.8vw, 92px); line-height: .94; }
+  .hero-support { max-width: 370px; }
+  .hero-world .book-stage, .hero-world.book-ready .book-stage { inset: 65px 1.5vw 34px 34%; }
+  .fallback-book { right: 10%; width: min(34vw, 520px); }
+
+  .portal-copy { min-height: 50svh; }
+  .portal-copy h2 { font-size: clamp(50px, 5.2vw, 88px); max-width: 1050px; }
+
+  .project-world { height: 220svh; }
+  .world-sticky {
+    isolation: isolate;
+    transform: scale(calc(.965 + var(--scene-enter, 1) * .035 - var(--world-exit, 0) * .025));
+    transform-origin: center bottom;
+    clip-path: inset(calc((1 - var(--scene-enter, 1)) * 9%) calc((1 - var(--scene-enter, 1)) * 5%) 0);
+  }
+  .world-sticky::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: min(58vw, 980px);
+    aspect-ratio: 1;
+    right: -16%;
+    top: 2%;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(var(--world-tint), .2), transparent 66%);
+    opacity: calc(.32 + var(--world-middle, 0) * .42);
+    transform: translate3d(calc(var(--world-progress, 0) * -8vw), calc(var(--world-progress, 0) * 5vh), 0) scale(calc(.82 + var(--world-middle, 0) * .22));
+  }
+  .world-backdrop { display: none; }
+  .world-head, .world-folio { z-index: 10; }
+  .world-copy {
+    z-index: 9;
+    top: 25%;
+    width: min(34%, 480px);
+    max-width: 480px;
+    opacity: 1;
+    transform: translate3d(0, calc(var(--world-progress, 0) * -2vh), 0);
+  }
+  .world-copy h2 { font-size: clamp(58px, 4.4vw, 82px); line-height: .98; }
+  #project-harvesterparts .world-copy h2 { font-size: clamp(52px, 4vw, 74px); max-width: 7.5ch; }
+  .world-stage { z-index: 5; inset: 16% 4.5% 10% 44%; perspective: 1750px; }
+  .primary-media {
+    transform: translate3d(
+      calc(3vw - var(--world-progress, 0) * 7vw),
+      calc(4vh - var(--world-progress, 0) * 8vh),
+      calc(-300px + var(--world-progress, 0) * 560px - var(--world-exit, 0) * 420px)
+    ) rotateY(calc(-14deg + var(--world-progress, 0) * 17deg - var(--world-exit, 0) * 4deg))
+      rotateX(calc(4deg - var(--world-progress, 0) * 4deg))
+      scale(calc(.78 + var(--world-progress, 0) * .27 - var(--world-exit, 0) * .08));
+    box-shadow: 0 34px 90px rgba(0, 0, 0, calc(.34 + var(--world-middle, 0) * .38));
+  }
+  .secondary-media {
+    transform: translate3d(
+      calc(10vw - var(--world-progress, 0) * 7vw),
+      calc(9vh - var(--world-progress, 0) * 18vh),
+      calc(-460px + var(--world-progress, 0) * 790px - var(--world-exit, 0) * 540px)
+    ) rotateY(calc(20deg - var(--world-progress, 0) * 16deg + var(--world-exit, 0) * 3deg))
+      scale(calc(.82 + var(--world-progress, 0) * .17 - var(--world-exit, 0) * .08));
+  }
+  .qortra-system {
+    transform: translateZ(calc(-220px + var(--world-middle, 0) * 280px - var(--world-exit, 0) * 180px))
+      rotateX(calc(11deg - var(--world-progress, 0) * 8deg + var(--world-exit, 0) * 4deg))
+      rotateY(calc(-15deg + var(--world-progress, 0) * 15deg))
+      scale(calc(.88 + var(--world-middle, 0) * .12));
+  }
+  .concept-plane {
+    transform: translate3d(
+      calc(var(--dx) * var(--world-spread, 0)),
+      calc(var(--dy) * var(--world-spread, 0)),
+      calc(-180px + var(--dz) * var(--world-spread, 0) - var(--world-exit, 0) * 180px)
+    ) rotateY(calc(var(--ry) * var(--world-spread, 0)))
+      scale(calc(.88 + var(--world-spread, 0) * .12));
+  }
+  .plane-1 { left: 15%; top: 14%; --dx: -3vw; --dy: -4vh; --dz: 200px; }
+  .plane-2 { right: 12%; top: 20%; --dx: 4vw; --dy: -2vh; --dz: 120px; }
+  .plane-3 { left: 17%; bottom: 12%; --dx: -4vw; --dy: 4vh; --dz: 250px; }
+  .plane-4 { right: 8%; bottom: 7%; --dx: 5vw; --dy: 4vh; --dz: 170px; }
+  .qortra-core {
+    left: 41%;
+    transform: translateZ(calc(-60px + var(--world-middle, 0) * 360px - var(--world-exit, 0) * 180px)) scale(calc(.92 + var(--world-middle, 0) * .13));
+  }
+
+  .film-room { height: 280svh; }
+  .film-title h2 { font-size: clamp(44px, 4vw, 72px); line-height: .98; }
+  .film-stage {
+    inset: 10% 2% 10% 42%;
+    transform: translate3d(0, calc(var(--film-exit, 0) * -5vh), calc(var(--film-exit, 0) * -180px)) scale(calc(1 - var(--film-exit, 0) * .12));
+  }
+
+  .capabilities { height: 160svh; }
+  .practice-intro h2 { font-size: clamp(40px, 3.7vw, 66px); line-height: 1; }
+  .practice-intro { transform: translateY(calc(var(--cap-progress, 0) * -5vh)); }
+  .capability-visual {
+    transform: perspective(1100px) translate3d(calc(var(--cap-progress, 0) * -2vw), calc(var(--cap-progress, 0) * -4vh), calc(var(--cap-progress, 0) * 150px)) rotateY(calc(-10deg + var(--cap-progress, 0) * 10deg));
+  }
+  .capability-index { transform: translateY(calc(var(--cap-progress, 0) * -3vh)); }
+
+  .process-head h2, .pricing-head h2 { font-size: clamp(44px, 4.2vw, 76px); line-height: .98; }
+  .about-copy h2 { font-size: clamp(40px, 3.8vw, 68px); line-height: 1; }
+  .final-invite { min-height: 82svh; }
+  .final-invite h2 { font-size: clamp(54px, 5.6vw, 96px); line-height: .92; }
+  .footer-call > a { font-size: clamp(44px, 4.3vw, 74px); line-height: 1; }
+  .case-hero h1 { font-size: clamp(58px, 5.4vw, 92px); line-height: 1; }
+  .case-next > a:first-of-type { font-size: clamp(44px, 4.8vw, 82px); line-height: 1.05; }
+}
 @media (min-width:768px) and (max-width:1100px) {
   .menu-toggle { min-height: 44px; font-size: 12px; padding-inline: 10px; }
   .hero-copy { width: 49%; top: 26%; }
@@ -355,6 +465,8 @@ body:has(.project-flow), body:has(.flow-confirmation) { background: var(--bg-pri
   .line-link { padding-inline: 0; }
   .hero-meta { font-size: 9px; }
   .hero-world .book-fallback { inset: 56% 0 0; }
+  .hero-world.book-ready .book-stage { display: block!important; inset: 53% 0 3%; }
+  .hero-world.book-ready .book-fallback { display: none!important; }
   .fallback-book { width: min(53vw, 230px); top: 3%; }
   .fallback-cover span, .fallback-cover small { font-size: 8px; }
   .fallback-cover strong { font-size: 23px; }
@@ -508,5 +620,5 @@ body:has(.project-flow), body:has(.flow-confirmation) { background: var(--bg-pri
   .hero-meta { position: static; margin-top: 35px; gap: 20px; }
 }
 @media (min-width:768px) {
-  .hero-world:is([data-book-diagnostic="webgl2-unavailable"], [data-book-diagnostic="initialization-failed"], [data-book-diagnostic="context-lost"]) { height: 130svh; }
+  .hero-world:is([data-book-diagnostic="webgl-unavailable"], [data-book-diagnostic="initialization-failed"], [data-book-diagnostic="context-lost"]) { height: 130svh; }
 }

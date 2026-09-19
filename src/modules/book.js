@@ -27,9 +27,17 @@ export async function initBook({ root, projects = [] } = {}) {
   const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
   const smooth = (value) => { const t = clamp(value); return t * t * (3 - 2 * t); };
   const mix = (start, end, amount) => start + (end - start) * amount;
+  const constrainedReason = () => {
+    if (motionQuery.matches) return 'reduced-motion';
+    if (navigator.connection?.saveData && window.innerWidth < 1100) return 'save-data';
+    const memory = Number(navigator.deviceMemory);
+    const cores = Number(navigator.hardwareConcurrency);
+    if ((memory > 0 && memory <= 2) || (cores > 0 && cores <= 2)) return 'low-resource';
+    return '';
+  };
   const tier = () => {
-    if (motionQuery.matches || window.innerWidth <= 767) return 'magazine';
-    if (navigator.connection?.saveData && window.innerWidth < 1100) return 'magazine';
+    if (constrainedReason()) return 'magazine';
+    if (window.innerWidth <= 767) return 'mobile';
     return window.innerWidth < 1100 || navigator.deviceMemory <= 4 || navigator.hardwareConcurrency <= 4 ? 'medium' : 'high';
   };
 
@@ -74,10 +82,12 @@ export async function initBook({ root, projects = [] } = {}) {
 
   function onEnvironmentChange() {
     if (!pointerQuery.matches) { pointerX = 0; pointerY = 0; }
-    if (tier() === 'magazine') {
-      showMagazine('reduced-or-mobile');
+    const nextTier = tier();
+    if (nextTier === 'magazine') {
+      showMagazine(constrainedReason() || 'fallback');
       releaseGraphics();
     } else {
+      if (graphics && graphics.quality !== nextTier) releaseGraphics();
       if (near && !graphics && !pending) void start();
       requestFrame();
     }
@@ -98,7 +108,7 @@ export async function initBook({ root, projects = [] } = {}) {
       if (width !== current.width || height !== current.height) {
         current.width = width;
         current.height = height;
-        current.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, tier() === 'medium' ? 1 : 1.5));
+        current.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, current.quality === 'high' ? 1.5 : 1));
         current.renderer.setSize(width, height, false);
         current.camera.aspect = width / height;
         current.camera.updateProjectionMatrix();
@@ -106,10 +116,11 @@ export async function initBook({ root, projects = [] } = {}) {
 
       const p = getProgress();
       const entered = smooth(p / 0.12);
-      const rotated = smooth((p - 0.12) / 0.16);
-      const opening = p < .45 ? smooth((p - .28) / .17) * .48 : .48 + smooth((p - .45) / .23) * .52;
-      const story = clamp((p - 0.68) / 0.20);
-      const portal = smooth((p - 0.88) / 0.12);
+      const rotated = smooth((p - 0.12) / 0.14);
+      const opening = p < .45 ? smooth((p - .26) / .19) * .58 : .58 + smooth((p - .45) / .17) * .42;
+      const story = clamp((p - 0.62) / 0.28);
+      const push = smooth((p - 0.78) / 0.12);
+      const portal = smooth((p - 0.90) / 0.10);
       const spreadProgress = story * Math.max(0, edition.length - 1);
       const spread = Math.min(edition.length - 1, Math.floor(spreadProgress));
       const local = spreadProgress - spread;
@@ -117,9 +128,21 @@ export async function initBook({ root, projects = [] } = {}) {
       const next = Math.min(edition.length - 1, spread + 1);
       const turning = next !== spread && turn > 0 && turn < 1;
 
-      current.book.position.set(mix(-current.pageWidth / 2, mix(0, -0.9, portal), opening), mix(-0.38, -0.10, entered), 0);
-      current.book.rotation.set(mix(-0.12, -0.24, rotated) + pointerY * 0.035, mix(-0.62, -0.42, rotated) + mix(0, 0.5, opening) + pointerX * 0.05, mix(-0.02, -0.045, rotated));
-      current.book.scale.setScalar(mix(0.94, mix(1.08, 1.22, portal), entered));
+      current.book.position.set(
+        mix(-current.pageWidth / 2, mix(mix(0, 0.18, push), -0.82, portal), opening),
+        mix(-0.34, mix(-0.08, 0.14, push), entered),
+        0,
+      );
+      const parallaxX = current.quality === 'mobile' ? 0 : pointerX;
+      const parallaxY = current.quality === 'mobile' ? 0 : pointerY;
+      current.book.rotation.set(
+        mix(-0.10, -0.27, rotated) + parallaxY * 0.035,
+        mix(-0.72, -0.43, rotated) + mix(0, 0.49, opening) + parallaxX * 0.05,
+        mix(-0.015, -0.055, rotated),
+      );
+      const desktopScale = innerWidth >= 1024 ? 1.06 : 1;
+      const openScale = mix(mix(0.98, 1.12, entered), 1.18, opening);
+      current.book.scale.setScalar(desktopScale * mix(mix(openScale, 1.26, push), 1.32, portal));
       current.coverPivot.rotation.y = -opening * Math.PI;
       current.coverBoard.castShadow = opening < 0.99;
       current.leftPage.visible = opening > 0.95;
@@ -128,24 +151,28 @@ export async function initBook({ root, projects = [] } = {}) {
       const visibleHeight = Math.max(6.7, (current.pageWidth * 2 + 1.5) / current.camera.aspect);
       const cameraDistance = visibleHeight / (2 * Math.tan((current.camera.fov * Math.PI) / 360));
       // Give lifted paper room in perspective, clear of the navigation and folio.
-      const motionClearance = 1 + Math.sin(opening * Math.PI) * 0.35 + (turning ? Math.sin(turn * Math.PI) * 0.28 : 0);
+      const motionClearance = 1 + Math.sin(opening * Math.PI) * 0.16 + (turning ? Math.sin(turn * Math.PI) * 0.13 : 0);
       const portraitTablet = innerWidth <= 1100 && innerHeight > innerWidth;
+      const mobileTier = current.quality === 'mobile';
       const heroOffset = portraitTablet ? 0 : current.camera.aspect < 1.25 ? -1.25 : -1.9;
       const heroLift = portraitTablet ? mix(2.1, 0, opening) : 0;
-      current.camera.position.set(mix(heroOffset, mix(0, 0.6, portal), opening) + pointerX * 0.12, 0.24 + heroLift - pointerY * 0.08, cameraDistance * mix(1.08, mix(.92, .76, portal), entered) * motionClearance);
-      current.camera.lookAt(mix(heroOffset, mix(0, .45, portal), opening), heroLift, 0);
+      const cameraPush = mix(mix(1.10, .92, entered), .84, opening);
+      const cameraDepth = mix(mix(cameraPush, .76, push), .66, portal);
+      current.camera.position.set(mix(heroOffset, mix(mix(0, .12, push), 0.62, portal), opening) + parallaxX * 0.12, 0.24 + heroLift - parallaxY * 0.08, cameraDistance * cameraDepth * motionClearance);
+      current.camera.lookAt(mix(heroOffset, mix(mix(0, .1, push), .46, portal), opening), heroLift, 0);
 
       const rightIndex = turn > 0 ? next : spread;
       const leftIndex = turn >= 1 ? next : spread;
       current.leftPage.material.map = current.pageTextures[leftIndex].left;
       current.rightPage.material.map = current.pageTextures[rightIndex].right;
-      current.rightPage.position.z = mix(0.108, 1.6, portal);
-      current.rightPage.scale.setScalar(mix(1, 1.34, portal));
+      current.rightPage.position.z = mix(0.108, 1.05, portal);
+      current.rightPage.scale.setScalar(mix(1, 1.20, portal));
       current.turnFront.material.map = current.pageTextures[spread].right;
       current.turnBack.material.map = current.pageTextures[next].left;
       current.turnFront.visible = turning && opening > 0.99;
       current.turnBack.visible = current.turnFront.visible;
       if (turning) current.bendPage(turn);
+      if (mobileTier) current.fitMobileCamera();
 
       const labelIndex = turn > 0.72 ? next : spread;
       const label = opening < 0.98 ? 'THE INDEPENDENT EDITION / SCROLL TO OPEN' :
@@ -158,8 +185,8 @@ export async function initBook({ root, projects = [] } = {}) {
       root.style.setProperty('--book-progress', p.toFixed(4));
       root.style.setProperty('--book-open', opening.toFixed(4));
       root.style.setProperty('--book-portal', portal.toFixed(4));
-      root.dataset.bookChapter = p < .12 ? 'approach' : p < .28 ? 'rotation' : p < .68 ? 'opening' : p < .84 ? 'edition' : 'portal';
-      current.renderer.shadowMap.needsUpdate = true;
+      root.dataset.bookChapter = p < .12 ? 'approach' : p < .26 ? 'rotation' : p < .62 ? 'opening' : p < .78 ? 'edition' : p < .90 ? 'close-up' : 'portal';
+      if (current.renderer.shadowMap.enabled) current.renderer.shadowMap.needsUpdate = true;
       const themeChanging = current.updateTheme?.();
       current.renderer.render(current.scene, current.camera);
       if (themeChanging) requestFrame();
@@ -167,6 +194,7 @@ export async function initBook({ root, projects = [] } = {}) {
         root.classList.add('book-ready');
         root.dataset.bookMode = '3d';
         root.dataset.bookDiagnostic = 'active';
+        root.dataset.bookTier = current.quality;
         if (fallback) fallback.hidden = true;
       }
     } catch {
@@ -184,21 +212,23 @@ export async function initBook({ root, projects = [] } = {}) {
     let localGraphics;
     try {
       const {
-        ACESFilmicToneMapping, BackSide, BoxGeometry, BufferGeometry,
+        ACESFilmicToneMapping, BackSide, Box3, BoxGeometry, BufferGeometry,
         CanvasTexture, DirectionalLight, DoubleSide, Float32BufferAttribute,
         FrontSide, Group, HemisphereLight, LineBasicMaterial,
         LineSegments, Mesh, MeshBasicMaterial, MeshStandardMaterial,
         PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, SRGBColorSpace,
-        Scene, ShadowMaterial, WebGLRenderer,
+        Scene, ShadowMaterial, Vector3, WebGLRenderer,
       } = await import('./book-three.js');
       // Canvas print must use the same loaded, self-hosted type as the edition.
       if (document.fonts) await document.fonts.ready;
-      if (disposed || token !== generation || tier() === 'magazine') return;
+      const quality = tier();
+      if (disposed || token !== generation || quality === 'magazine') return;
       const canvas = document.createElement('canvas');
       canvas.setAttribute('aria-hidden', 'true');
       canvas.style.cssText = 'display:block;width:100%;height:100%;pointer-events:none;';
-      const context = canvas.getContext('webgl2', { alpha: true, antialias: true, powerPreference: tier() === 'medium' ? 'low-power' : 'high-performance' });
-      if (!context) { failed = true; showMagazine('webgl2-unavailable'); return; }
+      const contextOptions = { alpha: true, antialias: quality !== 'mobile', powerPreference: quality === 'high' ? 'high-performance' : 'low-power' };
+      const context = canvas.getContext('webgl2', contextOptions) || canvas.getContext('webgl', contextOptions);
+      if (!context) { failed = true; showMagazine('webgl-unavailable'); return; }
 
       const geometries = new Set();
       const materials = new Set();
@@ -208,12 +238,12 @@ export async function initBook({ root, projects = [] } = {}) {
       const geometry = (value) => { geometries.add(value); return value; };
       const material = (value) => { materials.add(value); return value; };
       const texture = (value) => { textures.add(value); return value; };
-      const renderer = new WebGLRenderer({ canvas, context, antialias: true, alpha: true });
+      const renderer = new WebGLRenderer({ canvas, context, antialias: quality !== 'mobile', alpha: true });
       renderer.outputColorSpace = SRGBColorSpace;
       renderer.toneMapping = ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.16;
       renderer.setClearColor(0x08090b, 0);
-      renderer.shadowMap.enabled = tier() === 'high';
+      renderer.shadowMap.enabled = quality === 'high';
       renderer.shadowMap.type = PCFSoftShadowMap;
       renderer.shadowMap.autoUpdate = false;
 
@@ -223,14 +253,14 @@ export async function initBook({ root, projects = [] } = {}) {
       scene.add(book);
       const pageWidth = 3.05;
       const pageHeight = 4.15;
-      localGraphics = { canvas, renderer, scene, camera, book, pageWidth, geometries, materials, textures, images, shadows, width: 0, height: 0 };
+      localGraphics = { canvas, renderer, scene, camera, book, pageWidth, quality, geometries, materials, textures, images, shadows, width: 0, height: 0 };
       graphics = localGraphics;
 
       const ambient = new HemisphereLight(0xf6f1e7, 0x424759, 1.42);
       scene.add(ambient);
       const keyLight = new DirectionalLight(0xfff4e2, 2.15);
       keyLight.position.set(-3.5, 5, 8);
-      keyLight.castShadow = true;
+      keyLight.castShadow = quality === 'high';
       keyLight.shadow.mapSize.set(1024, 1024);
       keyLight.shadow.camera.left = -8;
       keyLight.shadow.camera.right = 8;
@@ -253,7 +283,7 @@ export async function initBook({ root, projects = [] } = {}) {
       };
       const floor = mesh(new PlaneGeometry(36, 26), new ShadowMaterial({ color: 0x000000, opacity: 0.28 }), scene);
       floor.position.z = -0.43;
-      floor.receiveShadow = true;
+      floor.receiveShadow = quality === 'high';
 
       const shadowCanvas = document.createElement('canvas');
       shadowCanvas.width = shadowCanvas.height = 128;
@@ -300,7 +330,7 @@ export async function initBook({ root, projects = [] } = {}) {
       coverBoard.castShadow = true;
       coverBoard.receiveShadow = true;
 
-      const resolution = tier() === 'medium' ? 768 : 1024;
+      const resolution = quality === 'mobile' ? 512 : quality === 'medium' ? 768 : 1024;
       function newPageCanvas() {
         const result = document.createElement('canvas');
         result.width = resolution;
@@ -423,15 +453,15 @@ export async function initBook({ root, projects = [] } = {}) {
         themeMix = mix(themeFrom, themeTarget, progress);
         coverBoard.material.color.lerpColors(graphite, stone, themeMix);
         backCover.material.color.copy(coverBoard.material.color);
-        ambient.intensity = mix(1.25, 1.65, themeMix);
-        keyLight.intensity = mix(2.0, 2.6, themeMix);
-        rim.intensity = mix(.95, .65, themeMix);
+        ambient.intensity = mix(1.42, 1.68, themeMix);
+        keyLight.intensity = mix(2.30, 2.58, themeMix);
+        rim.intensity = mix(1.18, .72, themeMix);
         rim.color.lerpColors(coolRim, daylight, themeMix);
         metal.roughness = mix(.24, .36, themeMix);
         metal.metalness = mix(.72, .55, themeMix);
-        floor.material.opacity = mix(.28, .15, themeMix);
-        contactShadow.material.opacity = mix(1, .5, themeMix);
-        renderer.toneMappingExposure = mix(1.12, 1.02, themeMix);
+        floor.material.opacity = mix(.34, .16, themeMix);
+        contactShadow.material.opacity = mix(1, .52, themeMix);
+        renderer.toneMappingExposure = mix(1.18, 1.04, themeMix);
         return progress < 1;
       };
       localGraphics.setTheme();
@@ -524,8 +554,8 @@ export async function initBook({ root, projects = [] } = {}) {
       leftPage.receiveShadow = true;
       leftPage.visible = false;
 
-      const segmentsX = tier() === 'medium' ? 32 : 56;
-      const segmentsY = 8;
+      const segmentsX = quality === 'mobile' ? 18 : quality === 'medium' ? 32 : 56;
+      const segmentsY = quality === 'mobile' ? 4 : 8;
       const turnGeometry = geometry(new PlaneGeometry(pageWidth, pageHeight, segmentsX, segmentsY));
       const backGeometry = geometry(turnGeometry.clone());
       const backUvs = backGeometry.getAttribute('uv');
@@ -573,6 +603,27 @@ export async function initBook({ root, projects = [] } = {}) {
       }
 
       Object.assign(localGraphics, { coverPivot, coverBoard, leftPage, rightPage, turnFront, turnBack, pageTextures, bendPage });
+      if (quality === 'mobile') {
+        const bounds = new Box3();
+        const partBounds = new Box3();
+        const center = new Vector3();
+        const size = new Vector3();
+        localGraphics.fitMobileCamera = () => {
+          book.updateMatrixWorld(true);
+          bounds.makeEmpty();
+          book.traverseVisible(part => {
+            if (!part.geometry) return;
+            if (part === turnFront || part === turnBack || !part.geometry.boundingBox) part.geometry.computeBoundingBox();
+            bounds.union(partBounds.copy(part.geometry.boundingBox).applyMatrix4(part.matrixWorld));
+          });
+          bounds.getCenter(center);
+          bounds.getSize(size);
+          const tangent = Math.tan(camera.fov * Math.PI / 360);
+          const distance = Math.max(size.y / 2 / tangent, size.x / 2 / tangent / camera.aspect) * 1.12 + size.z / 2;
+          camera.position.set(center.x, center.y, center.z + distance);
+          camera.lookAt(center);
+        };
+      }
       canvas.addEventListener('webglcontextlost', onContextLost);
       stage.prepend(canvas);
       requestFrame();
@@ -586,7 +637,7 @@ export async function initBook({ root, projects = [] } = {}) {
     }
   }
 
-  showMagazine(tier() === 'magazine' ? 'reduced-or-mobile' : 'awaiting-viewport');
+  showMagazine(tier() === 'magazine' ? constrainedReason() || 'fallback' : 'awaiting-viewport');
   const lazyObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver((entries) => {
     near = entries[0].isIntersecting;
     if (near) void start();
@@ -606,7 +657,7 @@ export async function initBook({ root, projects = [] } = {}) {
   const resizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(requestFrame) : null;
   resizeObserver?.observe(stage);
   window.addEventListener('scroll', requestFrame, { passive: true });
-  const onPointerMove = (event) => { if (!pointerQuery.matches || event.pointerType === 'touch' || !inView) return; pointerX = event.clientX / Math.max(1, innerWidth) - .5; pointerY = event.clientY / Math.max(1, innerHeight) - .5; requestFrame(); };
+  const onPointerMove = (event) => { if (tier() === 'mobile' || !pointerQuery.matches || event.pointerType === 'touch' || !inView) return; pointerX = event.clientX / Math.max(1, innerWidth) - .5; pointerY = event.clientY / Math.max(1, innerHeight) - .5; requestFrame(); };
   window.addEventListener('pointermove', onPointerMove, { passive: true });
   const onTheme = () => graphics?.setTheme();
   window.addEventListener('kirat:theme', onTheme);

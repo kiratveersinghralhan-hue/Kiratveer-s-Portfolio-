@@ -14,6 +14,7 @@ export function initMotion() {
   const worlds = [...document.querySelectorAll('.project-world')];
   const processLine = document.querySelector('.process-section');
   const filmRoom = document.querySelector('.film-room');
+  const capabilities = document.querySelector('.capabilities');
   const filmButtons = [...document.querySelectorAll('[data-film-select]')];
   const cleanups = [];
   let cinematic = [];
@@ -58,6 +59,9 @@ export function initMotion() {
     worlds.forEach(scene => {
       scene.style.removeProperty('--world-progress');
       scene.style.removeProperty('--scene-enter');
+      scene.style.removeProperty('--world-middle');
+      scene.style.removeProperty('--world-spread');
+      scene.style.removeProperty('--world-exit');
     });
     if (!reduced.matches) {
       worlds.forEach((scene, index) => {
@@ -70,8 +74,14 @@ export function initMotion() {
             const travelled = self.progress * sceneHeight;
             const enter = Math.min(1, travelled / innerHeight);
             const progress = Math.max(0, (travelled - innerHeight) / Math.max(1, sceneHeight - innerHeight));
+            const middle = Math.max(0, 1 - Math.abs(progress - .5) * 2);
+            const spread = Math.sin(progress * Math.PI);
+            const exit = Math.max(0, (progress - .76) / .24);
             scene.style.setProperty('--scene-enter', enter.toFixed(4));
             scene.style.setProperty('--world-progress', progress.toFixed(4));
+            scene.style.setProperty('--world-middle', middle.toFixed(4));
+            scene.style.setProperty('--world-spread', spread.toFixed(4));
+            scene.style.setProperty('--world-exit', exit.toFixed(4));
           },
         });
         cinematic.push(() => trigger.kill());
@@ -79,6 +89,10 @@ export function initMotion() {
       });
       if (processLine) {
         const trigger = ScrollTrigger.create({ trigger: processLine, start: 'top 70%', end: 'bottom 70%', onUpdate: self => processLine.style.setProperty('--process-progress', self.progress.toFixed(4)) });
+        cinematic.push(() => trigger.kill());
+      }
+      if (capabilities) {
+        const trigger = ScrollTrigger.create({ trigger: capabilities, start: 'top top', end: 'bottom bottom', onUpdate: self => capabilities.style.setProperty('--cap-progress', self.progress.toFixed(4)) });
         cinematic.push(() => trigger.kill());
       }
       const portal = document.querySelector('.portal-copy h2');
